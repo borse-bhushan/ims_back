@@ -2,8 +2,6 @@
 URL Configuration for project
 """
 
-# Third Party Library Imports
-
 from django.urls import path, include
 from drf_spectacular.views import (
     SpectacularAPIView,
@@ -23,12 +21,8 @@ urlpatterns = [
     path("api/", include("tenant.urls")),
     # User Management API
     path("api/", include("auth_user.urls")),
-    # Address Management API
-    path("api/", include("address.urls")),
     # Audit Logs Management API
     path("api/", include("audit_logs.urls")),
-    # Customer Management API
-    path("api/", include("customer.urls")),
     # Monitoring API
     path("api/", include("monitor.urls")),
     # Swagger Documentation

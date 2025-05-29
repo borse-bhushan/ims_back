@@ -5,8 +5,6 @@ This file contains the common functions which are used in the project.
 import sys
 import uuid
 
-from urllib.parse import urlencode
-
 from django.utils import timezone
 
 from utils import constants, settings
@@ -83,17 +81,6 @@ def get_current_datetime():
     return timezone.now()
 
 
-def create_end_point(end_point: str):
-    """
-    Creates a complete endpoint URL by appending the given endpoint path to the base path.
-    """
-
-    if not end_point.startswith("/"):
-        end_point = f"/{end_point}"
-
-    return constants.BASE_PATH + end_point
-
-
 def get_client_info(request):
     """
     Get the real client IP address, supporting proxies and Docker.
@@ -110,35 +97,14 @@ def get_client_info(request):
     return {"client_ip": ip, "client_user_agent": user_agent}
 
 
-def build_sso_redirect_url(
-    sso_domain: str, sso_tenant_id: str, sso_path: str, query_params: dict
-) -> str:
+def get_subdomain(request):
     """
-    Builds the redirect URL for Microsoft SSO OAuth2.
-
-    Args:
-        config (dict): Configuration dictionary containing required keys.
-
-    Returns:
-        str: The full redirect URL.
+    Extract the subdomain from the request host.
     """
+    host = request.get_host().split(":")[0]
 
-    base_url = create_url(create_url(sso_domain, sso_tenant_id), sso_path)
+    parts = host.split(".")
+    if len(parts) > 2:
+        return parts[0]
 
-    return f"{base_url}?{urlencode(query_params)}"
-
-
-def create_url(host: str, path: str):
-    """
-    This will help to create the URL  [https://<host>/<path>].
-    """
-    if not host:
-        return None
-
-    if not host.endswith("/"):
-        host += "/"
-
-    if path.startswith("/"):
-        path = path.removeprefix("/")
-
-    return f"{host}{path}"
+    return None

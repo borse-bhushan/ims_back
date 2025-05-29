@@ -2,13 +2,10 @@
 This module adds the Performance time and System version in the response headers.
 """
 
-# Standard Library Imports
 from timeit import default_timer as timer
 
-# standard library imports
 from django.utils import timezone
 
-# Local imports
 from utils.version import get_version_str
 
 

@@ -2,15 +2,12 @@
 Middleware to handle exceptions globally in Django Rest Framework.
 """
 
-# Standard Library
 import logging
 import traceback
 
-# Third Party Library
 from rest_framework import status
 from django.utils.deprecation import MiddlewareMixin
 
-# Local Imports
 from utils.messages import error
 from utils.exceptions import codes
 from utils.logger.logger import log_msg

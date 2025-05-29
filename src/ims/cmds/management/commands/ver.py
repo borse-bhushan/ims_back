@@ -2,13 +2,10 @@
 This file is to update the version of the application.
 """
 
-# Standard Library Imports
 import logging
 
-# Third Party Imports
 from django.core.management.base import BaseCommand, CommandError
 
-# Local Imports
 from utils.logger import logger
 from utils import version as v_action, constants
 

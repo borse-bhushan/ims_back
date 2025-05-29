@@ -2,7 +2,7 @@
 This is the model BaseManager class which is used to perform CRUD operations on the models.
 """
 
-from typing import Union, TypeVar, Generic, overload, List, Dict, Callable
+from typing import Union, TypeVar, Generic, overload, List, Dict
 
 from rest_framework import status
 from django.db.models import Q, F, Model
@@ -12,7 +12,7 @@ from utils.messages import error
 from utils.pagination import Pagination
 from utils.exceptions import CommonError
 
-from customer.helpers import get_customer_tenant_details_from_request_thread
+from tenant.utils.helpers import get_tenant_details_from_request_thread
 
 T = TypeVar("T", bound=Model)
 
@@ -148,7 +148,8 @@ class Manager(Generic[T]):
     query_builder = QueryBuilder()
 
     def __init__(self, tenant_aware=True):
-        self.__tenant_aware = tenant_aware
+        if not tenant_aware:
+            self.__tenant_aware = tenant_aware
 
     def disable_tenant_aware(self):
         """
@@ -179,8 +180,8 @@ class Manager(Generic[T]):
             query["is_deleted"] = is_deleted
 
         if self.__tenant_aware:
-            tenant_customer_info = get_customer_tenant_details_from_request_thread()
-            query["tenant_id"] = tenant_customer_info["tenant_id"]
+            tenant_info = get_tenant_details_from_request_thread()
+            query["tenant_id"] = tenant_info["tenant_id"]
 
         objects = self.model.objects.filter(self.query_builder.build_query(query))
 
@@ -200,10 +201,14 @@ class Manager(Generic[T]):
     def get_objects_mapping(
         self,
         query: dict,
-        only: list = None,
-        order_by: list = None,
+        only: List = None,
+        order_by: List = None,
         mapping_by: str = "pk",
     ) -> Dict[str, T]:
+        """
+        Retrieves objects from the database based on the provided query and returns a
+        dictionary mapping a specified attribute to each object.
+        """
 
         objects = self.list(query=query, only=only, order_by=order_by)
 
@@ -268,6 +273,15 @@ class Manager(Generic[T]):
         order_by: list = None,
         pagination: dict = None,
     ) -> tuple[QuerySet[T], dict[str, int]]:
+        """
+        List objects with pagination based on the provided query.
+        Args:
+            query (dict): The main query dictionary for filtering objects. If None, an empty dict is used.
+            only (list, optional): List of fields to include in the result. Defaults to None.
+            order_by (list, optional): List of fields to order the result by. Defaults to None.
+            pagination (dict, optional): Pagination parameters including 'page' and 'page_size'.
+                Defaults to None, which means no pagination is applied.
+        """
         objects = self.list(query=query, only=only, order_by=order_by)
 
         page_number: int = pagination["page"]
@@ -354,13 +368,13 @@ class Manager(Generic[T]):
             ], many=True)
         """
 
-        tenant_customer_info = {}
+        tenant_info = {}
         if self.__tenant_aware:
-            tenant_customer_info = get_customer_tenant_details_from_request_thread()
+            tenant_info = get_tenant_details_from_request_thread()
 
         def add_tenant_info(item):
             if self.__tenant_aware:
-                item["tenant_id"] = tenant_customer_info["tenant_id"]
+                item["tenant_id"] = tenant_info["tenant_id"]
             return item
 
         if many:
@@ -411,7 +425,6 @@ class Manager(Generic[T]):
         return obj
 
     def upsert(self, data, query) -> T:
-        print("upsert")
         """
         Update an existing object or create a new one based on query conditions.
         This function attempts to find an object using the provided query parameters. If the object

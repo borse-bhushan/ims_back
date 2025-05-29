@@ -65,10 +65,7 @@ THIRD_PARTY_APPS = ["rest_framework", "drf_spectacular"]
 INSTALLED_APPS += THIRD_PARTY_APPS
 
 MY_APPS = [
-    "address",
-    "file",
     "tenant",
-    "customer",
     "auth_user",
     "monitor",
     "cmds",

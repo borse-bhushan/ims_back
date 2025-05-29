@@ -2,12 +2,10 @@
 This file contains the monitoring API which will return the CPU, RAM, DISK information.
 """
 
-# Third Party Library
 import psutil
 from rest_framework.views import APIView
 from drf_spectacular.utils import extend_schema
 
-# Local Library
 from monitor import swagger
 
 from auth_user.constants import MethodEnum

@@ -3,10 +3,8 @@ This file contains the response generator function which will be used to generat
 the response in a consistent format.
 """
 
-# Standard Library imports
 import typing
 
-# Third Party imports
 from rest_framework import status
 from rest_framework.response import Response
 from django.http.response import JsonResponse

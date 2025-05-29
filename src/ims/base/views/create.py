@@ -1,10 +1,13 @@
+"""
+This module provides a base view class for handling create operations in a IMS application.
+"""
+
 from django.db import models
 from rest_framework import status, serializers, parsers
 
 from base import constants
 from base.db_access import Manager
 
-from file.utils.helper import save_file
 
 from utils.messages import success
 from utils.response import generate_response
@@ -25,11 +28,9 @@ class CreateView:
     """
 
     many = False
-    file_upload = False  # { "file_key": "name of the key", "base_path": "base_path for file", "file_id_key": "file_id_key in table" }
-
     manager: Manager = None
+    serializer_class = None
     is_common_data_needed = True
-    serializer_class: serializers.Serializer = None
 
     parser_classes = (parsers.JSONParser, parsers.MultiPartParser)
 
@@ -70,20 +71,6 @@ class CreateView:
         Returns:
             dict | list: The processed data before saving.
         """
-
-        return data
-
-    def upload_file(self, data: dict | list, **kwargs):
-        """
-        Handles file uploads by saving the file and updating the data dictionary with the file ID.
-        """
-
-        if data.get(self.file_upload.get("file_key", "file")):
-            file_obj = save_file(
-                data.pop(self.file_upload.get("file_key", "file")),
-                base_path=self.file_upload["base_path"],
-            )
-            data[self.file_upload.get("file_id_key", "file_id")] = file_obj.file_id
 
         return data
 
@@ -141,6 +128,7 @@ class CreateView:
         Returns:
             Response: A success response with the created object(s) or an error message if validation fails.
         """
+
         serializer_obj: serializers.Serializer = self.serializer_class(
             data=request.data, many=self.many
         )
@@ -156,9 +144,6 @@ class CreateView:
             data = self.add_common_data(data=data, request=request, many=self.many)
 
         data = self.pre_save(data=data, request=request)
-
-        if self.file_upload:
-            data = self.upload_file(data=data, request=request)
 
         obj = self.manager.create(data, many=self.many)
 

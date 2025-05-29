@@ -1,6 +1,7 @@
 """
 This module provides a function to get authentication classes for the API views.
 """
+
 import importlib
 from utils import settings
 
