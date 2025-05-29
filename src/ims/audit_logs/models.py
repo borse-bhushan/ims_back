@@ -36,10 +36,10 @@ class AuditLogs(BaseModel, models.Model):
         return {
             "audit_id": self.audit_id,
             "user_id": self.user_id,
+            "client_ip": self.client_ip,
             "module_name": self.module_name,
             "http_method": self.http_method,
             "request_path": self.request_path,
-            "client_ip": self.client_ip,
-            "client_user_agent": self.client_user_agent,
             "request_headers": self.request_headers,
+            "client_user_agent": self.client_user_agent,
         }

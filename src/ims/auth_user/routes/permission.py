@@ -21,7 +21,7 @@ Note:
 
 from django.urls import path
 
-from ..views import PermissionViewSet
+from auth_user.views import PermissionViewSet
 
 urlpatterns = [
     path(

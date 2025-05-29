@@ -12,6 +12,8 @@ from utils.functions import get_uuid
 from base.db_models.model import BaseModel
 from tenant.db_access import tenant_manager
 
+from auth_user.constants import RoleEnum
+
 
 class User(BaseModel, AbstractBaseUser):
     __doc__ = """
@@ -28,6 +30,8 @@ class User(BaseModel, AbstractBaseUser):
     profile_photo = models.CharField(max_length=512, null=True, default=None)
     password = models.CharField(max_length=128, null=True, default=None)
     date_joined = models.DateTimeField(null=True, default=None)
+
+    role_id = models.CharField(choices=RoleEnum.choices, max_length=64)
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"

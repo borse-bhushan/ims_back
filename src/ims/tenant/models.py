@@ -7,12 +7,6 @@ from django.db import models
 from utils.functions import get_uuid
 from base.db_models import BaseModel
 
-print(
-    Warning(
-        "-- Need to add the address table and add the foreign key to the tenant table ----"
-    )
-)
-
 
 class Tenant(BaseModel):
     """Represents a tenant organization within the system."""

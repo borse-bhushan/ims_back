@@ -8,11 +8,7 @@ from rest_framework import serializers
 from utils.messages import error
 from utils.exceptions import codes
 
-from ..db_access import (
-    role_manager,
-    permission_manager,
-    role_permission_mapping_manager,
-)
+from ..db_access import permission_manager, role_permission_mapping_manager
 
 
 class RolePermissionSerializer(serializers.Serializer):
@@ -27,14 +23,6 @@ class RolePermissionSerializer(serializers.Serializer):
         """
         Validate the input data for creating or updating a RolePermission.
         """
-
-        if not role_manager.exists({"role_id": attrs["role_id"]}):
-            raise serializers.ValidationError(
-                {
-                    "role_id": error.NO_DATA_FOUND,
-                },
-                code=codes.NO_DATA_FOUND,
-            )
 
         if not permission_manager.exists({"permission_id": attrs["permission_id"]}):
             raise serializers.ValidationError(

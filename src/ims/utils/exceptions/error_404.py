@@ -10,9 +10,6 @@ from utils.messages import error
 from utils.response import generate_response
 
 
-print("error_404 -> put error message in the error module")
-
-
 def error_404(*args, **kwargs):
     """
     Custom 404 error handler.

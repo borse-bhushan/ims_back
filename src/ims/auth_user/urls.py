@@ -7,8 +7,6 @@ from django.urls import path, include
 urlpatterns = [
     path("auth/", include("auth_user.routes.auth")),
     path("", include("auth_user.routes.user")),
-    path("", include("auth_user.routes.role")),
-    path("", include("auth_user.routes.user_role")),
     path("", include("auth_user.routes.permission")),
     path("", include("auth_user.routes.role_permission")),
 ]

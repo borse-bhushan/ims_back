@@ -6,13 +6,10 @@ This module provides a decorator to register and check user permissions
 from functools import wraps
 
 from utils.exceptions import PermissionDenied
-from auth_user.constants import RoleEnum
-from auth_user.db_access import (
-    permission_manager,
-    role_permission_mapping_manager,
-    user_role_mapping_manager,
-)
 from audit_logs.helpers import create_audit_log_entry
+
+from auth_user.constants import RoleEnum
+from auth_user.db_access import permission_manager, role_permission_mapping_manager
 
 
 def register_permission(
@@ -60,28 +57,15 @@ def register_permission(
                         },
                     )
 
-                roles = user_role_mapping_manager.list(
-                    query={
-                        "user_id": request.user.user_id,
-                    }
-                ).select_related("role")
-
-                if not roles:
-                    raise PermissionDenied()
-
-                role_ids = []
-                role_codes = []
-                for role_obj in roles:
-                    role_ids.append(role_obj.role_id)
-                    role_codes.append(role_obj.role.role_code)
-
-                is_super_company_admin = RoleEnum.SUPER_COMPANY_ADMIN in role_codes
+                is_super_company_admin = (
+                    RoleEnum.SUPER_COMPANY_ADMIN == request.user.role_id
+                )
 
                 if (
                     not is_super_company_admin
                     and not role_permission_mapping_manager.exists(
                         query={
-                            "role_id__in": [role_obj.role_id for role_obj in roles],
+                            "role_id": request.user.role_id,
                             "permission_id": m_kwargs["permission_obj"].permission_id,
                         }
                     )

@@ -1,28 +1,13 @@
 {
     "data": [
         {
-            "user_id": "ed0b2cfb-864a-4c34-93d1-8876bbb5cd7a",
-            "email": "shubham.patil@sagacitysoftware.co.in",
-            "first_name": "Shubham",
-            "last_name": "Patil",
-            "phone_number": "9878786565",
-            "password": "Shubham@123"
-        },
-        {
             "user_id": "9d018a56-abd9-4dfd-b606-80ce3ba8f53f",
             "email": "bhushan.borse@sagacitysoftware.co.in",
             "first_name": "Bhushan",
             "last_name": "Borse",
             "phone_number": "9878786565",
-            "password": "Bhushan@123"
-        },
-        {
-            "user_id": "70c2b240-27b1-4596-851b-95cb65f84842",
-            "email": "vaibhav.jaiswal@sagacitysoftware.co.in",
-            "first_name": "Vaibhav",
-            "last_name": "Jaiswal",
-            "phone_number": "9878786565",
-            "password": "Vaibhav@123"
+            "password": "Bhushan@123",
+            "role_id": "SUPER_COMPANY_ADMIN"
         }
     ]
 }

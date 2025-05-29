@@ -19,12 +19,8 @@ from utils.swagger import (
     responses_401_example,
 )
 
+from ..db_access import user_manager
 from ..serializers import UserSerializer
-from ..db_access import (
-    user_manager,
-    role_manager,
-    user_role_mapping_manager,
-)
 from ..swagger import (
     UserResponseSerializer,
     UserListResponseSerializer,
@@ -130,21 +126,4 @@ class UserProfileViewSet(RetrieveView, viewsets.ViewSet):
     )
     def retrieve(self, request, *args, **kwargs):
 
-        return generate_response(
-            data={
-                **request.user.to_dict(),
-                "roles": [
-                    role.to_dict()
-                    for role in role_manager.list(
-                        {
-                            "role_id__in": [
-                                role.role_id
-                                for role in user_role_mapping_manager.list(
-                                    {"user_id": request.user.user_id}
-                                )
-                            ]
-                        }
-                    )
-                ],
-            }
-        )
+        return generate_response(data={**request.user.to_dict()})
