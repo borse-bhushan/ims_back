@@ -1,22 +1,44 @@
 """
-URL configuration for ims project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/5.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
+URL Configuration for project
 """
-from django.contrib import admin
-from django.urls import path
+
+# Third Party Library Imports
+
+from django.urls import path, include
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
+
+
+from utils.exceptions import error_404
+
+from .swagger import get_token_auth_schema
+
+get_token_auth_schema()
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    # Tenant Management API
+    path("api/", include("tenant.urls")),
+    # User Management API
+    path("api/", include("auth_user.urls")),
+    # Address Management API
+    path("api/", include("address.urls")),
+    # Audit Logs Management API
+    path("api/", include("audit_logs.urls")),
+    # Customer Management API
+    path("api/", include("customer.urls")),
+    # Monitoring API
+    path("api/", include("monitor.urls")),
+    # Swagger Documentation
+    path("api/schema", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/docs",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path("api/redoc", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
 ]
+
+handler404 = error_404

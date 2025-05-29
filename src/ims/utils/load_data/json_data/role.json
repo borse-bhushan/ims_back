@@ -1,0 +1,14 @@
+{
+    "data": [
+        {
+            "role_id": "c27b9528-334c-4a1a-b676-17f323f5cf93",
+            "role_code": "SUPER_COMPANY_ADMIN",
+            "display_name": "Company Admin"
+        },
+        {
+            "role_id": "1bff4fcb-029b-458f-b40b-8817fdec79b2",
+            "role_code": "MANAGER",
+            "display_name": "Manager"
+        }
+    ]
+}

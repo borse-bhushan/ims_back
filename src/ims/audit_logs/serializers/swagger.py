@@ -1,0 +1,146 @@
+"""
+Module providing serializers and OpenAPI examples for audit_logs endpoints.
+"""
+
+from rest_framework import serializers
+from drf_spectacular.utils import OpenApiExample
+from utils.swagger import PaginationSerializer
+from utils.swagger.common_swagger_functions import (
+    get_list_success_example,
+    get_by_id_success_example,
+)
+
+
+class AuditLogsDataSerializer(serializers.Serializer):
+    """
+    Serializer for audit logs data structure.
+    """
+
+    audit_id = serializers.Serializer()
+    user_id = serializers.Serializer()
+    module_name = serializers.Serializer()
+    http_method = serializers.Serializer()
+    request_path = serializers.Serializer()
+    client_ip = serializers.Serializer()
+    client_user_agent = serializers.Serializer()
+    request_route = serializers.Serializer()
+    request_headers = serializers.Serializer()
+
+
+class AuditLogsDataListSerializer(serializers.Serializer):
+    """
+    Serializer for the data list of audit logs.
+    """
+
+    list = AuditLogsDataSerializer(many=True, help_text="List of audit logs.")
+    pagination = PaginationSerializer(
+        help_text="Pagination information for the list of audit logs."
+    )
+
+
+class AuditLogsListResponseSerializer(serializers.Serializer):
+    """
+    Serializer for the response of the audit logs list endpoint.
+    """
+
+    data = AuditLogsDataListSerializer(
+        help_text="List of audit logs with pagination information."
+    )
+    errors = serializers.JSONField(
+        help_text="Any errors for the response.", allow_null=True
+    )
+    messages = serializers.JSONField(
+        help_text="Any informational messages for the response.", allow_null=True
+    )
+    status_code = serializers.IntegerField(default=200)
+    is_success = serializers.BooleanField(default=True)
+
+
+class AuditLogsResponseSerializer(serializers.Serializer):
+    """
+    Serializer for the response of the audit logs list endpoint.
+    """
+
+    data = AuditLogsDataSerializer(help_text="Auditlogs information.")
+    errors = serializers.JSONField(
+        help_text="Any errors for the response.", allow_null=True
+    )
+    messages = serializers.JSONField(
+        help_text="Any informational messages for the response.", allow_null=True
+    )
+    status_code = serializers.IntegerField(default=200)
+    is_success = serializers.BooleanField(default=True)
+
+
+audit_getById_success_example: OpenApiExample = get_by_id_success_example(
+    name="Get Audit logs by Id - Success",
+    data={
+        "audit_id": "e3744e32-8c42-468e-a11b-6595da3a12e1",
+        "user_id": "70c2b240-27b1-4596-851b-95cb65f84842",
+        "module_name": "audit_logs",
+        "http_method": "GET",
+        "request_path": "/api/audit-logs",
+        "client_ip": "127.0.0.1",
+        "request_route": "api/audit-logs",
+        "client_user_agent": "PostmanRuntime/7.44.0",
+        "request_headers": {
+            "Content-Length": "",
+            "Content-Type": "text/plain",
+            "User-Agent": "PostmanRuntime/7.44.0",
+            "Accept": "*/*",
+            "Cache-Control": "no-cache",
+            "Postman-Token": "14406ac5-d700-4f76-be90-0316af10d742",
+            "Host": "127.0.0.1:8000",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Connection": "keep-alive",
+        },
+    },
+)
+audit_list_example_data = [
+    {
+        "audit_id": "f3ef804b-93dc-4ff9-a7ba-2a118aa9efb1",
+        "user_id": "70c2b240-27b1-4596-851b-95cb65f84842",
+        "module_name": "audit_logs",
+        "http_method": "GET",
+        "request_path": "/api/audit-logs",
+        "client_ip": "127.0.0.1",
+        "request_route": "api/audit-logs",
+        "client_user_agent": "PostmanRuntime/7.44.0",
+        "request_headers": {
+            "Content-Length": "",
+            "Content-Type": "text/plain",
+            "User-Agent": "PostmanRuntime/7.44.0",
+            "Accept": "*/*",
+            "Cache-Control": "no-cache",
+            "Postman-Token": "9312b6a7-046f-42cd-be45-c0aa57194833",
+            "Host": "127.0.0.1:8000",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Connection": "keep-alive",
+        },
+    },
+    {
+        "audit_id": "5094d3ae-928c-4df8-8100-99b278f2b9bd",
+        "user_id": "70c2b240-27b1-4596-851b-95cb65f84842",
+        "module_name": "Authentication",
+        "http_method": "POST",
+        "request_path": "/api/auth/login",
+        "client_ip": "127.0.0.1",
+        "request_route": "api/auth/login",
+        "client_user_agent": "PostmanRuntime/7.44.0",
+        "request_headers": {
+            "Content-Length": "94",
+            "Content-Type": "application/json",
+            "User-Agent": "PostmanRuntime/7.44.0",
+            "Accept": "*/*",
+            "Cache-Control": "no-cache",
+            "Postman-Token": "5cdf6c11-bde0-4c28-b82f-122804e4734e",
+            "Host": "127.0.0.1:8000",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Connection": "keep-alive",
+        },
+    },
+]
+audit_list_success_example: OpenApiExample = get_list_success_example(
+    name="List Audit - Success",
+    list_data=audit_list_example_data,
+)

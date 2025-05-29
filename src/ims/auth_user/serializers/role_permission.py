@@ -1,0 +1,60 @@
+"""
+RolePermissionSerializer
+Serializer for both creating a Permission.
+"""
+
+from rest_framework import serializers
+
+from utils.messages import error
+from utils.exceptions import codes
+
+from ..db_access import (
+    role_manager,
+    permission_manager,
+    role_permission_mapping_manager,
+)
+
+
+class RolePermissionSerializer(serializers.Serializer):
+    """
+    Serializer for both creating a RolePermission.
+    """
+
+    role_id = serializers.UUIDField(required=True)
+    permission_id = serializers.UUIDField(required=False)
+
+    def validate(self, attrs):
+        """
+        Validate the input data for creating or updating a RolePermission.
+        """
+
+        if not role_manager.exists({"role_id": attrs["role_id"]}):
+            raise serializers.ValidationError(
+                {
+                    "role_id": error.NO_DATA_FOUND,
+                },
+                code=codes.NO_DATA_FOUND,
+            )
+
+        if not permission_manager.exists({"permission_id": attrs["permission_id"]}):
+            raise serializers.ValidationError(
+                {
+                    "permission_id": error.NO_DATA_FOUND,
+                },
+                code=codes.NO_DATA_FOUND,
+            )
+
+        if role_permission_mapping_manager.exists(
+            {
+                "role_id": attrs["role_id"],
+                "permission_id": attrs["permission_id"],
+            }
+        ):
+            raise serializers.ValidationError(
+                {
+                    "role_permission": error.ALREADY_EXIST,
+                },
+                code=codes.DUPLICATE_ENTRY,
+            )
+
+        return attrs
