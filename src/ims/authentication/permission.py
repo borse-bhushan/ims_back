@@ -17,6 +17,7 @@ def register_permission(
     action: str,
     name: str,
     check: bool = True,
+    create_permission: bool = True,
     **m_kwargs,
 ):
     """
@@ -44,7 +45,7 @@ def register_permission(
             )
             if check:
 
-                if not m_kwargs.get("permission_obj"):
+                if create_permission and not m_kwargs.get("permission_obj"):
                     m_kwargs["permission_obj"] = permission_manager.upsert(
                         data={
                             "name": name,
@@ -57,18 +58,16 @@ def register_permission(
                         },
                     )
 
-                is_super_company_admin = (
-                    RoleEnum.SUPER_COMPANY_ADMIN == request.user.role_id
-                )
+                is_super_admin = RoleEnum.SUPER_ADMIN == request.user.role_id
 
-                if (
-                    not is_super_company_admin
-                    and not role_permission_mapping_manager.exists(
-                        query={
-                            "role_id": request.user.role_id,
-                            "permission_id": m_kwargs["permission_obj"].permission_id,
-                        }
-                    )
+                if not create_permission and not is_super_admin:
+                    raise PermissionDenied()
+
+                if not is_super_admin and not role_permission_mapping_manager.exists(
+                    query={
+                        "role_id": request.user.role_id,
+                        "permission_id": m_kwargs["permission_obj"].permission_id,
+                    }
                 ):
                     raise PermissionDenied()
 

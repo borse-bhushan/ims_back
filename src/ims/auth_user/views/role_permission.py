@@ -31,7 +31,7 @@ from ..swagger import (
     role_permission_delete_example
 )
 
-MODULE = "RolePermission"
+MODULE = "Role Permission"
 
 
 class RolePermissionViewSet(CreateView, DeleteView, ListView, viewsets.ViewSet):

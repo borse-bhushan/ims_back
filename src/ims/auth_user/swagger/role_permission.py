@@ -12,7 +12,7 @@ from utils.swagger.common_swagger_functions import (
 )
 
 
-class RolePermissionSerializer(serializers.Serializer):
+class RolePermissionSwaggerSerializer(serializers.Serializer):
     """
     Serializer for both creating a RolePermission.
     """
@@ -24,7 +24,7 @@ class RolePermissionResponseSerializer(serializers.Serializer):
     """
     Response wrapper for RolePermission single object.
     """
-    data = RolePermissionSerializer(help_text="Role-Permission mapping information.")
+    data = RolePermissionSwaggerSerializer(help_text="Role-Permission mapping information.")
     errors = serializers.JSONField(help_text="Errors if any.", allow_null=True)
     messages = serializers.JSONField(help_text="Messages if any.", allow_null=True)
     status_code = serializers.IntegerField(default=200)
@@ -35,7 +35,7 @@ class RolePermissionListDataSerializer(serializers.Serializer):
     """
     Serializer for RolePermission list with pagination.
     """
-    list = RolePermissionSerializer(many=True, help_text="List of role-permission mappings.")
+    list = RolePermissionSwaggerSerializer(many=True, help_text="List of role-permission mappings.")
     pagination = serializers.JSONField(help_text="Pagination info.")
 
 

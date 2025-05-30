@@ -19,7 +19,7 @@ class RolePermissionMapping(BaseModel, models.Model):
     role_permission_mapping_id = models.CharField(
         max_length=64, primary_key=True, default=get_uuid
     )
-    
+
     role_id = models.CharField(choices=RoleEnum.choices, max_length=64)
     permission = models.ForeignKey("Permission", on_delete=models.CASCADE)
 

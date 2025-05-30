@@ -16,15 +16,29 @@ class AuditLogsDataSerializer(serializers.Serializer):
     Serializer for audit logs data structure.
     """
 
-    audit_id = serializers.Serializer()
-    user_id = serializers.Serializer()
-    module_name = serializers.Serializer()
-    http_method = serializers.Serializer()
-    request_path = serializers.Serializer()
-    client_ip = serializers.Serializer()
-    client_user_agent = serializers.Serializer()
-    request_route = serializers.Serializer()
-    request_headers = serializers.Serializer()
+    audit_id = serializers.CharField(
+        help_text="Unique identifier for the audit log entry."
+    )
+    user_id = serializers.CharField(
+        help_text="Unique identifier of the user who performed the action."
+    )
+    module_name = serializers.CharField(
+        help_text="Name of the module where the action occurred."
+    )
+    http_method = serializers.CharField(
+        help_text="HTTP method used in the request (GET, POST, etc.)."
+    )
+    request_path = serializers.CharField(help_text="Full path of the request URL.")
+    client_ip = serializers.CharField(
+        help_text="IP address of the client making the request."
+    )
+    client_user_agent = serializers.CharField(
+        help_text="User agent string of the client."
+    )
+    request_route = serializers.CharField(help_text="Route used to access the API.")
+    request_headers = serializers.JSONField(
+        help_text="Headers included in the original request."
+    )
 
 
 class AuditLogsDataListSerializer(serializers.Serializer):
@@ -72,7 +86,7 @@ class AuditLogsResponseSerializer(serializers.Serializer):
     is_success = serializers.BooleanField(default=True)
 
 
-audit_getById_success_example: OpenApiExample = get_by_id_success_example(
+audit_get_by_id_success_example: OpenApiExample = get_by_id_success_example(
     name="Get Audit logs by Id - Success",
     data={
         "audit_id": "e3744e32-8c42-468e-a11b-6595da3a12e1",

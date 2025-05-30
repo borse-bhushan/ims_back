@@ -13,24 +13,28 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Tenant',
+            name='AuditLogs',
             fields=[
                 ('is_active', models.BooleanField(default=True)),
                 ('is_deleted', models.BooleanField(default=False)),
                 ('client_ip', models.CharField(default=None, max_length=128, null=True)),
                 ('client_user_agent', models.CharField(default=None, max_length=128, null=True)),
+                ('tenant_id', models.CharField(max_length=128)),
                 ('created_by', models.CharField(default=None, max_length=128, null=True)),
                 ('updated_by', models.CharField(default=None, max_length=128, null=True)),
                 ('updated_dtm', models.DateTimeField(auto_now=True)),
                 ('created_dtm', models.DateTimeField(auto_now_add=True)),
                 ('deleted_dtm', models.DateTimeField(default=None, null=True)),
-                ('tenant_id', models.CharField(default=utils.functions.get_uuid, max_length=36, primary_key=True, serialize=False)),
-                ('tenant_code', models.CharField(max_length=256)),
-                ('tenant_name', models.CharField(max_length=256)),
-                ('tenant_desc', models.TextField(default=None, null=True)),
+                ('audit_id', models.CharField(default=utils.functions.get_uuid, max_length=64, primary_key=True, serialize=False)),
+                ('user_id', models.CharField(default=None, max_length=64, null=True)),
+                ('module_name', models.CharField(default=None, max_length=128, null=True)),
+                ('http_method', models.CharField(default=None, max_length=16, null=True)),
+                ('request_path', models.CharField(default=None, max_length=256, null=True)),
+                ('request_route', models.CharField(default=None, max_length=256, null=True)),
+                ('request_headers', models.JSONField(default=None, null=True)),
             ],
             options={
-                'db_table': 'tenants',
+                'db_table': 'audit_logs',
             },
         ),
     ]

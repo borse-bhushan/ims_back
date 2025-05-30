@@ -21,7 +21,16 @@ class RetrieveView:
 
     @classmethod
     def get_method_view_mapping(cls):
+        """
+        Returns a mapping of HTTP methods to view methods for this class.
+        """
         return {constants.GET: "retrieve"}
+
+    def get_details(self, obj, **kwargs):
+        """
+        Get the details of the object in dictionary format.
+        """
+        return obj.to_dict()
 
     def retrieve(self, request, **kwargs):
         """
@@ -37,7 +46,8 @@ class RetrieveView:
                 self.lookup_field: kwargs[self.lookup_field],
             }
         )
+
         if not obj:
             raise NoDataFoundError()
 
-        return generate_response(data=obj.to_dict())
+        return generate_response(data=self.get_details(obj, request=request, **kwargs))

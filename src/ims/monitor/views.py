@@ -96,7 +96,7 @@ class MonitorView(APIView):
 
     authentication_classes = get_authentication_classes()
 
-    @extend_schema(responses={"200": swagger.SysInfoResponseSerializer()})
+    @extend_schema(responses={"200": swagger.SysInfoResponseSerializer()}, tags=[MODULE])
     @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE} information")
     def get(self, *_):
         """

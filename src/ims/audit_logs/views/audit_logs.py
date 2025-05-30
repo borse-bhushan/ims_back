@@ -18,14 +18,14 @@ from utils.swagger import (
 )
 from ..serializers import (
     AuditLogsListResponseSerializer,
-    audit_getById_success_example,
+    audit_get_by_id_success_example,
     audit_list_success_example,
     AuditLogsResponseSerializer,
 )
 from ..db_access import audit_logs_manager
 
 
-MODULE_NAME = "audit_logs"
+MODULE_NAME = "Audit Logs"
 
 
 class AuditLogViewSet(RetrieveView, ListView, viewsets.ViewSet):
@@ -70,7 +70,7 @@ class AuditLogViewSet(RetrieveView, ListView, viewsets.ViewSet):
     @extend_schema(
         responses={200: AuditLogsResponseSerializer, **responses_404, **responses_401},
         examples=[
-            audit_getById_success_example,
+            audit_get_by_id_success_example,
             responses_404_example,
             responses_401_example,
         ],

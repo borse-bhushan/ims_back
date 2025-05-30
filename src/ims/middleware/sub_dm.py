@@ -4,10 +4,12 @@ This middleware extracts the subdomain from the request and attaches it to the r
 """
 
 from rest_framework import status
+from django.urls import resolve, Resolver404
 
 from utils.messages import error
 from utils.response import generate_response
 from utils import functions as common_functions
+from utils.exclude_path import is_path_excluded
 
 from tenant.db_access import tenant_manager
 from tenant.utils.helpers import (
@@ -31,6 +33,18 @@ class AttachSubdomainToRequestMiddleware:
         If the domain, subdomain is invalid, it will return a 400 Bad Request response
         with an error message.
         """
+
+        try:
+            resolver_match = resolve(request.path)
+            request.resolver_match = resolver_match
+            route = resolver_match.route
+
+            if is_path_excluded(route):
+                return self.get_response(request)
+
+        except Resolver404:
+            pass
+
         sub_domain_data = common_functions.get_subdomain(request)
         if not sub_domain_data:
             return generate_response(
@@ -40,7 +54,7 @@ class AttachSubdomainToRequestMiddleware:
             )
 
         tenant_manager_obj = tenant_manager.disable_tenant_aware()
-        tenant_obj = tenant_manager_obj.get(query={"sub_domain": sub_domain_data})
+        tenant_obj = tenant_manager_obj.get(query={"tenant_code": sub_domain_data})
 
         if not tenant_obj:
             return generate_response(

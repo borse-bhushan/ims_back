@@ -1,13 +1,12 @@
 {
     "data": [
         {
-            "user_id": "9d018a56-abd9-4dfd-b606-80ce3ba8f53f",
-            "email": "bhushan.borse@sagacitysoftware.co.in",
-            "first_name": "Bhushan",
             "last_name": "Borse",
-            "phone_number": "9878786565",
+            "first_name": "Bhushan",
             "password": "Bhushan@123",
-            "role_id": "SUPER_COMPANY_ADMIN"
+            "phone_number": "9878786565",
+            "role_id": "SUPER_ADMIN",
+            "email": "borsebhushan216@gmail.com"
         }
     ]
 }

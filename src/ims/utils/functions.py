@@ -104,7 +104,7 @@ def get_subdomain(request):
     host = request.get_host().split(":")[0]
 
     parts = host.split(".")
-    if len(parts) > 2:
+    if len(parts) >= 2:
         return parts[0]
 
     return None

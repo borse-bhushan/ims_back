@@ -11,8 +11,9 @@ class RoleEnum(models.TextChoices):
     within the system. Each role is represented as a string constant.
     """
 
-    SUPER_COMPANY_ADMIN = "SUPER_COMPANY_ADMIN", "Company Admin"
+    SUPER_ADMIN = "SUPER_ADMIN", "Super Admin"
 
+    COMPANY_ADMIN = "COMPANY_ADMIN", "Company Admin"
     MANAGER = "MANAGER", "Manager"
     OPERATOR = "OPERATOR", "Operator"
 

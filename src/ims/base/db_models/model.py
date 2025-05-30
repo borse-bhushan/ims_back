@@ -16,7 +16,7 @@ class BaseModel(models.Model):
     client_ip = models.CharField(max_length=128, null=True, default=None)
     client_user_agent = models.CharField(max_length=128, null=True, default=None)
 
-    tenant_id = models.CharField(max_length=128)
+    tenant_id = models.CharField(max_length=128, null=True, default=None)
 
     created_by = models.CharField(max_length=128, null=True, default=None)
     updated_by = models.CharField(max_length=128, null=True, default=None)

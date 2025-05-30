@@ -4,10 +4,12 @@ Tenant viewset for managing Tenants.
 
 from rest_framework import viewsets
 
-from base.views.base import BaseView
+from base.views.base import BaseView, RetrieveView
+
+from utils.constants import BASE_PATH
+from utils import functions as common_functions
 
 from auth_user.constants import MethodEnum
-from utils import functions as common_functions
 from authentication import get_authentication_classes, register_permission
 
 
@@ -18,6 +20,7 @@ from .db_access import tenant_manager
 
 
 MODULE = "Tenant"
+MODULE_DETAILS = "Tenant Details"
 
 
 class TenantViewSet(BaseView, viewsets.ViewSet):
@@ -65,3 +68,26 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
     @register_permission(MODULE, MethodEnum.DELETE, f"Delete {MODULE}")
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
+
+
+class TenantDetialsViewSet(RetrieveView, viewsets.ViewSet):
+    """
+    ViewSet for managing tenant details.
+    """
+
+    lookup_field = "tenant_code"
+    manager = tenant_manager.disable_tenant_aware()
+
+    def get_details(self, obj, **kwargs):
+        """
+        Get the details of the object in dictionary format.
+        """
+
+        request = kwargs["request"]
+        tenant_details = obj.to_dict()
+        return {
+            "host": request.get_host(),
+            "sub_domain": tenant_details["tenant_code"],
+            "api_host": f"{request.scheme}://{tenant_details['tenant_code']}.{request.get_host()}",
+            "base_path": BASE_PATH.removesuffix("/"),
+        }

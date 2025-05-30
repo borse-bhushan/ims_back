@@ -13,7 +13,7 @@ from utils.swagger.common_swagger_functions import (get_delete_success_example,
                                                     get_by_id_success_example)
 
 
-class PermissionSerializer(serializers.Serializer):
+class PermissionSwaggerSerializer(serializers.Serializer):
     """
     Serializer for both creating and updating a permission.
     """
@@ -34,7 +34,7 @@ class PermissionResponseSerializer(serializers.Serializer):
     Serializer for the response of permission-related endpoints.
     """
 
-    data = PermissionSerializer(help_text="Permission details.")
+    data = PermissionSwaggerSerializer(help_text="Permission details.")
     errors = serializers.JSONField(help_text="Errors, if any", allow_null=True)
     messages = serializers.JSONField(
         help_text="Informational messages", allow_null=True
@@ -48,7 +48,7 @@ class PermissionListDataSerializer(serializers.Serializer):
     Serializer for the data field in permission list response.
     """
 
-    list = PermissionSerializer(many=True, help_text="List of permissions")
+    list = PermissionSwaggerSerializer(many=True, help_text="List of permissions")
     pagination = PaginationSerializer(help_text="Pagination info")
 
 
