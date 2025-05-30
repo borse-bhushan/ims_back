@@ -9,12 +9,14 @@ from django.urls import resolve, Resolver404
 from utils.messages import error
 from utils.response import generate_response
 from utils import functions as common_functions
-from utils.exclude_path import is_path_excluded
+from utils.tenant_aware_path import is_path_excluded_from_tenant_aware
 
 from tenant.db_access import tenant_manager
 from tenant.utils.helpers import (
     set_tenant_details_to_request_thread,
     clear_tenant_details_from_request_thread,
+    set_request_tenant_aware,
+    clear_request_tenant_aware,
 )
 
 
@@ -39,11 +41,15 @@ class AttachSubdomainToRequestMiddleware:
             request.resolver_match = resolver_match
             route = resolver_match.route
 
-            if is_path_excluded(route):
-                return self.get_response(request)
-
+            if is_path_excluded_from_tenant_aware(route):
+                set_request_tenant_aware(is_tenant_aware=False)
+                response = self.get_response(request)
+                clear_request_tenant_aware()
+                return response
         except Resolver404:
             pass
+
+        set_request_tenant_aware()
 
         sub_domain_data = common_functions.get_subdomain(request)
         if not sub_domain_data:
@@ -67,6 +73,7 @@ class AttachSubdomainToRequestMiddleware:
 
         response = self.get_response(request)
 
+        clear_request_tenant_aware()
         clear_tenant_details_from_request_thread()
 
         return response

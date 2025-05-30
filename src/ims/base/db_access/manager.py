@@ -12,7 +12,10 @@ from utils.messages import error
 from utils.pagination import Pagination
 from utils.exceptions import CommonError
 
-from tenant.utils.helpers import get_tenant_details_from_request_thread
+from tenant.utils.helpers import (
+    is_request_tenant_aware,
+    get_tenant_details_from_request_thread,
+)
 
 T = TypeVar("T", bound=Model)
 
@@ -179,13 +182,26 @@ class Manager(Generic[T]):
         if self.check_is_deleted:
             query["is_deleted"] = is_deleted
 
-        if self.__tenant_aware:
+        if self.__is_tenant_aware:
             tenant_info = get_tenant_details_from_request_thread()
             query["tenant_id"] = tenant_info["tenant_id"]
 
         objects = self.model.objects.filter(self.query_builder.build_query(query))
 
         return objects
+
+    @property
+    def __is_tenant_aware(self) -> bool:
+        """
+        Check if the manager is tenant-aware.
+        Returns:
+            bool: True if the manager is tenant-aware, False otherwise.
+        """
+
+        is_tenant_aware = is_request_tenant_aware()
+        if not is_tenant_aware:
+            return False
+        return self.__tenant_aware
 
     def get(self, query) -> T | None:
         """
@@ -369,11 +385,14 @@ class Manager(Generic[T]):
         """
 
         tenant_info = {}
-        if self.__tenant_aware:
+        if self.__is_tenant_aware:
             tenant_info = get_tenant_details_from_request_thread()
 
         def add_tenant_info(item):
-            if self.__tenant_aware:
+            """
+            Adds tenant information to the item if tenant awareness is enabled.
+            """
+            if self.__is_tenant_aware:
                 item["tenant_id"] = tenant_info["tenant_id"]
             return item
 

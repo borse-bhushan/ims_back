@@ -75,8 +75,8 @@ class TenantDetialsViewSet(RetrieveView, viewsets.ViewSet):
     ViewSet for managing tenant details.
     """
 
+    manager = tenant_manager
     lookup_field = "tenant_code"
-    manager = tenant_manager.disable_tenant_aware()
 
     def get_details(self, obj, **kwargs):
         """

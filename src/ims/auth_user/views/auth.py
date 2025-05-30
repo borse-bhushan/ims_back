@@ -17,6 +17,8 @@ from authentication import get_authentication_classes, register_permission
 
 from audit_logs.helpers import create_audit_log_entry
 
+from tenant.utils.helpers import is_request_tenant_aware
+
 from utils import functions as common_functions
 from utils.response.response import generate_response
 from utils.swagger import (
@@ -26,6 +28,7 @@ from utils.swagger import (
 )
 
 
+from ..constants import RoleEnum
 from ..serializers import LoginSerializer
 from ..db_access import token_manager, user_manager
 from ..serializers.swagger import (
@@ -54,9 +57,12 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
         Handle user login by validating credentials and generating a token.
         """
 
-        user_obj = user_manager.get(
-            {"email": data["username"], "password": data["password"]}
-        )
+        query = {"email": data["username"], "password": data["password"]}
+
+        if not is_request_tenant_aware():
+            query["role_id"] = RoleEnum.SUPER_ADMIN
+
+        user_obj = user_manager.get(query=query)
 
         if not user_obj:
             raise WrongCredentialsException()

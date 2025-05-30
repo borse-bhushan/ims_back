@@ -1,7 +1,5 @@
 """
-This module defines paths to be excluded from processing.
-It provides functions to add paths to the exclusion list and check if a path is excluded.
-It's useful in middleware that need to skip certain paths
+Utility functions to manage tenant-aware excluded paths.
 """
 
 from utils.constants import BASE_PATH
@@ -9,20 +7,24 @@ from utils.constants import BASE_PATH
 EXLUDE_PATHS = []
 
 
-def add_excluded_path(path, add_base_path=True):
+def add_path_to_tenant_aware_excluded_path_list(
+    _path, add_base_path=True, other_base_path=""
+):
     """
     Add a path to the list of excluded paths.
 
     Args:
         path (str): The path to be excluded.
     """
+    path = other_base_path + _path
+
     if path not in EXLUDE_PATHS:
         EXLUDE_PATHS.append(BASE_PATH + path if add_base_path else path)
 
-    return path
+    return _path
 
 
-def is_path_excluded(path):
+def is_path_excluded_from_tenant_aware(path):
     """
     Check if a path is excluded.
 
@@ -32,4 +34,5 @@ def is_path_excluded(path):
     Returns:
         bool: True if the path is excluded, False otherwise.
     """
+
     return path in EXLUDE_PATHS
