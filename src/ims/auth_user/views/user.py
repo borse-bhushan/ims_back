@@ -125,5 +125,7 @@ class UserProfileViewSet(RetrieveView, viewsets.ViewSet):
         check=False,
     )
     def retrieve(self, request, *args, **kwargs):
-
+        """
+        Retrieve the user profile information.
+        """
         return generate_response(data={**request.user.to_dict()})

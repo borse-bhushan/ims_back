@@ -33,43 +33,45 @@ def register_permission(
         def wrapper(self, request, *args, **kwargs):
             """
             Wrapper function to check if the user has the permission before executing the view.
-            If check is False, it will not check the permission.
-            If check is True, it will check the permission.
-            If the user does not have the permission, it will raise a PermissionDenied exception.
-            If the user has the permission, it will execute the view.
             """
             create_audit_log_entry(
                 action=action,
                 request=request,
                 module_name=module,
             )
-            if check:
 
-                if create_permission and not m_kwargs.get("permission_obj"):
-                    m_kwargs["permission_obj"] = permission_manager.upsert(
-                        data={
-                            "name": name,
-                            "action": action,
-                            "module": module,
-                        },
-                        query={
-                            "action": action,
-                            "module": module,
-                        },
-                    )
+            if not check:
+                return view(self, request, *args, **kwargs)
 
-                is_super_admin = RoleEnum.SUPER_ADMIN == request.user.role_id
+            is_super_admin = RoleEnum.SUPER_ADMIN == request.user.role_id
 
-                if not create_permission and not is_super_admin:
+            if not create_permission:
+
+                if not is_super_admin:
                     raise PermissionDenied()
 
-                if not is_super_admin and not role_permission_mapping_manager.exists(
+                return view(self, request, *args, **kwargs)
+
+            if not m_kwargs.get("permission_obj"):
+                m_kwargs["permission_obj"] = permission_manager.upsert(
+                    data={
+                        "name": name,
+                        "action": action,
+                        "module": module,
+                    },
                     query={
-                        "role_id": request.user.role_id,
-                        "permission_id": m_kwargs["permission_obj"].permission_id,
-                    }
-                ):
-                    raise PermissionDenied()
+                        "action": action,
+                        "module": module,
+                    },
+                )
+
+            if not is_super_admin and not role_permission_mapping_manager.exists(
+                query={
+                    "role_id": request.user.role_id,
+                    "permission_id": m_kwargs["permission_obj"].permission_id,
+                }
+            ):
+                raise PermissionDenied()
 
             return view(self, request, *args, **kwargs)
 

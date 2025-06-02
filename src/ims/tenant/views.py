@@ -49,23 +49,48 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
 
         return data
 
-    @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")
+    @register_permission(
+        MODULE,
+        MethodEnum.POST,
+        f"Create {MODULE}",
+        create_permission=False,
+    )
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
 
-    @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE}")
+    @register_permission(
+        MODULE,
+        MethodEnum.GET,
+        f"Get {MODULE}",
+        create_permission=False,
+    )
     def list_all(self, request, *args, **kwargs):
         return super().list_all(request, *args, **kwargs)
 
-    @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE}")
+    @register_permission(
+        MODULE,
+        MethodEnum.GET,
+        f"Get {MODULE}",
+        create_permission=False,
+    )
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
 
-    @register_permission(MODULE, MethodEnum.PUT, f"Update {MODULE}")
+    @register_permission(
+        MODULE,
+        MethodEnum.PUT,
+        f"Update {MODULE}",
+        create_permission=False,
+    )
     def update(self, request, *args, **kwargs):
         return super().update(request, *args, **kwargs)
 
-    @register_permission(MODULE, MethodEnum.DELETE, f"Delete {MODULE}")
+    @register_permission(
+        MODULE,
+        MethodEnum.DELETE,
+        f"Delete {MODULE}",
+        create_permission=False,
+    )
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
 
