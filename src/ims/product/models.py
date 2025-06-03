@@ -16,6 +16,9 @@ class Product(BaseModel, models.Model):
     product_code = models.CharField(max_length=256)
     product_name = models.CharField(max_length=256)
     product_desc = models.TextField(null=True, default=None)
+    sell_price = models.DecimalField(max_digits=10, decimal_places=2)
+    purchase_price = models.DecimalField(max_digits=10, decimal_places=2)
+
     category = models.ForeignKey("category.Category", on_delete=models.CASCADE)
 
     class Meta:
@@ -27,8 +30,10 @@ class Product(BaseModel, models.Model):
         """
         return {
             "product_id": self.product_id,
+            "sell_price": self.sell_price,
             "category_id": self.category_id,
             "product_code": self.product_code,
             "product_name": self.product_name,
             "product_desc": self.product_desc,
+            "purchase_price": self.purchase_price,
         }
