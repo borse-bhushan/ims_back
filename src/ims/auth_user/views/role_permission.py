@@ -28,7 +28,7 @@ from ..swagger import (
     RolePermissionListResponseSerializer,
     role_permission_create_example,
     role_permission_list_example,
-    role_permission_delete_example
+    role_permission_delete_example,
 )
 
 MODULE = "Role Permission"
@@ -56,8 +56,16 @@ class RolePermissionViewSet(CreateView, DeleteView, ListView, viewsets.ViewSet):
         }
 
     @extend_schema(
-        responses={201: RolePermissionResponseSerializer, **responses_400, **responses_401},
-        examples=[role_permission_create_example, responses_400_example, responses_401_example],
+        responses={
+            201: RolePermissionResponseSerializer,
+            **responses_400,
+            **responses_401,
+        },
+        examples=[
+            role_permission_create_example,
+            responses_400_example,
+            responses_401_example,
+        ],
         tags=[MODULE],
     )
     @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")
@@ -65,8 +73,16 @@ class RolePermissionViewSet(CreateView, DeleteView, ListView, viewsets.ViewSet):
         return super().create(request, *args, **kwargs)
 
     @extend_schema(
-        responses={200: RolePermissionListResponseSerializer, **responses_404, **responses_401},
-        examples=[role_permission_list_example, responses_404_example, responses_401_example],
+        responses={
+            200: RolePermissionListResponseSerializer,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            role_permission_list_example,
+            responses_404_example,
+            responses_401_example,
+        ],
         tags=[MODULE],
     )
     @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE}")
@@ -75,7 +91,11 @@ class RolePermissionViewSet(CreateView, DeleteView, ListView, viewsets.ViewSet):
 
     @extend_schema(
         responses={204: None, **responses_404, **responses_401},
-        examples=[role_permission_delete_example, responses_404_example, responses_401_example],
+        examples=[
+            role_permission_delete_example,
+            responses_404_example,
+            responses_401_example,
+        ],
         tags=[MODULE],
     )
     @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")

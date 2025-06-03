@@ -19,6 +19,7 @@ from audit_logs.helpers import create_audit_log_entry
 
 from tenant.utils.helpers import is_request_tenant_aware
 
+from utils.messages import success
 from utils import functions as common_functions
 from utils.response.response import generate_response
 from utils.swagger import (
@@ -89,7 +90,7 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
         return generate_response(
             data=obj.to_dict(),
             status_code=status.HTTP_201_CREATED,
-            messages={"message": "Logged in successful."},
+            messages={"message": success.LOGIN_SUCCESSFULLY},
         )
 
     @extend_schema(
@@ -127,6 +128,6 @@ class LogoutViewSet(DeleteView, viewsets.ViewSet):
 
         return generate_response(
             data=None,
-            messages={"message": "Logged out successfully."},
             status_code=status.HTTP_204_NO_CONTENT,
+            messages={"message": success.LOGOUT_SUCCESSFULLY},
         )
