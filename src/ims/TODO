@@ -1,0 +1,1 @@
+Write the middleware which can change the authentication machanism based on the tenant congig.
