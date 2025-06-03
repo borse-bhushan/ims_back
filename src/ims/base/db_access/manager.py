@@ -145,7 +145,7 @@ class Manager(Generic[T]):
         user_manager.delete({'id': 1}, soft_delete=True)
     """
 
-    model: Model = None
+    model: type[T] = None
     __tenant_aware = True
     check_is_deleted: bool = True
     query_builder = QueryBuilder()
@@ -397,8 +397,10 @@ class Manager(Generic[T]):
             return item
 
         if many:
+
             data_list = []
             for item in data:
+                # pylint: disable=not-callable
                 data_list.append(self.model(**add_tenant_info(item)))
             return self.model.objects.bulk_create(data_list)
 

@@ -19,7 +19,7 @@ def disable_print():
 
     def restricted_print(*args, **kwargs):
         stack = traceback.extract_stack()
-        caller = stack[-2]  # Get the second-last frame (where print() was called from)
+        caller = stack[-2]  # Get the second-last frame (where 'print' was called from)
         caller_file = caller.filename
 
         # Allow print only for virtual environment packages

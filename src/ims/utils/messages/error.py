@@ -16,6 +16,6 @@ INTERNAL_SERVER_ERROR: str = "Internal Server Error."
 RESOURCE_NOT_FOUND: str = "The requested resource was not found."
 DELETE_WITHOUT_QUERY: str = "Provide the Query To delete the records."
 PRINT_FUNCTION_IS_DISABLE: str = (
-    "print() function is disabled please remove the use of it instead use the [log_msg]. "
+    "'print' function is disabled please remove the use of it instead use the [log_msg]. "
     "Change the DISABLE_PRINT:True in the config file to False to enable the print function. "
 )

@@ -26,4 +26,7 @@ class BaseModel(models.Model):
     deleted_dtm = models.DateTimeField(null=True, default=None)
 
     class Meta:
+        """
+        Base model meta class
+        """
         abstract = True
