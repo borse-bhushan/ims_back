@@ -2,7 +2,7 @@
 tenant serializers module.
 """
 
-from .category import CategorySerializer
+from .tenant import CategorySerializer
 from .query import CategoryQuerySerializer
 
 __all__ = ["CategorySerializer", "CategoryQuerySerializer"]
