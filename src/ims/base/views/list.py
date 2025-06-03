@@ -95,7 +95,7 @@ class ListView:
         """
 
         if self.list_serializer_class is not None:
-            serializer = self.list_serializer_class(data=query_params)
+            serializer = self.list_serializer_class(data=query_params, partial=True)
             is_valid = serializer.is_valid()
             if not is_valid:
                 raise ValidationError(serializer.errors)
@@ -120,7 +120,7 @@ class ListView:
         Retrieve object list with pagination based on query params provided in the request data.
         """
 
-        serializer = self.list_serializer_class(data=query)
+        serializer = self.list_serializer_class(data=query, partial=True)
         is_valid = serializer.is_valid()
         if not is_valid:
             raise ValidationError(serializer.errors)

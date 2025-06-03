@@ -8,7 +8,7 @@ from utils.functions import get_uuid
 from base.db_models import BaseModel
 
 
-class Tenant(BaseModel):
+class Tenant(BaseModel, models.Model):
     """Represents a tenant organization within the system."""
 
     tenant_id = models.CharField(primary_key=True, default=get_uuid, max_length=36)
@@ -18,6 +18,10 @@ class Tenant(BaseModel):
     tenant_desc = models.TextField(null=True, default=None)
 
     class Meta:
+        """
+        Meta class for Tenant model.
+        """
+
         db_table = "tenants"
 
     def to_dict(self):

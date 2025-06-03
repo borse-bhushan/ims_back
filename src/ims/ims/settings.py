@@ -70,6 +70,7 @@ MY_APPS = [
     "monitor",
     "cmds",
     "audit_logs",
+    "category",
 ]
 
 INSTALLED_APPS += MY_APPS

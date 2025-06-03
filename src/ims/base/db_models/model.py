@@ -29,4 +29,5 @@ class BaseModel(models.Model):
         """
         Base model meta class
         """
+
         abstract = True

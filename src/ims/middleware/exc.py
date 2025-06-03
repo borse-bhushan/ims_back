@@ -14,8 +14,6 @@ from utils.logger.logger import log_msg
 from utils.response import generate_response
 from utils.ser_val_err_format import format_serializer_errors
 from utils.exceptions import (
-    SettingKeyError,
-    CommonError,
     NoDataFoundError,
     ValidationError,
     BadRequestError,
@@ -60,8 +58,6 @@ class DRFExceptionMiddleware(MiddlewareMixin):
         This method catches exceptions and returns a JSON response.
         """
 
-        self.log_exception(exception)
-
         if isinstance(exception, ValidationError):
             return generate_response(
                 create_json_response=True,
@@ -69,24 +65,22 @@ class DRFExceptionMiddleware(MiddlewareMixin):
                 errors=format_serializer_errors(exception.message),
             )
 
-        if isinstance(exception, (NoDataFoundError, BadRequestError, PermissionDenied)):
-            return generate_response(
-                create_json_response=True,
-                status_code=exception.status_code,
-                errors={"message": exception.message, "code": exception.code},
-            )
-
-        if isinstance(exception, (SettingKeyError, CommonError)):
-            return self.return_500()
-
         if isinstance(
             exception,
-            (UnauthorizedException, WrongCredentialsException),
+            (
+                NoDataFoundError,
+                BadRequestError,
+                PermissionDenied,
+                UnauthorizedException,
+                WrongCredentialsException,
+            ),
         ):
             return generate_response(
                 create_json_response=True,
                 status_code=exception.status_code,
                 errors={"message": exception.message, "code": exception.code},
             )
+
+        self.log_exception(exception)
 
         return self.return_500()

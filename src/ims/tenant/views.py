@@ -62,7 +62,7 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
     @register_permission(
         MODULE,
         MethodEnum.GET,
-        f"Get {MODULE}",
+        f"List {MODULE}",
         create_permission=False,
     )
     def list_all(self, request, *args, **kwargs):

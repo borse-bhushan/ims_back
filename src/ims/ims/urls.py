@@ -23,6 +23,10 @@ urlpatterns = [
     path(BASE_PATH, include("tenant.urls")),
     # User Management API
     path(BASE_PATH, include("auth_user.urls")),
+    
+    # Category Management API
+    path(BASE_PATH, include("category.urls")),
+
     # Audit Logs Management API
     path(BASE_PATH, include("audit_logs.urls")),
     # Monitoring API
