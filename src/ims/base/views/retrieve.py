@@ -32,6 +32,12 @@ class RetrieveView:
         """
         return obj.to_dict()
 
+    def get_details_query(self, **kwargs):
+        """
+        Get the query parameters for retrieving the object based on the lookup field.
+        """
+        return {self.lookup_field: kwargs[self.lookup_field]}
+
     def retrieve(self, request, **kwargs):
         """
         Retrieve an object based on the ID provided in the request data.
@@ -41,11 +47,7 @@ class RetrieveView:
             object: The retrieved object if found.
         """
 
-        obj = self.manager.get(
-            query={
-                self.lookup_field: kwargs[self.lookup_field],
-            }
-        )
+        obj = self.manager.get(query=self.get_details_query(**kwargs, request=request))
 
         if not obj:
             raise NoDataFoundError()
