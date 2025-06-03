@@ -10,23 +10,23 @@ from auth_user.constants import MethodEnum
 from authentication import get_authentication_classes, register_permission
 
 
-from .db_access import category_manager
-from .serializers import CategorySerializer, CategoryQuerySerializer
+from .db_access import product_manager
+from .serializers import ProductQuerySerializer, ProductSerializer
 
 
-MODULE = "Category"
+MODULE = "Product"
 
 
-class CategoryViewSet(BaseView, viewsets.ViewSet):
+class ProductViewSet(BaseView, viewsets.ViewSet):
     """
-    ViewSet for managing category.
+    ViewSet for managing product.
     """
 
-    manager = category_manager
-    lookup_field = "category_id"
-    serializer_class = CategorySerializer
-    list_serializer_class = CategoryQuerySerializer
-    search_fields = ["category_code", "category_name"]
+    manager = product_manager
+    lookup_field = "product_id"
+    serializer_class = ProductSerializer
+    list_serializer_class = ProductQuerySerializer
+    search_fields = ["product_code", "product_name"]
     authentication_classes = get_authentication_classes()
 
     @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")

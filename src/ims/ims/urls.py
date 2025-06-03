@@ -27,6 +27,9 @@ urlpatterns = [
     # Category Management API
     path(BASE_PATH, include("category.urls")),
 
+    # Product Management API
+    path(BASE_PATH, include("product.urls")),
+
     # Audit Logs Management API
     path(BASE_PATH, include("audit_logs.urls")),
     # Monitoring API

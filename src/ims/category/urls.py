@@ -1,5 +1,5 @@
 """
-tenant URL routing module.
+Category URL routing module.
 """
 
 from django.urls import path

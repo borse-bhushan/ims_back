@@ -1,21 +1,21 @@
 """
-tenant URL routing module.
+Product URL routing module.
 """
 
 from django.urls import path
 
 
-from .views import CategoryViewSet
+from .views import ProductViewSet
 
 urlpatterns = [
     path(
-        "category",
-        CategoryViewSet.as_view(CategoryViewSet.get_method_view_mapping()),
-        name="category",
+        "product",
+        ProductViewSet.as_view(ProductViewSet.get_method_view_mapping()),
+        name="product",
     ),
     path(
-        "category/<str:category_id>",
-        CategoryViewSet.as_view(CategoryViewSet.get_method_view_mapping(True)),
-        name="category-detail",
+        "product/<str:product_id>",
+        ProductViewSet.as_view(ProductViewSet.get_method_view_mapping(True)),
+        name="product-detail",
     ),
 ]

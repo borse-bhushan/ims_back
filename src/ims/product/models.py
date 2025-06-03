@@ -17,7 +17,6 @@ class Product(BaseModel, models.Model):
     product_name = models.CharField(max_length=256)
     product_desc = models.TextField(null=True, default=None)
     category = models.ForeignKey("category.Category", on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
 
     class Meta:
         db_table = "products"
@@ -27,7 +26,6 @@ class Product(BaseModel, models.Model):
         Convert the model instance to a dictionary.
         """
         return {
-            "price": self.price,
             "product_id": self.product_id,
             "category_id": self.category_id,
             "product_code": self.product_code,
