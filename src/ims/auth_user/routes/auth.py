@@ -12,7 +12,7 @@ URLs:
 
 from django.urls import path
 
-from utils.tenant_aware_path import add_path_to_tenant_aware_excluded_path_list
+from utils.tenant_aware_path import add_to_tenant_aware_excluded_path_list
 
 from auth_user.views import LoginViewSet, LogoutViewSet
 
@@ -24,7 +24,7 @@ urlpatterns = [
         name="login",
     ),
     path(
-        add_path_to_tenant_aware_excluded_path_list(
+        add_to_tenant_aware_excluded_path_list(
             "admin/login", other_base_path="auth/"
         ),
         LoginViewSet.as_view(LoginViewSet.get_method_view_mapping()),
@@ -36,7 +36,7 @@ urlpatterns = [
         name="login",
     ),
     path(
-        add_path_to_tenant_aware_excluded_path_list(
+        add_to_tenant_aware_excluded_path_list(
             "admin/logout", other_base_path="auth/"
         ),
         LogoutViewSet.as_view(LogoutViewSet.get_method_view_mapping()),

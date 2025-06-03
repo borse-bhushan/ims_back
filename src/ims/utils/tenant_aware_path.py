@@ -7,7 +7,7 @@ from utils.constants import BASE_PATH
 EXLUDE_PATHS = []
 
 
-def add_path_to_tenant_aware_excluded_path_list(
+def add_to_tenant_aware_excluded_path_list(
     _path, add_base_path=True, other_base_path=""
 ):
     """
