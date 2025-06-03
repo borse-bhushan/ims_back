@@ -1,6 +1,7 @@
 """
 Serializer for Product.
 """
+from decimal import Decimal
 
 from rest_framework import serializers
 
@@ -21,10 +22,10 @@ class ProductSerializer(serializers.Serializer):
     product_desc = serializers.CharField(allow_null=True, required=False)
 
     sell_price = serializers.DecimalField(
-        max_digits=10, decimal_places=2, min_value=0.01
+        max_digits=10, decimal_places=2, min_value=Decimal("0.01")
     )
     purchase_price = serializers.DecimalField(
-        max_digits=10, decimal_places=2, min_value=0.01
+        max_digits=10, decimal_places=2, min_value=Decimal("0.01")
     )
 
     def get_query(self, field_name, value):
