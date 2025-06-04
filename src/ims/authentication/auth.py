@@ -5,6 +5,35 @@ This module provides a function to get authentication classes for the API views.
 import importlib
 from utils import settings
 
+from tenant.constants import AuthenticationTypeEnum
+from tenant.utils.helpers import is_request_tenant_aware
+from tenant.db_access import tenant_configuration_manager
+
+
+def import_authentication_class(class_name):
+    """
+    This function imports the authentication class based on the provided class name.
+    The class name should be in the format 'module.ClassName'.
+    """
+
+    module_name = ".".join(class_name.split(".")[:-1])
+
+    # Import the module relative to the current package
+    current_module = importlib.import_module(module_name, __package__)
+
+    auth_class_name = class_name.split(".")[-1]
+    return current_module.__dict__[auth_class_name]
+
+
+def get_default_authentication_class():
+    """
+    This function returns the default authentication class to be used in the API views.
+    """
+
+    str_auth_class = settings.read("DEFAULT_AUTHENTICATION_CLASSES")
+
+    return [import_authentication_class(class_name) for class_name in str_auth_class]
+
 
 def get_authentication_classes(self):
     """
@@ -12,15 +41,11 @@ def get_authentication_classes(self):
     The authentication classes are used to authenticate users and provide access control.
     """
 
-    str_auth_classes = settings.read("DEFAULT_AUTHENTICATION_CLASSES")
+    if not is_request_tenant_aware():
+        return get_default_authentication_class()
 
-    auth_classes = []
+    tenant_configuration_obj = tenant_configuration_manager.get({})
+    if tenant_configuration_obj.authentication_type == AuthenticationTypeEnum.TOKEN:
+        return get_default_authentication_class()
 
-    for str_auth_class in str_auth_classes:
-        auth_classes.append(
-            importlib.import_module(
-                ".".join(str_auth_class.split(".")[:-1]), __package__
-            ).__dict__[str_auth_class.split(".")[-1]]()
-        )
-
-    return auth_classes
+    return []

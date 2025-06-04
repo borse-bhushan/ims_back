@@ -10,9 +10,9 @@ from django.contrib.auth.models import AbstractBaseUser
 
 from utils.functions import get_uuid
 from base.db_models.model import BaseModel
-from tenant.db_access import tenant_manager
 
-from auth_user.constants import RoleEnum
+from .constants import RoleEnum
+from .constants import MethodEnum
 
 
 class User(BaseModel, AbstractBaseUser):
@@ -65,9 +65,107 @@ class User(BaseModel, AbstractBaseUser):
             "full_name": f"{self.get_full_name or ''}".title(),
         }
 
-    @property
-    def tenant(self):
+
+"""
+Permission model to define actions like 'can_view_users', 'can_edit_users', etc.
+Each permission is linked to a module and action.
+"""
+
+
+class Permission(BaseModel, models.Model):
+    """
+    Permission model to define actions like 'can_view_users', 'can_edit_users', etc.
+    Each permission is linked to a module and action.
+    """
+
+    permission_id = models.CharField(max_length=64, primary_key=True, default=get_uuid)
+
+    name = models.CharField(max_length=64)
+    module = models.CharField(max_length=64)
+    action = models.CharField(max_length=64, choices=MethodEnum.choices)
+
+    class Meta:
         """
-        Returns the tenant id of the user
+        db_table (str): Specifies the database table name for the model.
         """
-        return tenant_manager.get({"tenant_id": self.tenant_id})
+
+        db_table = "permissions"
+
+    def to_dict(self):
+        """
+        Convert Permission model instance to a dictionary representation.
+        Returns:
+            dict: A dictionary containing the permission details with the following keys:
+                - name (str): The name of the permission
+                - module (str): The module this permission belongs to
+                - action (str): The action type of the permission
+                - permission_id (int): The unique identifier of the permission
+        """
+
+        return {
+            "name": self.name,
+            "module": self.module,
+            "action": self.action,
+            "permission_id": self.permission_id,
+        }
+
+
+class RolePermissionMapping(BaseModel, models.Model):
+    """
+    Model to link roles to permissions.
+    Useful for tracking role permissions mapping over time.
+    """
+
+    role_permission_mapping_id = models.CharField(
+        max_length=64, primary_key=True, default=get_uuid
+    )
+
+    role_id = models.CharField(choices=RoleEnum.choices, max_length=64)
+    permission = models.ForeignKey("Permission", on_delete=models.CASCADE)
+
+    class Meta:
+        """
+        db_table (str): Specifies the database table name for the model.
+        """
+
+        db_table = "role_permission_mappings"
+
+    def to_dict(self):
+        """
+        Convert the model instance to a dictionary.
+        Returns:
+            dict: Dictionary representation of the model instance.
+        """
+        return {
+            "role_id": self.role_id,
+            "permission_id": self.permission_id,
+        }
+
+
+class Token(BaseModel, models.Model):
+    """
+    Model to save login session token against a user.
+    """
+
+    created_dtm = models.DateTimeField(auto_now_add=True)
+    token = models.CharField(max_length=512, primary_key=True)
+    user = models.ForeignKey("User", on_delete=models.CASCADE)
+
+    class Meta:
+        """
+        db_table (str): Specifies the database table name for the model.
+        """
+
+        db_table = "token"
+
+    def to_dict(self):
+        """
+        Convert the Token instance to a dictionary representation.
+
+        Returns:
+            dict: Dictionary representation of the Token instance.
+        """
+        return {
+            "token": self.token,
+            "created_dtm": self.created_dtm,
+        }
