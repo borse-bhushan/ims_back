@@ -72,6 +72,7 @@ MY_APPS = [
     "audit_logs",
     "category",
     "product",
+    "supplier",
 ]
 
 INSTALLED_APPS += MY_APPS
