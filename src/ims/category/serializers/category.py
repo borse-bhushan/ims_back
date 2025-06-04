@@ -14,7 +14,6 @@ class CategorySerializer(serializers.Serializer):
 
     category_code = serializers.CharField(max_length=256)
     category_name = serializers.CharField(max_length=256)
-    category_desc = serializers.CharField(allow_null=True, required=False)
 
     def get_query(self, field_name, value):
         """

@@ -15,7 +15,6 @@ class Category(BaseModel, models.Model):
 
     category_code = models.CharField(max_length=256)
     category_name = models.CharField(max_length=256)
-    category_desc = models.TextField(null=True, default=None)
 
     class Meta:
         db_table = "categories"
@@ -28,5 +27,4 @@ class Category(BaseModel, models.Model):
             "category_id": self.category_id,
             "category_code": self.category_code,
             "category_name": self.category_name,
-            "category_desc": self.category_desc,
         }

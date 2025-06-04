@@ -20,7 +20,6 @@ class ProductSerializer(serializers.Serializer):
     category_id = serializers.UUIDField()
     product_code = serializers.CharField(max_length=256)
     product_name = serializers.CharField(max_length=256)
-    product_desc = serializers.CharField(allow_null=True, required=False)
 
     sell_price = serializers.DecimalField(
         max_digits=10, decimal_places=2, min_value=Decimal("0.01")

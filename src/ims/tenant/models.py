@@ -15,7 +15,6 @@ class Tenant(BaseModel, models.Model):
 
     tenant_code = models.CharField(max_length=256)
     tenant_name = models.CharField(max_length=256)
-    tenant_desc = models.TextField(null=True, default=None)
 
     class Meta:
         """
@@ -32,5 +31,4 @@ class Tenant(BaseModel, models.Model):
             "tenant_id": self.tenant_id,
             "tenant_code": self.tenant_code,
             "tenant_name": self.tenant_name,
-            "tenant_desc": self.tenant_desc,
         }

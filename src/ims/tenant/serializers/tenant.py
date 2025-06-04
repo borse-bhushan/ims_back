@@ -14,7 +14,6 @@ class TenantSerializer(serializers.Serializer):
 
     tenant_code = serializers.CharField(max_length=256)
     tenant_name = serializers.CharField(max_length=256)
-    tenant_desc = serializers.CharField(allow_null=True, required=False)
 
     def get_query(self, field_name, value):
         """
