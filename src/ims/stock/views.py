@@ -30,7 +30,7 @@ class StockViewSet(BaseView, viewsets.ViewSet):
     search_fields = ["referance_number"]
     filter_fields = ["product_id", "supplier_id", "movement_type"]
 
-    authentication_classes = get_authentication_classes()
+    get_authenticators = get_authentication_classes
 
     @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")
     def create(self, request, *args, **kwargs):

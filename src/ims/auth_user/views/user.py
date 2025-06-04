@@ -40,10 +40,11 @@ class UserViewSet(BaseView, viewsets.ViewSet):
     ViewSet for handling user endpoints.
     """
 
-    authentication_classes = get_authentication_classes()
     manager = user_manager
-    serializer_class = UserSerializer
     lookup_field = "user_id"
+    serializer_class = UserSerializer
+
+    get_authenticators = get_authentication_classes
 
     @extend_schema(
         responses={201: UserResponseSerializer, **responses_400, **responses_401},
@@ -116,7 +117,7 @@ class UserProfileViewSet(RetrieveView, viewsets.ViewSet):
     ViewSet for handling user profile endpoints.
     """
 
-    authentication_classes = get_authentication_classes()
+    get_authenticators = get_authentication_classes
 
     @register_permission(
         MODULE_PROFILE,

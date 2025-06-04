@@ -29,10 +29,10 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
     manager = tenant_manager
     lookup_field = "tenant_id"
     serializer_class = TenantSerializer
-    authentication_classes = get_authentication_classes()
-
     list_serializer_class = TenantQuerySerializer
     search_fields = ["tenant_code", "tenant_name"]
+
+    get_authenticators = get_authentication_classes
 
     def add_common_data(self, data, request, *args, **kwargs):
         """

@@ -26,7 +26,8 @@ class SupplierViewSet(BaseView, viewsets.ViewSet):
     serializer_class = SupplierSerializer
     list_serializer_class = SupplierQuerySerializer
     search_fields = ["supplier_code", "supplier_name"]
-    authentication_classes = get_authentication_classes()
+
+    get_authenticators = get_authentication_classes
 
     @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")
     def create(self, request, *args, **kwargs):

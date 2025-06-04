@@ -42,7 +42,8 @@ class RolePermissionViewSet(CreateView, DeleteView, ListView, viewsets.ViewSet):
     is_pagination: bool = False
     manager = role_permission_mapping_manager
     serializer_class = RolePermissionSerializer
-    authentication_classes = get_authentication_classes()
+
+    get_authenticators = get_authentication_classes
 
     @classmethod
     def get_method_view_mapping(cls, with_path_id=False):

@@ -27,7 +27,8 @@ class CategoryViewSet(BaseView, viewsets.ViewSet):
     serializer_class = CategorySerializer
     list_serializer_class = CategoryQuerySerializer
     search_fields = ["category_code", "category_name"]
-    authentication_classes = get_authentication_classes()
+
+    get_authenticators = get_authentication_classes
 
     @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")
     def create(self, request, *args, **kwargs):

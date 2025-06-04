@@ -33,9 +33,10 @@ class AuditLogViewSet(RetrieveView, ListView, viewsets.ViewSet):
     ViewSet for managing AuditLog objects.
     """
 
-    authentication_classes = get_authentication_classes()
     manager = audit_logs_manager
     lookup_field = "audit_id"
+
+    get_authenticators = get_authentication_classes
 
     @classmethod
     def get_method_view_mapping(cls, with_path_id=False):

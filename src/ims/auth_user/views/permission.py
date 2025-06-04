@@ -42,10 +42,11 @@ class PermissionViewSet(BaseView, viewsets.ViewSet):
     """
 
     is_pagination: bool = False
-    authentication_classes = get_authentication_classes()
     manager = permission_manager
-    serializer_class = PermissionSerializer
     lookup_field = "permission_id"
+    serializer_class = PermissionSerializer
+
+    get_authenticators = get_authentication_classes
 
     @extend_schema(
         responses={201: PermissionResponseSerializer, **responses_400, **responses_401},

@@ -82,7 +82,7 @@ AUTH_USER_MODEL = "auth_user.User"
 
 TOKEN_AUTHENTICATION_CLASS = "authentication.token.TokenAuthentication"
 
-AUTHENTICATION_CLASSES = [TOKEN_AUTHENTICATION_CLASS]
+DEFAULT_AUTHENTICATION_CLASSES = [TOKEN_AUTHENTICATION_CLASS]
 
 MIDDLEWARE = [
     "middleware.sub_dm.AttachSubdomainToRequestMiddleware",

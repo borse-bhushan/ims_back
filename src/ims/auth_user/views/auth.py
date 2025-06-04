@@ -109,8 +109,7 @@ class LogoutViewSet(DeleteView, viewsets.ViewSet):
     """
 
     manager = token_manager
-
-    authentication_classes = get_authentication_classes()
+    get_authenticators = get_authentication_classes
 
     @extend_schema(
         request=LogoutResponseSerializer,
