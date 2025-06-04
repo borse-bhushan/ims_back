@@ -108,3 +108,13 @@ def get_subdomain(request):
         return parts[0]
 
     return None
+
+
+def create_stock_referance(prefix: str, length: int = 8):
+    """
+    Create a unique stock referance with the given prefix and length.
+    The code will be a combination of the prefix and a random UUID.
+    """
+
+    unique_part = uuid.uuid4().hex[:length]
+    return f"{prefix}:{unique_part}".upper()

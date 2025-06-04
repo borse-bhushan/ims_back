@@ -1,5 +1,5 @@
 """
-tenant serializers module.
+Supplier serializers module.
 """
 
 from .supplier import SupplierSerializer

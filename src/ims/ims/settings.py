@@ -73,6 +73,7 @@ MY_APPS = [
     "category",
     "product",
     "supplier",
+    "stock",
 ]
 
 INSTALLED_APPS += MY_APPS

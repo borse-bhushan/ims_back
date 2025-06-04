@@ -1,5 +1,5 @@
 """
-tenant serializers module.
+Category serializers module.
 """
 
 from .category import CategorySerializer

@@ -5,8 +5,8 @@ This is the model BaseManager class which is used to perform CRUD operations on 
 from typing import Union, TypeVar, Generic, overload, List, Dict
 
 from rest_framework import status
-from django.db.models import Q, F, Model
 from django.db.models.query import QuerySet
+from django.db.models import Q, F, Model, Sum
 
 from utils.messages import error
 from utils.pagination import Pagination
@@ -465,3 +465,6 @@ class Manager(Generic[T]):
         if not obj:
             return self.create(data)
         return self.__update(obj, data)
+
+    def sum(self, query, field):
+        return self.__parse_query(query=query).aggregate(sum=Sum(field))["sum"] or 0

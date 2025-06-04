@@ -5,6 +5,7 @@ in an application.
 """
 
 INVALID: str = "INVALID"
+REQUIRED: str = "REQUIRED"
 BAD_REQUEST: str = "BAD_REQUEST"
 UNAUTHORIZED: str = "UNAUTHORIZED"
 UNKNOWN_ERROR: str = "UNKNOWN_ERROR"

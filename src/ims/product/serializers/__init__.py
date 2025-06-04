@@ -1,5 +1,5 @@
 """
-tenant serializers module.
+Product serializers module.
 """
 
 from .product import ProductSerializer
