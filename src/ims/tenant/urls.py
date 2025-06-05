@@ -6,9 +6,16 @@ from django.urls import path
 
 from utils.tenant_aware_path import add_to_tenant_aware_excluded_path_list
 
-from .views import TenantViewSet, TenantDetialsViewSet
+from .views import TenantViewSet, TenantDetialsViewSet, TenantConfigurationViewSet
 
 urlpatterns = [
+    path(
+        "tenant/configuration",
+        TenantConfigurationViewSet.as_view(
+            TenantConfigurationViewSet.get_method_view_mapping()
+        ),
+        name="tenant-configuration",
+    ),
     path(
         add_to_tenant_aware_excluded_path_list("tenant"),
         TenantViewSet.as_view(TenantViewSet.get_method_view_mapping()),
@@ -24,4 +31,5 @@ urlpatterns = [
         TenantDetialsViewSet.as_view(TenantDetialsViewSet.get_method_view_mapping()),
         name="tenant-detail",
     ),
+    
 ]

@@ -4,9 +4,12 @@ Serializer for Tenant.
 
 from rest_framework import serializers
 
+from utils.messages import error
+from utils.exceptions import codes
 from utils.validators import validate_unique
 
-from ..db_access import tenant_manager
+from ..constants import AuthenticationTypeEnum
+from ..db_access import tenant_manager, tenant_configuration_manager
 
 
 class TenantSerializer(serializers.Serializer):
@@ -57,3 +60,11 @@ class TenantSerializer(serializers.Serializer):
         validate_unique(tenant_manager, self.get_query("tenant_name", value))
 
         return value
+
+
+class TenantConfigurationSerializer(serializers.Serializer):
+    """Serializer for Tenant Configuration"""
+
+    authentication_type = serializers.ChoiceField(
+        choices=AuthenticationTypeEnum.choices
+    )

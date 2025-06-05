@@ -117,6 +117,12 @@ class CreateView:
 
         return add_data(data)
 
+    def save(self, data: dict | list, **kwargs):
+        """
+        Saves the validated data to the database using the manager.
+        """
+        return self.manager.create(data, many=self.many)
+
     def create(self, request):
         """
         Handles the object creation process, including validation, data enrichment,
@@ -145,6 +151,6 @@ class CreateView:
 
         data = self.pre_save(data=data, request=request)
 
-        obj = self.manager.create(data, many=self.many)
+        obj = self.save(data=data, request=request)
 
         return self.post_save(obj=obj, data=data, request=request)

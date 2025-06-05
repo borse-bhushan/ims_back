@@ -25,17 +25,17 @@ def import_authentication_class(class_name):
     return current_module.__dict__[auth_class_name]
 
 
-def get_default_authentication_class():
+def get_default_authentication_class(*_, **__):
     """
-    This function returns the default authentication class to be used in the API views.
+    This function returns the default authentication class object to be used in the API views.
     """
 
     str_auth_class = settings.read("DEFAULT_AUTHENTICATION_CLASSES")
 
-    return [import_authentication_class(class_name) for class_name in str_auth_class]
+    return [import_authentication_class(class_name)() for class_name in str_auth_class]
 
 
-def get_authentication_classes(self):
+def get_authentication_classes(*_, **__):
     """
     This function returns a list of authentication classes to be used in the API views.
     The authentication classes are used to authenticate users and provide access control.

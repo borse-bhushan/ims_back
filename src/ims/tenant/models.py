@@ -63,5 +63,7 @@ class TenantConfiguration(BaseModel, models.Model):
         Convert the model instance to a dictionary.
         """
         return {
-            "tenant_id": self.tenant.tenant_id,
+            "tenant_id": self.tenant_id,
+            "tenant_configuration_id": self.tenant_configuration_id,
+            "authentication_type": self.authentication_type,
         }

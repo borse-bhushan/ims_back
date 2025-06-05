@@ -2,7 +2,7 @@
 tenant serializers module.
 """
 
-from .tenant import TenantSerializer
 from .query import TenantQuerySerializer
+from .tenant import TenantSerializer, TenantConfigurationSerializer
 
-__all__ = ["TenantSerializer", "TenantQuerySerializer"]
+__all__ = ["TenantSerializer", "TenantQuerySerializer", "TenantConfigurationSerializer"]
