@@ -8,8 +8,8 @@ from utils.messages import error
 from utils.exceptions import codes
 from utils.validators import validate_unique
 
+from ..db_access import tenant_manager
 from ..constants import AuthenticationTypeEnum
-from ..db_access import tenant_manager, tenant_configuration_manager
 
 
 class TenantSerializer(serializers.Serializer):
@@ -68,3 +68,15 @@ class TenantConfigurationSerializer(serializers.Serializer):
     authentication_type = serializers.ChoiceField(
         choices=AuthenticationTypeEnum.choices
     )
+
+    tenant_id = serializers.UUIDField()
+
+    def validate_tenant_id(self, value):
+
+        if not tenant_manager.exists({"tenant_id": value}):
+            raise serializers.ValidationError(
+                error.NO_DATA_FOUND,
+                code=codes.NO_DATA_FOUND,
+            )
+
+        return value

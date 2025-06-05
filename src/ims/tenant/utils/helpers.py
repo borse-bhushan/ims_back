@@ -12,7 +12,7 @@ def set_tenant_details_to_request_thread(tenant_obj):
     """
     Set the tenant_id to the thread local storage.
     """
-    _thread_locals.tenant_id = tenant_obj.tenant_id
+    _thread_locals.tenant_id = getattr(tenant_obj, "tenant_id", None)
     return True
 
 

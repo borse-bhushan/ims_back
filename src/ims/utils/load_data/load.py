@@ -5,6 +5,7 @@ Load the pre requesit data.
 import json
 
 
+from auth_user.constants import RoleEnum
 from auth_user.db_access import user_manager
 
 from tenant.db_access import tenant_manager
@@ -18,12 +19,12 @@ def load_data():
     load_data_obj = LoadDataFromFiles()
     load_data_obj.delete_all_records()
 
-    load_data_obj.load_tenant_data()
+    # load_data_obj.load_tenant_data()
 
-    tenant_manager_obj = tenant_manager.disable_tenant_aware()
-    tenant_obj = tenant_manager_obj.get(query={})
+    # tenant_manager_obj = tenant_manager.disable_tenant_aware()
+    # tenant_obj = tenant_manager_obj.get(query={})
 
-    set_tenant_details_to_request_thread(tenant_obj)
+    set_tenant_details_to_request_thread(None)
 
     load_data_obj.load_user_data()
 
@@ -46,7 +47,10 @@ class LoadDataFromFiles:
         for user in user_data:
             user_obj = user_manager.create(data=user)
             user_obj.set_password(user["password"])
+            if user_obj.role_id == RoleEnum.SUPER_ADMIN:
+                user_obj.tenant_id = None
             user_obj.save()
+
             user_list.append(user_obj)
         return user_list
 
