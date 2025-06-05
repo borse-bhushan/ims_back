@@ -10,7 +10,7 @@ from .views import TenantViewSet, TenantDetialsViewSet, TenantConfigurationViewS
 
 urlpatterns = [
     path(
-        "tenant/configuration",
+        add_to_tenant_aware_excluded_path_list("tenant/<str:tenant_id>/configuration"),
         TenantConfigurationViewSet.as_view(
             TenantConfigurationViewSet.get_method_view_mapping()
         ),
@@ -31,5 +31,4 @@ urlpatterns = [
         TenantDetialsViewSet.as_view(TenantDetialsViewSet.get_method_view_mapping()),
         name="tenant-detail",
     ),
-    
 ]

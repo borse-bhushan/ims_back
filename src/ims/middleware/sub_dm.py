@@ -41,7 +41,7 @@ class AttachSubdomainToRequestMiddleware:
             request.resolver_match = resolver_match
             route = resolver_match.route
 
-            if is_path_excluded_from_tenant_aware(route):
+            if is_path_excluded_from_tenant_aware(route, request.method.lower()):
                 set_request_tenant_aware(is_tenant_aware=False)
                 response = self.get_response(request)
                 clear_request_tenant_aware()

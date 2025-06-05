@@ -42,7 +42,13 @@ class LoadDataFromFiles:
         data = self.read_file("user")
         user_data = data.get("data")
 
-        return user_manager.create(data=user_data, many=True)
+        user_list = []
+        for user in user_data:
+            user_obj = user_manager.create(data=user)
+            user_obj.set_password(user["password"])
+            user_obj.save()
+            user_list.append(user_obj)
+        return user_list
 
     def load_tenant_data(self):
         """

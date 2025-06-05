@@ -2,6 +2,7 @@
 Login and Logout ViewSets for handling user authentication.
 """
 
+import jwt
 import secrets
 
 
@@ -17,11 +18,14 @@ from authentication import get_authentication_classes, register_permission
 
 from audit_logs.helpers import create_audit_log_entry
 
+from tenant.constants import AuthenticationTypeEnum
 from tenant.utils.helpers import is_request_tenant_aware
+from tenant.db_access import tenant_configuration_manager
 
-from utils.messages import success
-from utils import functions as common_functions
+from utils.messages import success, error
 from utils.response.response import generate_response
+from utils import functions as common_functions, settings
+from utils.exceptions import BadRequestError, ValidationError
 from utils.swagger import (
     responses_400,
     responses_401,
@@ -53,13 +57,12 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
     is_common_data_needed = False
     serializer_class = LoginSerializer
 
-    def pre_save(self, data: dict, **kwargs):
+    def check_password(self, username, password, request):
         """
-        Handle user login by validating credentials and generating a token.
+        Check if the provided password is correct for the given username.
         """
 
-        query = {"email": data["username"], "password": data["password"]}
-
+        query = {"email": username}
         if not is_request_tenant_aware():
             query["role_id"] = RoleEnum.SUPER_ADMIN
 
@@ -68,17 +71,33 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
         if not user_obj:
             raise WrongCredentialsException()
 
-        self.manager.delete({"user": user_obj}, soft_delete=False)
+        if not user_obj.check_password(password):
+            raise WrongCredentialsException()
 
-        request = kwargs["request"]
+        user_obj.last_login = common_functions.get_current_datetime()
+        user_obj.save(update_fields=["last_login"])
+
         request.user = user_obj
-        common_info = common_functions.get_client_info(request)
 
         create_audit_log_entry(
             request=request,
             action=request.method,
             module_name=MODULE_NAME,
         )
+
+        return user_obj
+
+    def pre_save(self, data: dict, **kwargs):
+        """
+        Handle user login by validating credentials and generating a token.
+        """
+
+        request = kwargs["request"]
+        user_obj = self.check_password(data["username"], data["password"], request)
+
+        self.manager.delete({"user": user_obj}, soft_delete=False)
+
+        common_info = common_functions.get_client_info(request)
 
         return {"user": user_obj, "token": secrets.token_hex(16).upper(), **common_info}
 
@@ -100,7 +119,51 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
         tags=[MODULE_NAME],
     )
     def create(self, request, *args, **kwargs):
+
+        if is_request_tenant_aware():
+
+            tenant_config_obj = tenant_configuration_manager.get({})
+
+            if not tenant_config_obj:
+                raise BadRequestError(error.TENANT_CONFIGURATION_NOT_FOUND)
+
+            at = tenant_config_obj.authentication_type
+
+            if not at:
+                raise BadRequestError(error.AUTHENTICATIION_NOT_CONFIGURED)
+
+            if at == AuthenticationTypeEnum.JWT_TOKEN:
+                return self.jwt_login(request, *args, **kwargs)
+
         return super().create(request, *args, **kwargs)
+
+    def jwt_login(self, request, *args, **kwargs):
+        """
+        Handle JWT login for the user.
+        This method is used to authenticate the user and generate a JWT token.
+        """
+
+        serializer_obj = self.serializer_class(data=request.data)
+
+        is_valid = serializer_obj.is_valid()
+
+        if not is_valid:
+            raise ValidationError(serializer_obj.errors)
+
+        data = serializer_obj.validated_data
+
+        user_obj = self.check_password(data["username"], data["password"], request)
+
+        access_token = jwt.encode(
+            algorithm="HS256",
+            key=settings.read("SECRET_KEY"),
+            payload={"user_id": user_obj.user_id},
+        )
+        return generate_response(
+            data={"token": access_token, "created_dtm": user_obj.last_login},
+            status_code=status.HTTP_201_CREATED,
+            messages={"message": success.LOGIN_SUCCESSFULLY},
+        )
 
 
 class LogoutViewSet(DeleteView, viewsets.ViewSet):

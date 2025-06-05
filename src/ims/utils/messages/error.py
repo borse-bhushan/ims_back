@@ -15,6 +15,8 @@ DATA_NOT_PROVIDED: str = "Please provide the data."
 INTERNAL_SERVER_ERROR: str = "Internal Server Error."
 RESOURCE_NOT_FOUND: str = "The requested resource was not found."
 DELETE_WITHOUT_QUERY: str = "Provide the Query To delete the records."
+TENANT_CONFIGURATION_NOT_FOUND: str = "Tenant configuration not found."
+AUTHENTICATIION_NOT_CONFIGURED: str = "Authentication is not configured."
 STOCK_QUANTITY_NOT_AVAILABLE: str = "The requested stock quantity is not available."
 PRINT_FUNCTION_IS_DISABLE: str = (
     "'print' function is disabled please remove the use of it instead use the [log_msg]. "

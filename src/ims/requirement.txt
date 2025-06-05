@@ -7,7 +7,6 @@ djangorestframework==3.15.2
 # For monitoring
 psutil==7.0.0
 
-
 # For static analysis of the code
 pylint==3.3.6
 pylint_django==2.6.1
@@ -16,19 +15,5 @@ pylint_django==2.6.1
 drf-spectacular==0.28.0
 drf-spectacular-sidecar==2025.3.1
 
-
-# For the unit testing
-pytest==8.3.5
-pytest-clarity==1.0.1
-pytest-cov==6.1.1
-pytest-django==4.11.1
-pytest-sugar==1.0.0
-
-# for decoding the SSO Access Token
+# for encoding and decoding the JWT Access Token
 PyJWT==2.10.1
-
-# To make the requests to third party's
-requests==2.32.3
-
-# For running the https server
-gunicorn==23.0.0

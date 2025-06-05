@@ -3,11 +3,16 @@ This module provides a function to get authentication classes for the API views.
 """
 
 import importlib
+
 from utils import settings
+from utils.messages import error
+from utils.exceptions import BadRequestError
 
 from tenant.constants import AuthenticationTypeEnum
 from tenant.utils.helpers import is_request_tenant_aware
 from tenant.db_access import tenant_configuration_manager
+
+from .jwt_token import JWTAuthentication
 
 
 def import_authentication_class(class_name):
@@ -35,6 +40,14 @@ def get_default_authentication_class(*_, **__):
     return [import_authentication_class(class_name)() for class_name in str_auth_class]
 
 
+def get_jwt_authentication_class(*_, **__):
+    """
+    This function returns the JWT authentication class object to be used in the API views.
+    """
+
+    return [JWTAuthentication()]
+
+
 def get_authentication_classes(*_, **__):
     """
     This function returns a list of authentication classes to be used in the API views.
@@ -45,7 +58,14 @@ def get_authentication_classes(*_, **__):
         return get_default_authentication_class()
 
     tenant_configuration_obj = tenant_configuration_manager.get({})
+
+    if not tenant_configuration_obj:
+        raise BadRequestError(error.TENANT_CONFIGURATION_NOT_FOUND)
+
     if tenant_configuration_obj.authentication_type == AuthenticationTypeEnum.TOKEN:
         return get_default_authentication_class()
 
-    return []
+    if tenant_configuration_obj.authentication_type == AuthenticationTypeEnum.JWT_TOKEN:
+        return [JWTAuthentication()]
+
+    raise BadRequestError(error.AUTHENTICATIION_NOT_CONFIGURED)

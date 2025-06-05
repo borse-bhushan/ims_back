@@ -123,7 +123,21 @@ class CreateView:
         """
         return self.manager.create(data, many=self.many)
 
-    def create(self, request):
+    def is_create_data_valid(self, request, *args, **kwargs):
+        """
+        Validates the input data for the create operation.
+        """
+
+        serializer_obj: serializers.Serializer = self.serializer_class(
+            data=request.data, many=self.many
+        )
+
+        if not serializer_obj.is_valid():
+            raise ValidationError(serializer_obj.errors)
+
+        return serializer_obj
+
+    def create(self, request, *args, **kwargs):
         """
         Handles the object creation process, including validation, data enrichment,
         database persistence, and response generation.
@@ -135,14 +149,7 @@ class CreateView:
             Response: A success response with the created object(s) or an error message if validation fails.
         """
 
-        serializer_obj: serializers.Serializer = self.serializer_class(
-            data=request.data, many=self.many
-        )
-
-        is_valid = serializer_obj.is_valid()
-
-        if not is_valid:
-            raise ValidationError(serializer_obj.errors)
+        serializer_obj = self.is_create_data_valid(request, *args, **kwargs)
 
         data = serializer_obj.validated_data
 

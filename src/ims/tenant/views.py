@@ -140,11 +140,14 @@ class TenantConfigurationViewSet(CreateView, RetrieveView, viewsets.ViewSet):
         """
         Returns a mapping of HTTP methods to view methods for this class.
         """
-
         return {
             **CreateView.get_method_view_mapping(),
             **RetrieveView.get_method_view_mapping(),
         }
+
+    def is_create_data_valid(self, request, *args, **kwargs):
+        request.data["tenant_id"] = kwargs["tenant_id"]
+        return super().is_create_data_valid(request, *args, **kwargs)
 
     @register_permission(
         TENANT_CONF,
