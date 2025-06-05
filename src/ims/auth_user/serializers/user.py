@@ -10,6 +10,8 @@ from utils.exceptions import codes
 
 from auth_user.db_access import user_manager
 
+from ..constants import RoleEnum
+
 
 class UserSerializer(serializers.Serializer):
     """
@@ -19,8 +21,10 @@ class UserSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
     profile_photo = serializers.CharField(required=False)
     phone_number = serializers.IntegerField(required=True)
+    role_id = serializers.ChoiceField(choices=RoleEnum.choices)
     last_name = serializers.CharField(required=True, max_length=16)
     first_name = serializers.CharField(required=True, max_length=16)
+    passwrod = serializers.CharField(required=True, max_length=16, min_length=4)
 
     def validate_email(self, value):
         """
@@ -42,3 +46,11 @@ class UserSerializer(serializers.Serializer):
             )
 
         return value
+
+
+class UserCompanyAdminSerializer(UserSerializer, serializers.Serializer):
+    role_id = serializers.ChoiceField(
+        choices=RoleEnum.choices,
+        default=RoleEnum.COMPANY_ADMIN,
+    )
+    tenant_id = serializers.UUIDField()

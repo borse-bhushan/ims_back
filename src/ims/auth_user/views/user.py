@@ -6,7 +6,7 @@ from rest_framework import viewsets
 from drf_spectacular.utils import extend_schema
 
 from auth_user.constants import MethodEnum
-from base.views import BaseView, RetrieveView
+from base.views import BaseView, RetrieveView, CreateView, ListView
 from authentication import get_authentication_classes, register_permission
 
 from utils.response import generate_response
@@ -19,8 +19,13 @@ from utils.swagger import (
     responses_401_example,
 )
 
+from ..constants import RoleEnum
 from ..db_access import user_manager
-from ..serializers import UserSerializer
+from ..serializers import (
+    UserSerializer,
+    UserCompanyAdminListQuerySerializer,
+    UserCompanyAdminSerializer,
+)
 from ..swagger import (
     UserResponseSerializer,
     UserListResponseSerializer,
@@ -33,6 +38,7 @@ from ..swagger import (
 
 MODULE = "User"
 MODULE_PROFILE = "User Profile"
+MODULE_COMPANY_ADMIN = "User Company Admin"
 
 
 class UserViewSet(BaseView, viewsets.ViewSet):
@@ -46,6 +52,17 @@ class UserViewSet(BaseView, viewsets.ViewSet):
 
     get_authenticators = get_authentication_classes
 
+    def save(self, data, **kwargs):
+        """
+        Save password in hash
+        """
+
+        user_obj = super().save(data, **kwargs)
+        user_obj.set_password(user_obj.password)
+        user_obj.save()
+
+        return user_obj
+
     @extend_schema(
         responses={201: UserResponseSerializer, **responses_400, **responses_401},
         examples=[
@@ -57,6 +74,24 @@ class UserViewSet(BaseView, viewsets.ViewSet):
     )
     @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")
     def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @extend_schema(
+        responses={201: UserResponseSerializer, **responses_400, **responses_401},
+        examples=[
+            user_create_success_example,
+            responses_400_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_COMPANY_ADMIN],
+    )
+    @register_permission(
+        MODULE_COMPANY_ADMIN,
+        MethodEnum.POST,
+        f"Create {MODULE_COMPANY_ADMIN}",
+        create_permission=False,
+    )
+    def create_company_admin(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
 
     @extend_schema(
@@ -110,6 +145,76 @@ class UserViewSet(BaseView, viewsets.ViewSet):
     @register_permission(MODULE, MethodEnum.DELETE, f"Delete {MODULE}")
     def destroy(self, request, *args, **kwargs):
         return super().destroy(request, *args, **kwargs)
+
+
+class UserCompanyAdminsViewSet(CreateView, ListView, viewsets.ViewSet):
+    """
+    ViewSet for handling user endpoints.
+    """
+
+    manager = user_manager
+    lookup_field = "user_id"
+    serializer_class = UserCompanyAdminSerializer
+    list_serializer_class = UserCompanyAdminListQuerySerializer
+
+    get_authenticators = get_authentication_classes
+
+    @classmethod
+    def get_method_view_mapping(cls):
+        """
+        Get the mapping of http method and view method
+        """
+        return {
+            **CreateView.get_method_view_mapping(),
+            **ListView.get_method_view_mapping(),
+        }
+
+    def save(self, data, **kwargs):
+        """
+        Save password in hash
+        """
+
+        user_obj = super().save(data, **kwargs)
+        user_obj.set_password(user_obj.password)
+        user_obj.save()
+
+        return user_obj
+
+    @extend_schema(
+        responses={201: UserResponseSerializer, **responses_400, **responses_401},
+        examples=[
+            user_create_success_example,
+            responses_400_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_COMPANY_ADMIN],
+    )
+    @register_permission(
+        MODULE_COMPANY_ADMIN,
+        MethodEnum.POST,
+        f"Create {MODULE_COMPANY_ADMIN}",
+        create_permission=False,
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @extend_schema(
+        responses={200: UserListResponseSerializer, **responses_404, **responses_401},
+        examples=[
+            user_list_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_COMPANY_ADMIN],
+    )
+    @register_permission(
+        MODULE_COMPANY_ADMIN,
+        MethodEnum.GET,
+        f"Get {MODULE_COMPANY_ADMIN}",
+        create_permission=False,
+    )
+    def list_all(self, request, *args, **kwargs):
+        return super().list_all(request, *args, **kwargs)
 
 
 class UserProfileViewSet(RetrieveView, viewsets.ViewSet):
