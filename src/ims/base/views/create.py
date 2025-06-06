@@ -53,6 +53,13 @@ class CreateView:
         Returns:
             models.Model: The modified object after post-save operations.
         """
+        if self.many:
+            return generate_response(
+                data=None,
+                status_code=status.HTTP_201_CREATED,
+                messages={"message": success.CREATED_SUCCESSFULLY},
+            )
+
         return generate_response(
             data=obj.to_dict(),
             status_code=status.HTTP_201_CREATED,
@@ -127,7 +134,7 @@ class CreateView:
         """
         Validates the input data for the create operation.
         """
-        
+
         serializer_obj: serializers.Serializer = self.serializer_class(
             data=request.data, many=self.many
         )
@@ -146,7 +153,8 @@ class CreateView:
             request (Request): The HTTP request containing input data.
 
         Returns:
-            Response: A success response with the created object(s) or an error message if validation fails.
+            Response: A success response with the created object(s) 
+            or an error message if validation fails.
         """
 
         serializer_obj = self.is_create_data_valid(request, *args, **kwargs)

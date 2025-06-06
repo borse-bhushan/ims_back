@@ -5,10 +5,13 @@ This module provides a decorator to register and check user permissions
 
 from functools import wraps
 
-from utils.exceptions import PermissionDenied
+from utils.messages import error
+from utils.exceptions import codes, PermissionDenied, BadRequestError
+
 from audit_logs.helpers import create_audit_log_entry
 
 from auth_user.constants import RoleEnum
+from auth_user.utils.permission import load_permission
 from auth_user.db_access import permission_manager, role_permission_mapping_manager
 
 from tenant.utils.helpers import is_request_tenant_aware
@@ -25,6 +28,13 @@ def register_permission(
     """
     Register a permission with the given module, action, and name.
     """
+
+    if check and create_permission:
+        load_permission.register_module_and_action(
+            name=name,
+            module=module,
+            action=action,
+        )
 
     def decorator(view):
         """
@@ -55,17 +65,19 @@ def register_permission(
                 return view(self, request, *args, **kwargs)
 
             if not m_kwargs.get("permission_obj"):
-                m_kwargs["permission_obj"] = permission_manager.upsert(
-                    data={
-                        "name": name,
-                        "action": action,
-                        "module": module,
-                    },
+                permission_obj = permission_manager.get(
                     query={
                         "action": action,
                         "module": module,
                     },
                 )
+                if not permission_obj:
+                    raise BadRequestError(
+                        error.PERMISSION_NOT_REGISTER,
+                        code=codes.PERMISSION_NOT_REGISTERD,
+                    )
+
+                m_kwargs["permission_obj"] = permission_obj
 
             is_company_admin = False
             if is_request_tenant_aware():

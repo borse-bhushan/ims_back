@@ -2,7 +2,6 @@
 This module contains the views for the auth_user app.
 """
 
-from .permission import PermissionViewSet, CreatePermissionViewSet
 from .role_permission import RolePermissionViewSet
 from .auth import (
     LoginViewSet,
@@ -13,6 +12,10 @@ from .user import (
     UserProfileViewSet,
     UserCompanyAdminsViewSet,
 )
+from .permission import (
+    PermissionViewSet,
+    ListCreatePermissionViewSet,
+)
 
 __all__ = [
     "UserViewSet",
@@ -22,5 +25,5 @@ __all__ = [
     "UserProfileViewSet",
     "RolePermissionViewSet",
     "UserCompanyAdminsViewSet",
-    "CreatePermissionViewSet"
+    "ListCreatePermissionViewSet",
 ]

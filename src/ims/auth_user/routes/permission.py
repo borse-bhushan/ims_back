@@ -24,19 +24,21 @@ from django.urls import path
 from utils.tenant_aware_path import add_to_tenant_aware_excluded_path_list
 
 from auth_user.constants import MethodEnum
-from auth_user.views import PermissionViewSet
+from auth_user.views import PermissionViewSet, ListCreatePermissionViewSet
 
 urlpatterns = [
     path(
         add_to_tenant_aware_excluded_path_list(
-            "permission", method_list=[MethodEnum.POST]
+            "admin/permission", method_list=[MethodEnum.POST, MethodEnum.GET]
         ),
-        PermissionViewSet.as_view(PermissionViewSet.get_method_view_mapping()),
+        ListCreatePermissionViewSet.as_view(
+            ListCreatePermissionViewSet.get_method_view_mapping()
+        ),
         name="permission",
     ),
     path(
-        "permission/<str:permission_id>",
-        PermissionViewSet.as_view(PermissionViewSet.get_method_view_mapping(True)),
-        name="permission-detail",
+        "permission",
+        PermissionViewSet.as_view(PermissionViewSet.get_method_view_mapping()),
+        name="permission",
     ),
 ]

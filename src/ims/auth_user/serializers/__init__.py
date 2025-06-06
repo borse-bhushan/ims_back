@@ -8,6 +8,7 @@ from .user import UserSerializer, UserCompanyAdminSerializer
 from .permission import PermissionSerializer
 from .role_permission import RolePermissionSerializer
 from .user_query import UserCompanyAdminListQuerySerializer
+from .permission_query import PermissionListQuerySerializer
 
 from .swagger import (
     LoginResponseSerializer,
@@ -27,4 +28,5 @@ __all__ = [
     "RolePermissionSerializer",
     "UserCompanyAdminListQuerySerializer",
     "UserCompanyAdminSerializer",
+    "PermissionListQuerySerializer",
 ]

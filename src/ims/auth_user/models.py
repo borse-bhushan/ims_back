@@ -1,8 +1,11 @@
 """
-This module contains the User model for the application.
-It defines the fields and methods for the User model.
-The User model is used to store user information and authentication details.
+This module defines the models related to user authentication and authorization for the application.
 
+Models:
+    - User: Represents an application user, including their personal information, role, and authentication details.
+    - Permission: Defines specific permissions (actions) that can be assigned to roles, such as 'can_view_users' or 'can_edit_users'.
+    - RolePermissionMapping: Maps roles to permissions, enabling role-based access control.
+    - Token: Stores login session tokens associated with users for authentication purposes.
 """
 
 from django.db import models
@@ -65,12 +68,6 @@ class User(BaseModel, AbstractBaseUser):
             "first_name": f"{self.first_name or ''}".title(),
             "full_name": f"{self.get_full_name or ''}".title(),
         }
-
-
-"""
-Permission model to define actions like 'can_view_users', 'can_edit_users', etc.
-Each permission is linked to a module and action.
-"""
 
 
 class Permission(BaseModel, models.Model):
