@@ -38,19 +38,9 @@ from ..swagger import (
 
 MODULE = "User"
 MODULE_PROFILE = "User Profile"
-MODULE_COMPANY_ADMIN = "User Company Admin"
 
 
-class UserViewSet(BaseView, viewsets.ViewSet):
-    """
-    ViewSet for handling user endpoints.
-    """
-
-    manager = user_manager
-    lookup_field = "user_id"
-    serializer_class = UserSerializer
-
-    get_authenticators = get_authentication_classes
+class UserViewSetBase:
 
     def save(self, data, **kwargs):
         """
@@ -74,24 +64,6 @@ class UserViewSet(BaseView, viewsets.ViewSet):
     )
     @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")
     def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
-
-    @extend_schema(
-        responses={201: UserResponseSerializer, **responses_400, **responses_401},
-        examples=[
-            user_create_success_example,
-            responses_400_example,
-            responses_401_example,
-        ],
-        tags=[MODULE_COMPANY_ADMIN],
-    )
-    @register_permission(
-        MODULE_COMPANY_ADMIN,
-        MethodEnum.POST,
-        f"Create {MODULE_COMPANY_ADMIN}",
-        create_permission=False,
-    )
-    def create_company_admin(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
 
     @extend_schema(
@@ -147,7 +119,24 @@ class UserViewSet(BaseView, viewsets.ViewSet):
         return super().destroy(request, *args, **kwargs)
 
 
-class UserCompanyAdminsViewSet(CreateView, ListView, viewsets.ViewSet):
+class UserViewSet(UserViewSetBase, BaseView, viewsets.ViewSet):
+    """
+    ViewSet for handling user endpoints.
+    """
+
+    manager = user_manager
+    lookup_field = "user_id"
+    serializer_class = UserSerializer
+
+    get_authenticators = get_authentication_classes
+
+
+class UserCompanyAdminsViewSet(
+    UserViewSetBase,
+    ListView,
+    CreateView,
+    viewsets.ViewSet,
+):
     """
     ViewSet for handling user endpoints.
     """
@@ -168,53 +157,6 @@ class UserCompanyAdminsViewSet(CreateView, ListView, viewsets.ViewSet):
             **CreateView.get_method_view_mapping(),
             **ListView.get_method_view_mapping(),
         }
-
-    def save(self, data, **kwargs):
-        """
-        Save password in hash
-        """
-
-        user_obj = super().save(data, **kwargs)
-        user_obj.set_password(user_obj.password)
-        user_obj.save()
-
-        return user_obj
-
-    @extend_schema(
-        responses={201: UserResponseSerializer, **responses_400, **responses_401},
-        examples=[
-            user_create_success_example,
-            responses_400_example,
-            responses_401_example,
-        ],
-        tags=[MODULE_COMPANY_ADMIN],
-    )
-    @register_permission(
-        MODULE_COMPANY_ADMIN,
-        MethodEnum.POST,
-        f"Create {MODULE_COMPANY_ADMIN}",
-        create_permission=False,
-    )
-    def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
-
-    @extend_schema(
-        responses={200: UserListResponseSerializer, **responses_404, **responses_401},
-        examples=[
-            user_list_success_example,
-            responses_404_example,
-            responses_401_example,
-        ],
-        tags=[MODULE_COMPANY_ADMIN],
-    )
-    @register_permission(
-        MODULE_COMPANY_ADMIN,
-        MethodEnum.GET,
-        f"Get {MODULE_COMPANY_ADMIN}",
-        create_permission=False,
-    )
-    def list_all(self, request, *args, **kwargs):
-        return super().list_all(request, *args, **kwargs)
 
 
 class UserProfileViewSet(RetrieveView, viewsets.ViewSet):

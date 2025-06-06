@@ -66,6 +66,7 @@ def register_permission(
                         "module": module,
                     },
                 )
+
             is_company_admin = False
             if is_request_tenant_aware():
                 is_company_admin = RoleEnum.COMPANY_ADMIN == request.user.role_id
