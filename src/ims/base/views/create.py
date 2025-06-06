@@ -127,7 +127,7 @@ class CreateView:
         """
         Validates the input data for the create operation.
         """
-
+        
         serializer_obj: serializers.Serializer = self.serializer_class(
             data=request.data, many=self.many
         )

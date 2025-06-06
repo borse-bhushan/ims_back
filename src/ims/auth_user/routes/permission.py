@@ -21,11 +21,16 @@ Note:
 
 from django.urls import path
 
+from utils.tenant_aware_path import add_to_tenant_aware_excluded_path_list
+
+from auth_user.constants import MethodEnum
 from auth_user.views import PermissionViewSet
 
 urlpatterns = [
     path(
-        "permission",
+        add_to_tenant_aware_excluded_path_list(
+            "permission", method_list=[MethodEnum.POST]
+        ),
         PermissionViewSet.as_view(PermissionViewSet.get_method_view_mapping()),
         name="permission",
     ),

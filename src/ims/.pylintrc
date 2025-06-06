@@ -643,4 +643,4 @@ init-hook='import sys; sys.path.append(".");import ims.settings'
 ignore=manage.py,asgi.py,wsgi.py,apps.py,tests,db_access,db_models,routes,serializers,urls.py
 load-plugins=pylint_django
 django-settings-module=ims.settings
-disable=duplicate-code
+disable=duplicate-code, not-callable

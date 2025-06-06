@@ -2,21 +2,25 @@
 Permission ViewSet for handling permission endpoints.
 """
 
-from rest_framework import viewsets
+from rest_framework import status, viewsets
 from drf_spectacular.utils import extend_schema
 
-from base.views import BaseView
+from base.views import BaseView, CreateView
 from auth_user.constants import MethodEnum
-from authentication import get_authentication_classes, register_permission
+from authentication import (
+    get_authentication_classes,
+    register_permission,
+    get_default_authentication_class,
+)
 
-from utils.exceptions import codes
-from utils.exceptions.exceptions import BadRequestError
-from utils.messages import error
+from utils.messages import error, success
+from utils.response import generate_response
+from utils.exceptions import BadRequestError, codes
 from utils.swagger import (
-    responses_400,
+    # responses_400,
     responses_404,
     responses_401,
-    responses_400_example,
+    # responses_400_example,
     responses_404_example,
     responses_401_example,
 )
@@ -26,7 +30,7 @@ from ..serializers import PermissionSerializer
 from ..swagger import (
     PermissionResponseSerializer,
     PermissionListResponseSerializer,
-    permission_create_success_example,
+    # permission_create_success_example,
     permission_list_success_example,
     permission_get_by_id_success_example,
     permission_update_success_example,
@@ -34,6 +38,26 @@ from ..swagger import (
 )
 
 MODULE = "Permission"
+
+
+class CreatePermissionViewSet(CreateView, viewsets.ViewSet):
+    """
+    Load the permission array against the tenant.
+    """
+
+    manager = permission_manager
+    get_authenticators = get_default_authentication_class
+
+    @register_permission(
+        MODULE, MethodEnum.POST, f"Create {MODULE}", create_permission=False
+    )
+    def create(self, request, *args, **kwargs):
+
+        return generate_response(
+            data=None,
+            status_code=status.HTTP_201_CREATED,
+            messages={"message": success.CREATED_SUCCESSFULLY},
+        )
 
 
 class PermissionViewSet(BaseView, viewsets.ViewSet):
@@ -48,18 +72,18 @@ class PermissionViewSet(BaseView, viewsets.ViewSet):
 
     get_authenticators = get_authentication_classes
 
-    @extend_schema(
-        responses={201: PermissionResponseSerializer, **responses_400, **responses_401},
-        examples=[
-            permission_create_success_example,
-            responses_400_example,
-            responses_401_example,
-        ],
-        tags=[MODULE],
-    )
-    @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")
-    def create(self, request, *args, **kwargs):
-        return super().create(request, *args, **kwargs)
+    # @extend_schema(
+    #     responses={201: PermissionResponseSerializer, **responses_400, **responses_401},
+    #     examples=[
+    #         permission_create_success_example,
+    #         responses_400_example,
+    #         responses_401_example,
+    #     ],
+    #     tags=[MODULE],
+    # )
+    # @register_permission(MODULE, MethodEnum.POST, f"Create {MODULE}")
+    # def create(self, request, *args, **kwargs):
+    #     return super().create(request, *args, **kwargs)
 
     @extend_schema(
         responses={
