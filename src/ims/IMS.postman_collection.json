@@ -1,0 +1,1478 @@
+{
+	"info": {
+		"_postman_id": "1a970851-de88-4524-8281-39b49f56b2d1",
+		"name": "IMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45175634"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"if (response.is_success){",
+									"    pm.environment.set(\"token\", response.data.token);",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"helloborse@gmail.com\",\n    // \"username\": \"11@gmail.com\",\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/auth/login",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Super Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"if (response.is_success){",
+									"    pm.environment.set(\"token\", response.data.token);",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/auth/admin/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/auth/logout",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tenant",
+			"item": [
+				{
+					"name": "Configuration",
+					"item": [
+						{
+							"name": "Configuration",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/tenant/:tenant_id/configuration",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"tenant",
+										":tenant_id",
+										"configuration"
+									],
+									"variable": [
+										{
+											"key": "tenant_id",
+											"value": "1e9a7813-c39b-4487-8812-2d57b08bd2de"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"authentication_type\": \"JWT_TOKEN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/tenant/:tenant_id/configuration",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"tenant",
+										":tenant_id",
+										"configuration"
+									],
+									"variable": [
+										{
+											"key": "tenant_id",
+											"value": "59ecd3a1-73fb-42cb-ae55-ab45c5101837"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Permission",
+					"item": [
+						{
+							"name": "Permission",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"tenant_id\": \"59ecd3a1-73fb-42cb-ae55-ab45c5101837\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/admin/permission",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"admin",
+										"permission"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Permission List",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/admin/permission?tenant_id=59ecd3a1-73fb-42cb-ae55-ab45c5101837",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"admin",
+										"permission"
+									],
+									"query": [
+										{
+											"key": "tenant_id",
+											"value": "59ecd3a1-73fb-42cb-ae55-ab45c5101837"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Tenant Domain Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"if (response.is_success){",
+									"    pm.environment.set(\"api_host\", response.data.api_host + '/' + response.data.base_path);",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/tenant/:tenant_code/details",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tenant",
+								":tenant_code",
+								"details"
+							],
+							"variable": [
+								{
+									"key": "tenant_code",
+									"value": "ami"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/tenant",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tenant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/tenant/:tenant_id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tenant",
+								":tenant_id"
+							],
+							"variable": [
+								{
+									"key": "tenant_id",
+									"value": "ff380c78-bac8-4adc-9fad-a94c445bbcd5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tenant_code\": \"ami\",\n    \"tenant_name\": \"Amazon-India\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tenant",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tenant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tenant_code\": \"ami\",\n    \"tenant_name\": \"Amazon - India\",\n    \"tenant_desc\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tenant/:tenant_id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tenant",
+								":tenant_id"
+							],
+							"variable": [
+								{
+									"key": "tenant_id",
+									"value": "bb6fd9d3-f2ca-42de-a6e8-b6c471a901b9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"tenant_desc\": \"hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/tenant/:tenant_id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tenant",
+								":tenant_id"
+							],
+							"variable": [
+								{
+									"key": "tenant_id",
+									"value": "bb6fd9d3-f2ca-42de-a6e8-b6c471a901b9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tenant",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/tenant/:tenant_id",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"tenant",
+								":tenant_id"
+							],
+							"variable": [
+								{
+									"key": "tenant_id",
+									"value": "35f420fa-73d2-4068-8e9f-cb6356c0b6b9"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This is the tenant module.\n\nThe CRUD operation for the tenant module is only applicable for the SUPER_ADMIN role"
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Company Admins",
+					"item": [
+						{
+							"name": "Create Company Admins",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"helloborse@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"COMPANY_ADMIN\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\",\n    \"tenant_id\": \"59ecd3a1-73fb-42cb-ae55-ab45c5101837\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/user/company-admin",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user",
+										"company-admin"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Company Admins List",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/user/company-admin?tenant_id=59ecd3a1-73fb-42cb-ae55-ab45c5101837",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user",
+										"company-admin"
+									],
+									"query": [
+										{
+											"key": "tenant_id",
+											"value": "59ecd3a1-73fb-42cb-ae55-ab45c5101837"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "User List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/user",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/user/:user_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"11@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"OPERATOR\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/user",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"supplier_code\": \"ami\",\n    \"supplier_name\": \"Amazon - India\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/user/:user_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"supplier_name\": \"hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/user/:user_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_host}}/user/:user_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This is the tenant module.\n\nThe CRUD operation for the tenant module is only applicable for the SUPER_ADMIN role"
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Category List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/category",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/category/:category_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"category",
+								":category_id"
+							],
+							"variable": [
+								{
+									"key": "category_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category_code\": \"asdsad\",\n    \"category_name\": \"asd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/category",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category_code\": \"asds\",\n    \"category_name\": \"addsc\",\n    \"category_desc\": \"Hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/category/:category_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"category",
+								":category_id"
+							],
+							"variable": [
+								{
+									"key": "category_id",
+									"value": "079525a1-d7a2-423b-ba5d-fac5f044fcc7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category_desc\": \"hu\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/category/:category_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"category",
+								":category_id"
+							],
+							"variable": [
+								{
+									"key": "category_id",
+									"value": "079525a1-d7a2-423b-ba5d-fac5f044fcc7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_host}}/category/:category_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"category",
+								":category_id"
+							],
+							"variable": [
+								{
+									"key": "category_id",
+									"value": "079525a1-d7a2-423b-ba5d-fac5f044fcc7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Product List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/product",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/product/:product_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"product",
+								":product_id"
+							],
+							"variable": [
+								{
+									"key": "product_id",
+									"value": "fda4a666-b2e1-4b86-8eb2-f9bfe53fc018"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_code\": \"asd\",\n    \"product_name\": \"asdsad\",\n    \"category_id\": \"7c582bf5-4dca-4593-8495-acd36757f464\",\n    \"product_desc\": \"asd\",\n    \"sell_price\": 2.99,\n    \"purchase_price\": 1.23\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/product",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_code\": \"asdsadasd\",\n    \"product_name\": \"asdsadsad\",\n    \"category_id\": \"6c995345-15a2-4d65-a2f3-e5c6e5b15c47\",\n    \"product_desc\": \"asd\",\n    \"sell_price\": 55,\n    \"purchase_price\": 20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/product/:product_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"product",
+								":product_id"
+							],
+							"variable": [
+								{
+									"key": "product_id",
+									"value": "fda4a666-b2e1-4b86-8eb2-f9bfe53fc018"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_desc\": \"Hello\",\n    \"sell_price\": 55,\n    \"purchase_price\": 20\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/product/:product_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"product",
+								":product_id"
+							],
+							"variable": [
+								{
+									"key": "product_id",
+									"value": "fda4a666-b2e1-4b86-8eb2-f9bfe53fc018"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_host}}/product/:product_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"product",
+								":product_id"
+							],
+							"variable": [
+								{
+									"key": "product_id",
+									"value": "1ae0bce9-fa90-40aa-b6b2-dc85e055ff47"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Supplier",
+			"item": [
+				{
+					"name": "Supplier List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/supplier",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"supplier"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supplier",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/supplier/:supplier_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"supplier",
+								":supplier_id"
+							],
+							"variable": [
+								{
+									"key": "supplier_id",
+									"value": "ebdc1f8c-08ed-49e3-b536-8aedfd0960ca"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supplier",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"supplier_code\": \"asds\",\n    \"supplier_name\": \"addsc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/supplier",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"supplier"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supplier",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"supplier_code\": \"ami\",\n    \"supplier_name\": \"Amazon - India\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/supplier/:supplier_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"supplier",
+								":supplier_id"
+							],
+							"variable": [
+								{
+									"key": "supplier_id",
+									"value": "ebdc1f8c-08ed-49e3-b536-8aedfd0960ca"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supplier",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"supplier_name\": \"hello\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/supplier/:supplier_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"supplier",
+								":supplier_id"
+							],
+							"variable": [
+								{
+									"key": "supplier_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Supplier",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_host}}/supplier/:supplier_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"supplier",
+								":supplier_id"
+							],
+							"variable": [
+								{
+									"key": "supplier_id",
+									"value": "ebdc1f8c-08ed-49e3-b536-8aedfd0960ca"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This is the tenant module.\n\nThe CRUD operation for the tenant module is only applicable for the SUPER_ADMIN role"
+		},
+		{
+			"name": "Stock",
+			"item": [
+				{
+					"name": "Stock List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/stock",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stock",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/stock/:stock_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"stock",
+								":stock_id"
+							],
+							"variable": [
+								{
+									"key": "stock_id",
+									"value": "7dd302bc-ea0a-4891-ba1f-63976df36e89"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stock",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"product_id\": \"5f930404-ed43-4d3e-bb89-6f9665804e41\",\n    \"supplier_id\": \"72ca4731-3384-4c7a-8a3c-d06718407bcf\",\n    \"price\": 32,\n    \"quantity\": 23,\n    \"movement_type\": \"IN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/stock",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"stock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Stock",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_host}}/stock/:stock_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"stock",
+								":stock_id"
+							],
+							"variable": [
+								{
+									"key": "stock_id",
+									"value": "75a007f7-be21-40a2-b10c-bcc3a8b7c8b3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This is the tenant module.\n\nThe CRUD operation for the tenant module is only applicable for the SUPER_ADMIN role"
+		},
+		{
+			"name": "Utils",
+			"item": [
+				{
+					"name": "Health Metrix",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/health",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Permission",
+			"item": [
+				{
+					"name": "Permission List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_host}}/permission",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"permission"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
