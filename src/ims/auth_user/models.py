@@ -58,6 +58,7 @@ class User(BaseModel, AbstractBaseUser):
         return {
             "email": self.email,
             "user_id": self.user_id,
+            "role_id": self.role_id,
             "phone_number": self.phone_number,
             "profile_photo": self.profile_photo,
             "last_name": f"{self.last_name or ''}".title(),
