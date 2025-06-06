@@ -19,7 +19,6 @@ from utils.swagger import (
     responses_401_example,
 )
 
-from ..constants import RoleEnum
 from ..db_access import user_manager
 from ..serializers import (
     UserSerializer,

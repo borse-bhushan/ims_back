@@ -639,8 +639,8 @@ redefining-builtins-modules=six.moves,past.builtins,future.builtins,builtins,io
 
 
 [MASTER]
-init-hook='import sys; sys.path.append(".");import pctms.settings'
+init-hook='import sys; sys.path.append(".");import ims.settings'
 ignore=manage.py,asgi.py,wsgi.py,apps.py,tests,db_access,db_models,routes,serializers,urls.py
 load-plugins=pylint_django
-django-settings-module=pctms.settings
+django-settings-module=ims.settings
 disable=duplicate-code
