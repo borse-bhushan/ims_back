@@ -28,6 +28,21 @@ class AttachSubdomainToRequestMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
+    def get_tenant_details(self, request):
+        sub_domain_data = common_functions.get_subdomain(request)
+
+        if not sub_domain_data:
+            return None
+
+        tenant_obj = tenant_manager.disable_tenant_aware().get(
+            query={"tenant_code": sub_domain_data}
+        )
+
+        if not tenant_obj:
+            return None
+
+        return tenant_obj
+
     def __call__(self, request):
         """
         Process the request to extract the domain, subdomain and validate it against the database.
@@ -49,18 +64,7 @@ class AttachSubdomainToRequestMiddleware:
         except Resolver404:
             pass
 
-        set_request_tenant_aware()
-
-        sub_domain_data = common_functions.get_subdomain(request)
-        if not sub_domain_data:
-            return generate_response(
-                create_json_response=True,
-                errors={"message": error.INVALID_TENANT},
-                status_code=status.HTTP_400_BAD_REQUEST,
-            )
-
-        tenant_manager_obj = tenant_manager.disable_tenant_aware()
-        tenant_obj = tenant_manager_obj.get(query={"tenant_code": sub_domain_data})
+        tenant_obj = self.get_tenant_details(request=request)
 
         if not tenant_obj:
             return generate_response(
@@ -69,6 +73,7 @@ class AttachSubdomainToRequestMiddleware:
                 status_code=status.HTTP_400_BAD_REQUEST,
             )
 
+        set_request_tenant_aware()
         set_tenant_details_to_request_thread(tenant_obj)
 
         response = self.get_response(request)

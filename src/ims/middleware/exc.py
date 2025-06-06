@@ -58,6 +58,9 @@ class DRFExceptionMiddleware(MiddlewareMixin):
         This method catches exceptions and returns a JSON response.
         """
 
+        # uncomment the below and comment this
+        self.log_exception(exception)
+
         if isinstance(exception, ValidationError):
             return generate_response(
                 create_json_response=True,
@@ -81,6 +84,6 @@ class DRFExceptionMiddleware(MiddlewareMixin):
                 errors={"message": exception.message, "code": exception.code},
             )
 
-        self.log_exception(exception)
+        # self.log_exception(exception)
 
         return self.return_500()

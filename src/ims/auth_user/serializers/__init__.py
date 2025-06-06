@@ -26,6 +26,5 @@ __all__ = [
     "PermissionSerializer",
     "RolePermissionSerializer",
     "UserCompanyAdminListQuerySerializer",
-    "UserCompanyAdminSerializer"
+    "UserCompanyAdminSerializer",
 ]
-
