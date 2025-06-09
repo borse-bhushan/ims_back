@@ -27,6 +27,7 @@ class LoadPermission:
 
         action_list.append({"action": action, "name": name})
 
+        self.__modules_and_there_actions[module] = action_list
         return True
 
     def load_module_and_actions_for_tenants(

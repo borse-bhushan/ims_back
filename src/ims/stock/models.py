@@ -37,6 +37,7 @@ class Stock(BaseModel, models.Model):
         return {
             "price": self.price,
             "stock_id": self.stock_id,
+            "quantity": self.quantity,
             "product_id": self.product_id,
             "supplier_id": self.supplier_id,
             "movement_type": self.movement_type,

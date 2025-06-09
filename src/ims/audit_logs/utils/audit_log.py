@@ -15,6 +15,7 @@ def create_audit_log_entry(request, module_name, action):
     client_info = get_client_info(request)
     headers = dict(request.headers) if hasattr(request, "headers") else {}
     headers.pop("Authorization", None)  # Remove Authorization header if present
+
     data = {
         "user_id": user_id,
         "created_by": user_id,

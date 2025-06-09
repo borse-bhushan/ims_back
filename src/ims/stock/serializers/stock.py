@@ -84,7 +84,7 @@ class StockSerializer(serializers.Serializer):
                 query={"product_id": self.initial_data.get("product_id")},
             )
 
-            if quantity < total_quantity:
+            if quantity > total_quantity:
                 raise serializers.ValidationError(
                     error.STOCK_QUANTITY_NOT_AVAILABLE.format(quantity=quantity),
                     code=codes.NO_DATA_FOUND,

@@ -74,7 +74,7 @@ def register_permission(
                 if not permission_obj:
                     raise BadRequestError(
                         error.PERMISSION_NOT_REGISTER,
-                        code=codes.PERMISSION_NOT_REGISTERD,
+                        code=codes.PERMISSION_NOT_REGISTERED,
                     )
 
                 m_kwargs["permission_obj"] = permission_obj
