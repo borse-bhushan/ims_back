@@ -1,6 +1,4 @@
-Write the middleware which can change the authentication machanism based on the tenant config.
-
-Write the cron to notify the stock availability
-Red alert if they are below threshold.
+Write the cron to notify the stock availability Red alert if they are below threshold.
 
 Reports for in and out.
+

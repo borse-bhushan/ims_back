@@ -9,6 +9,7 @@ from utils.messages import error
 from utils.exceptions import codes
 
 from ..db_access import permission_manager, role_permission_mapping_manager
+from ..constants import RoleEnum
 
 
 class RolePermissionSerializer(serializers.Serializer):
@@ -16,8 +17,8 @@ class RolePermissionSerializer(serializers.Serializer):
     Serializer for both creating a RolePermission.
     """
 
-    role_id = serializers.UUIDField(required=True)
     permission_id = serializers.UUIDField(required=False)
+    role_id = serializers.ChoiceField(choices=RoleEnum.choices, required=True)
 
     def validate(self, attrs):
         """
