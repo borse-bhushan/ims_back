@@ -13,9 +13,6 @@ class BaseModel(models.Model):
     is_active = models.BooleanField(default=True)
     is_deleted = models.BooleanField(default=False)
 
-    client_ip = models.CharField(max_length=128, null=True, default=None)
-    client_user_agent = models.CharField(max_length=128, null=True, default=None)
-
     tenant_id = models.CharField(max_length=128, null=True, default=None)
 
     created_by = models.CharField(max_length=128, null=True, default=None)

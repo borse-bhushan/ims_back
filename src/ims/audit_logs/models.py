@@ -15,12 +15,16 @@ class AuditLogs(BaseModel, models.Model):
     """
 
     audit_id = models.CharField(primary_key=True, max_length=64, default=get_uuid)
+
+    extra_details = models.JSONField(null=True, default=None)
+    request_headers = models.JSONField(null=True, default=None)
     user_id = models.CharField(max_length=64, null=True, default=None)
-    module_name = models.CharField(max_length=128, null=True, default=None)
+    client_ip = models.CharField(max_length=128, null=True, default=None)
     http_method = models.CharField(max_length=16, null=True, default=None)
+    module_name = models.CharField(max_length=128, null=True, default=None)
     request_path = models.CharField(max_length=256, null=True, default=None)
     request_route = models.CharField(max_length=256, null=True, default=None)
-    request_headers = models.JSONField(null=True, default=None)
+    client_user_agent = models.CharField(max_length=128, null=True, default=None)
 
     class Meta:
         """
@@ -40,6 +44,7 @@ class AuditLogs(BaseModel, models.Model):
             "module_name": self.module_name,
             "http_method": self.http_method,
             "request_path": self.request_path,
+            "extra_details": self.extra_details,
             "request_headers": self.request_headers,
             "client_user_agent": self.client_user_agent,
         }

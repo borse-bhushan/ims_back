@@ -8,7 +8,7 @@ from functools import wraps
 from utils.messages import error
 from utils.exceptions import codes, PermissionDenied, BadRequestError
 
-from audit_logs.helpers import create_audit_log_entry
+from audit_logs.utils.audit_log import create_audit_log_entry
 
 from auth_user.constants import RoleEnum
 from auth_user.utils.permission import load_permission

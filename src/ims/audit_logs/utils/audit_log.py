@@ -4,7 +4,7 @@ Create an audit log entry for actions performed in the application.
 
 from utils.functions import get_client_info
 
-from .db_access import audit_logs_manager
+from ..db_access import audit_logs_manager
 
 
 def create_audit_log_entry(request, module_name, action):

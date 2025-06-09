@@ -3,9 +3,10 @@ This module provides helper functions to manage customer tenant details
 in thread local storage. It allows setting, getting, and clearing tenant and customer IDs
 """
 
-import threading
+from utils.thread_local_var import get_thread_local_var
 
-_thread_locals = threading.local()
+
+_thread_locals = get_thread_local_var()
 
 
 def set_tenant_details_to_request_thread(tenant_obj):

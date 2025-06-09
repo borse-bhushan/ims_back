@@ -102,8 +102,6 @@ class CreateView:
 
         user_id = user.user_id
 
-        client_info = common_functions.get_client_info(request)
-
         def add_data(item: dict):
             """
             Adds common metadata to a single item.
@@ -111,8 +109,6 @@ class CreateView:
             item["created_by"] = user_id
             item["updated_by"] = user_id
 
-            item["client_ip"] = client_info["client_ip"]
-            item["client_user_agent"] = client_info["client_user_agent"]
             return item
 
         if many:
@@ -153,7 +149,7 @@ class CreateView:
             request (Request): The HTTP request containing input data.
 
         Returns:
-            Response: A success response with the created object(s) 
+            Response: A success response with the created object(s)
             or an error message if validation fails.
         """
 

@@ -16,7 +16,7 @@ from auth_user.constants import MethodEnum
 from authentication.exception import WrongCredentialsException
 from authentication import get_authentication_classes, register_permission
 
-from audit_logs.helpers import create_audit_log_entry
+from audit_logs.utils.audit_log import create_audit_log_entry
 
 from tenant.constants import AuthenticationTypeEnum
 from tenant.utils.helpers import is_request_tenant_aware
@@ -97,9 +97,7 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
 
         self.manager.delete({"user": user_obj}, soft_delete=False)
 
-        common_info = common_functions.get_client_info(request)
-
-        return {"user": user_obj, "token": secrets.token_hex(16).upper(), **common_info}
+        return {"user": user_obj, "token": secrets.token_hex(16).upper()}
 
     def post_save(self, obj, **kwargs):
         """

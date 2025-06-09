@@ -7,7 +7,6 @@ from rest_framework import viewsets
 from base.views.base import BaseView, RetrieveView, CreateView
 
 from utils.constants import BASE_PATH
-from utils import functions as common_functions
 
 from auth_user.constants import MethodEnum
 from authentication import get_default_authentication_class, register_permission
@@ -46,12 +45,8 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
 
         user_id = request.user.user_id
 
-        client_info = common_functions.get_client_info(request)
-
         data["created_by"] = user_id
         data["updated_by"] = user_id
-        data["client_ip"] = client_info["client_ip"]
-        data["client_user_agent"] = client_info["client_user_agent"]
 
         return data
 
