@@ -8,6 +8,7 @@ from authentication.permission import register_permission
 from utils.response import generate_response
 
 from stock.db_access import stock_manager
+from product.db_access import product_manager
 
 MODULE_NAME = "Reports"
 
@@ -31,4 +32,22 @@ class ReportViewSet(viewsets.ViewSet):
 
         stock_summary = stock_manager.get_stock_summary({})
 
-        return generate_response()
+        product_id_list = []
+        for obj in stock_summary:
+            product_id_list.append(obj["product_id"])
+
+        product_obj_mapping = product_manager.get_objects_mapping(
+            query={
+                "product_id__in": product_id_list,
+            }
+        )
+
+        data_list = []
+        for obj in stock_summary:
+            data_dict = {}
+            data_dict["movement_type"] = obj["movement_type"]
+            data_dict["total_quantity"] = obj["total_quantity"]
+            data_dict["product"] = product_obj_mapping[obj["product_id"]].to_dict()
+            data_list.append(data_dict)
+
+        return generate_response(data=data_list)
