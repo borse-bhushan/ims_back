@@ -11,12 +11,14 @@ from utils.response import generate_response
 from utils.exceptions import ValidationError, NoDataFoundError
 
 from auth_user.constants import MethodEnum
+from auth_user.db_access import user_manager
+
 from base.views.base import UpdateView, ListView
 from authentication import register_permission, get_authentication_classes
 
 
-from .db_access import user_notification_manager
 from .serializers import NotificationMarkAsReadSerializer
+from .db_access import user_notification_manager, notification_manager
 
 MODULE = "Notification"
 
@@ -40,6 +42,43 @@ class NotificationViewSet(UpdateView, ListView, viewsets.ViewSet):
             **ListView.get_method_view_mapping(),
             **UpdateView.get_method_view_mapping(),
         }
+
+    def get_query_obj(self, request, **_):
+        return {
+            "user_id": request.user.user_id,
+            "is_read": False,
+        }
+
+    def get_list(self, objects, **_):
+        user_ids = []
+        notification_ids = []
+        for obj in objects:
+            user_ids.append(obj.created_by)
+            notification_ids.append(obj.notification_id)
+
+        user_mapping_obj = user_manager.get_objects_mapping(
+            query={
+                "user_id__in": user_ids,
+            }
+        )
+        notification_mapping_obj = notification_manager.get_objects_mapping(
+            query={
+                "notification_id__in": notification_ids,
+            }
+        )
+
+        data_list = []
+        for obj in objects:
+
+            data_dict = {}
+            data_dict["created_dtm"] = obj.created_dtm
+            data_dict["sent_by"] = user_mapping_obj[obj.created_by].to_dict()
+            data_dict["notification"] = notification_mapping_obj[
+                obj.notification_id
+            ].to_dict()
+            data_list.append(data_dict)
+
+        return data_list
 
     @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE}")
     def list_all(self, request, *args, **kwargs):

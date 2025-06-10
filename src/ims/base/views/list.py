@@ -105,7 +105,7 @@ class ListView:
 
             query_params = serializer.validated_data
 
-        query_objects = {}
+        query_objects = self.get_query_obj(request=request)
 
         query_objects = self.get_search_and_filter_query(
             query_params=query_params,
@@ -117,6 +117,9 @@ class ListView:
             raise NoDataFoundError()
 
         return generate_response(data=self.get_list(objects=objects, request=request))
+
+    def get_query_obj(self, request, **_):
+        return {}
 
     def get_with_pagination(self, request, query):
         """
@@ -130,7 +133,7 @@ class ListView:
 
         query_params = serializer.validated_data
 
-        query_objects = {}
+        query_objects = self.get_query_obj(request=request)
 
         query_objects = self.get_search_and_filter_query(
             query_params=query_params,

@@ -15,6 +15,8 @@ from notification.utils.helpers import SendNotification
 from auth_user.constants import RoleEnum
 from auth_user.db_access import user_manager
 
+from utils.messages import notifications
+
 from .models import Stock
 from .constants import StockMovementEnum
 
@@ -28,7 +30,7 @@ class StockManager(manager.Manager[Stock]):
 
     @staticmethod
     @receiver(post_save, sender=Stock)
-    def send_notification_on_stock_movement(sender, instance: Stock, created, **kwargs):
+    def send_notification_on_stock_movement(_, instance: Stock, created, **__):
         """
         Signal receiver that sends a notification when a Stock instance is created.
         """
@@ -43,9 +45,16 @@ class StockManager(manager.Manager[Stock]):
         elif instance.movement_type == StockMovementEnum.OUT:
             notification_type = NotificationTypeEnum.STOCK_OUT
 
+        if notification_type is None:
+            return None
+
         SendNotification(
-            title="Stock Movement",
-            message=f"Stock {instance.reference_number} has been created",
+            title=notifications.STOCK_MOVEMENT_TITLE,
+            message=notifications.STOCK_MOVEMENT_MESSAGE.format(
+                quantity=instance.quantity,
+                reference_number=instance.reference_number,
+                movement_type=instance.get_movement_type_display(),
+            ),
             created_by=instance.created_by,
             notification_type=notification_type,
             notification_data={

@@ -46,7 +46,6 @@ class Notification(BaseModel, models.Model):
             "title": self.title,
             "message": self.message,
             "created_by": self.created_by,
-            "created_at": self.created_at,
             "notification_id": self.notification_id,
             "notification_type": self.notification_type,
             "notification_data": self.notification_data,
