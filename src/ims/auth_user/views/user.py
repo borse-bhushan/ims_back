@@ -145,6 +145,8 @@ class UserCompanyAdminsViewSet(
     serializer_class = UserCompanyAdminSerializer
     list_serializer_class = UserCompanyAdminListQuerySerializer
 
+    filter_fields = ["tenant_id"]
+
     get_authenticators = get_authentication_classes
 
     @classmethod

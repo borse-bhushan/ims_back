@@ -2,7 +2,7 @@
 Permission ViewSet for handling permission endpoints.
 """
 
-from rest_framework import status, viewsets
+from rest_framework import viewsets
 from drf_spectacular.utils import extend_schema
 
 from base.views import CreateView, ListView
@@ -12,8 +12,6 @@ from authentication import (
     get_default_authentication_class,
 )
 
-from utils.messages import success
-from utils.response import generate_response
 from utils.swagger import (
     responses_404,
     responses_401,
@@ -38,28 +36,6 @@ class PermissionListView:
     Base Permission List view
     """
 
-    is_pagination: bool = False
-    manager = permission_manager
-
-    @extend_schema(
-        responses={
-            200: PermissionListResponseSerializer,
-            **responses_404,
-            **responses_401,
-        },
-        examples=[
-            permission_list_success_example,
-            responses_404_example,
-            responses_401_example,
-        ],
-        tags=[MODULE],
-    )
-    @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE}")
-    def list_all(self, request, *args, **kwargs):
-        """Get the list of permissions and modules"""
-        # pylint:disable=no-member
-        return super().list_all(request, *args, **kwargs)
-
 
 class ListCreatePermissionViewSet(
     PermissionListView,
@@ -72,11 +48,13 @@ class ListCreatePermissionViewSet(
     """
 
     many = True
+    is_pagination: bool = False
     manager = permission_manager
     is_common_data_needed = False
     serializer_class = PermissionListQuerySerializer
     list_serializer_class = PermissionListQuerySerializer
     get_authenticators = get_default_authentication_class
+    filter_fields = ["tenant_id"]
 
     @classmethod
     def get_method_view_mapping(cls):
@@ -98,6 +76,27 @@ class ListCreatePermissionViewSet(
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
 
+    @extend_schema(
+        responses={
+            200: PermissionListResponseSerializer,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            permission_list_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE],
+    )
+    @register_permission(
+        MODULE, MethodEnum.GET, f"Get {MODULE}", create_permission=False
+    )
+    def list_all(self, request, *args, **kwargs):
+        """Get the list of permissions and modules"""
+        # pylint:disable=no-member
+        return super().list_all(request, *args, **kwargs)
+
 
 class PermissionViewSet(PermissionListView, ListView, viewsets.ViewSet):
     """
@@ -105,3 +104,24 @@ class PermissionViewSet(PermissionListView, ListView, viewsets.ViewSet):
     """
 
     get_authenticators = get_authentication_classes
+
+    is_pagination: bool = False
+    manager = permission_manager
+
+    @extend_schema(
+        responses={
+            200: PermissionListResponseSerializer,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            permission_list_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE],
+    )
+    @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE}")
+    def list_all(self, request, *args, **kwargs):
+        """Get the list of permissions and modules"""
+        return super().list_all(request, *args, **kwargs)

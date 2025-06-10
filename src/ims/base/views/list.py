@@ -51,7 +51,7 @@ class ListView:
         search_query = []
 
         for field in self.search_fields:
-            value = query_params.get(field, "").strip()
+            value = str(query_params.get(field, "")).strip()
 
             if not value:
                 continue
@@ -67,7 +67,7 @@ class ListView:
         filter_query = {}
 
         for field in self.filter_fields:
-            value = query_params.get(field, "").strip()
+            value = str(query_params.get(field, "")).strip()
 
             if not value:
                 continue
