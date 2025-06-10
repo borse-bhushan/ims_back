@@ -1,5 +1,5 @@
-from .stock_summary import StockSummaryFilter
+from .stock_summary import StockSummaryQuerySerializer
 
 __all__ = [
-    "StockSummaryFilter",
+    "StockSummaryQuerySerializer",
 ]

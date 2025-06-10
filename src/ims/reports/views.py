@@ -11,7 +11,7 @@ from utils.exceptions import ValidationError
 from stock.db_access import stock_manager
 from product.db_access import product_manager
 
-from .serializers import StockSummaryFilter
+from .serializers import StockSummaryQuerySerializer
 
 MODULE_NAME = "Reports"
 
@@ -33,7 +33,7 @@ class ReportViewSet(viewsets.ViewSet):
         Endpoint to get stock summary.
         """
 
-        stock_summary_filter = StockSummaryFilter(
+        stock_summary_filter = StockSummaryQuerySerializer(
             data=request.query_params.dict() or {}, partial=True
         )
 

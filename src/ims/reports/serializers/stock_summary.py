@@ -6,7 +6,7 @@ from utils.exceptions import codes
 from product.db_access import product_manager
 
 
-class StockSummaryFilter(serializers.Serializer):
+class StockSummaryQuerySerializer(serializers.Serializer):
 
     product_id = serializers.UUIDField()
 
