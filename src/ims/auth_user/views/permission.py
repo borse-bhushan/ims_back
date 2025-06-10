@@ -31,14 +31,7 @@ from auth_user.swagger import (
 MODULE = "Permission"
 
 
-class PermissionListView:
-    """
-    Base Permission List view
-    """
-
-
 class ListCreatePermissionViewSet(
-    PermissionListView,
     ListView,
     CreateView,
     viewsets.ViewSet,
@@ -94,11 +87,10 @@ class ListCreatePermissionViewSet(
     )
     def list_all(self, request, *args, **kwargs):
         """Get the list of permissions and modules"""
-        # pylint:disable=no-member
         return super().list_all(request, *args, **kwargs)
 
 
-class PermissionViewSet(PermissionListView, ListView, viewsets.ViewSet):
+class PermissionViewSet(ListView, viewsets.ViewSet):
     """
     ViewSet for handling permission endpoints.
     """
