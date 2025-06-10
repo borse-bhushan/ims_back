@@ -9,7 +9,7 @@ from auth_user.constants import RoleEnum
 from auth_user.db_access import user_manager
 
 from tenant.db_access import tenant_manager
-# from tenant.utils.helpers import set_tenant_details_to_request_thread
+from tenant.utils.helpers import set_tenant_details_to_request_thread
 
 
 def load_data():
@@ -24,7 +24,7 @@ def load_data():
     # tenant_manager_obj = tenant_manager.disable_tenant_aware()
     # tenant_obj = tenant_manager_obj.get(query={})
 
-    # set_tenant_details_to_request_thread(None)
+    set_tenant_details_to_request_thread(None)
 
     load_data_obj.load_user_data()
 
