@@ -1,6 +1,11 @@
 from rest_framework import serializers
 
+from utils.messages import error
+from utils.exceptions import codes
+
 from base.serializers import QuerySerializer
+
+from tenant.db_access import tenant_manager
 
 from ..constants import RoleEnum
 
@@ -33,3 +38,20 @@ class UserCompanyAdminListQuerySerializer(
         data = QuerySerializer.to_internal_value(self, data)
 
         return data
+
+    def validate_tenant_id(self, value):
+        """
+        Validates the tenant_id field.
+        """
+        if not value:
+            raise serializers.ValidationError(
+                self.error_messages["required"], code=codes.REQUIRED
+            )
+
+        if not tenant_manager.exists(query={"tenant_id": value}):
+            raise serializers.ValidationError(
+                error.NO_DATA_FOUND,
+                code=codes.NO_DATA_FOUND,
+            )
+
+        return value
