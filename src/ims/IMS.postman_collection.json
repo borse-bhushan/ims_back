@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "1a970851-de88-4524-8281-39b49f56b2d1",
+		"_postman_id": "173a12c4-71a9-4bad-9607-851f06278153",
 		"name": "IMS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "45175634"
+		"_exporter_id": "42734015",
+		"_collection_link": "https://sagacity-pctms.postman.co/workspace/My-Workspace~3ea0d6e9-bed4-4100-8efc-641209af93c5/collection/42734015-173a12c4-71a9-4bad-9607-851f06278153?action=share&source=collection_link&creator=42734015"
 	},
 	"item": [
 		{
@@ -153,7 +154,7 @@
 									"variable": [
 										{
 											"key": "tenant_id",
-											"value": "1e9a7813-c39b-4487-8812-2d57b08bd2de"
+											"value": "2ded15fb-7a92-401f-b3dc-ee0467689bb8"
 										}
 									]
 								}
@@ -187,7 +188,7 @@
 									"variable": [
 										{
 											"key": "tenant_id",
-											"value": "59ecd3a1-73fb-42cb-ae55-ab45c5101837"
+											"value": "2ded15fb-7a92-401f-b3dc-ee0467689bb8"
 										}
 									]
 								}
@@ -206,7 +207,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n    {\n        \"tenant_id\": \"59ecd3a1-73fb-42cb-ae55-ab45c5101837\"\n    }\n]",
+									"raw": "[\n    {\n        \"tenant_id\": \"2ded15fb-7a92-401f-b3dc-ee0467689bb8\"\n    }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -239,7 +240,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/admin/permission?tenant_id=59ecd3a1-73fb-42cb-ae55-ab45c5101837",
+									"raw": "{{host}}/admin/permission?tenant_id=2ded15fb-7a92-401f-b3dc-ee0467689bb8",
 									"host": [
 										"{{host}}"
 									],
@@ -250,7 +251,7 @@
 									"query": [
 										{
 											"key": "tenant_id",
-											"value": "59ecd3a1-73fb-42cb-ae55-ab45c5101837"
+											"value": "2ded15fb-7a92-401f-b3dc-ee0467689bb8"
 										}
 									]
 								}
@@ -492,7 +493,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"helloborse@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"COMPANY_ADMIN\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\",\n    \"tenant_id\": \"59ecd3a1-73fb-42cb-ae55-ab45c5101837\"\n}",
+									"raw": "{\n    \"email\": \"helloborse@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"COMPANY_ADMIN\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\",\n    \"tenant_id\": \"2ded15fb-7a92-401f-b3dc-ee0467689bb8\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -500,9 +501,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{api_host}}/user/company-admin",
+									"raw": "{{host}}/user/company-admin",
 									"host": [
-										"{{api_host}}"
+										"{{host}}"
 									],
 									"path": [
 										"user",
@@ -530,9 +531,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{api_host}}/user/company-admin?tenant_id=59ecd3a1-73fb-42cb-ae55-ab45c5101837",
+									"raw": "{{host}}/user/company-admin?tenant_id=2ded15fb-7a92-401f-b3dc-ee0467689bb8",
 									"host": [
-										"{{api_host}}"
+										"{{host}}"
 									],
 									"path": [
 										"user",
@@ -541,7 +542,7 @@
 									"query": [
 										{
 											"key": "tenant_id",
-											"value": "59ecd3a1-73fb-42cb-ae55-ab45c5101837"
+											"value": "2ded15fb-7a92-401f-b3dc-ee0467689bb8"
 										}
 									]
 								}
@@ -1334,7 +1335,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_id\": \"5f930404-ed43-4d3e-bb89-6f9665804e41\",\n    \"supplier_id\": \"72ca4731-3384-4c7a-8a3c-d06718407bcf\",\n    \"price\": 32,\n    \"quantity\": 23,\n    \"movement_type\": \"IN\"\n}",
+							"raw": "{\n    \"product_id\": \"5f930404-ed43-4d3e-bb89-6f9665804e41\",\n    \"supplier_id\": \"72ca4731-3384-4c7a-8a3c-d06718407bcf\",\n    \"price\": 32,\n    \"quantity\": 1,\n    \"movement_type\": \"OUT\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1435,6 +1436,150 @@
 							],
 							"path": [
 								"permission"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role Permission",
+			"item": [
+				{
+					"name": "Role Permission",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/role-permission",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"role-permission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Role Permission",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"role_id\": \"OPERATOR\",\n    \"permission_id\": \"44d288bd-e6d1-4ff7-a22f-b292a9949955\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/role-permission",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"role-permission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Role Permission",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{api_host}}/role-permission/:role_id/:permission_id",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"role-permission",
+								":role_id",
+								":permission_id"
+							],
+							"variable": [
+								{
+									"key": "role_id",
+									"value": "OPERATOR"
+								},
+								{
+									"key": "permission_id",
+									"value": "44d288bd-e6d1-4ff7-a22f-b292a9949955"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "This is the tenant module.\n\nThe CRUD operation for the tenant module is only applicable for the SUPER_ADMIN role"
+		},
+		{
+			"name": "Notification",
+			"item": [
+				{
+					"name": "Notification List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/notification",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"notification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark As Read",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"list_notification_id\": [],\n    \"mark_all_as_read\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{api_host}}/notification",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"notification"
 							]
 						}
 					},
