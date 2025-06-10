@@ -33,6 +33,8 @@ urlpatterns = [
     path(BASE_PATH, include("notification.urls")),
     # Supplier Management API
     path(BASE_PATH, include("supplier.urls")),
+    # Reports Management API
+    path(BASE_PATH, include("reports.urls")),
     # Audit Logs Management API
     path(BASE_PATH, include("audit_logs.urls")),
     # Monitoring API

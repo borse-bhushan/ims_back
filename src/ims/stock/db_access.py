@@ -5,6 +5,7 @@ the Stock model.
 It provides methods for creating, updating, deleting, and retrieving Stock records.
 """
 
+from django.db.models import Sum
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 
@@ -30,7 +31,7 @@ class StockManager(manager.Manager[Stock]):
 
     @staticmethod
     @receiver(post_save, sender=Stock)
-    def send_notification_on_stock_movement(_, instance: Stock, created, **__):
+    def send_notification_on_stock_movement(sender, instance: Stock, created, **__):
         """
         Signal receiver that sends a notification when a Stock instance is created.
         """
@@ -66,6 +67,18 @@ class StockManager(manager.Manager[Stock]):
                     "role_id": RoleEnum.COMPANY_ADMIN,
                 },
             )
+        )
+
+    def get_stock_summary(self, query):
+        """
+        Get stock summary.
+        Returns a dictionary with the total quantity of stock.
+        """
+
+        return (
+            self._parse_query(query)
+            .values("product_id", "movement_type")
+            .annotate(total_quantity=Sum("quantity"))
         )
 
 

@@ -162,7 +162,7 @@ class Manager(Generic[T]):
 
         return self.__class__(tenant_aware=False)
 
-    def __parse_query(self, query, is_deleted=False) -> QuerySet[T]:
+    def _parse_query(self, query, is_deleted=False) -> QuerySet[T]:
         """
         Parse and process query parameters for database filtering.
         This method handles query parsing and filtering for database operations.
@@ -174,7 +174,7 @@ class Manager(Generic[T]):
         Example:
             # Using dict query
             query = {'name': 'John', 'age__gte': 18}
-            result = model_manager.__parse_query(query)
+            result = model_manager._parse_query(query)
         """
 
         query = query or dict()
@@ -212,7 +212,7 @@ class Manager(Generic[T]):
             object: The first object that matches the query criteria. Returns None if no match is found.
 
         """
-        return self.__parse_query(query=query).first()
+        return self._parse_query(query=query).first()
 
     def get_objects_mapping(
         self,
@@ -248,7 +248,7 @@ class Manager(Generic[T]):
             model_mgr.list({'status': 'active'})
         """
 
-        objects = self.__parse_query(query=query)
+        objects = self._parse_query(query=query)
 
         if only:
             objects = objects.only(*only)
@@ -268,7 +268,7 @@ class Manager(Generic[T]):
         Example:
             model_mgr.count({'status': 'active'})
         """
-        return self.__parse_query(query=query).count()
+        return self._parse_query(query=query).count()
 
     def exists(self, query: dict) -> bool:
         """
@@ -280,7 +280,7 @@ class Manager(Generic[T]):
         Example:
             model_mgr.exists({'status': 'active'})
         """
-        return self.__parse_query(query=query).exists()
+        return self._parse_query(query=query).exists()
 
     def list_with_pagination(
         self,
@@ -346,7 +346,7 @@ class Manager(Generic[T]):
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
-        objects = self.__parse_query(query=query)
+        objects = self._parse_query(query=query)
 
         if self.check_is_deleted:
             if soft_delete:
@@ -467,4 +467,4 @@ class Manager(Generic[T]):
         return self.__update(obj, data)
 
     def sum(self, query, field):
-        return self.__parse_query(query=query).aggregate(sum=Sum(field))["sum"] or 0
+        return self._parse_query(query=query).aggregate(sum=Sum(field))["sum"] or 0
