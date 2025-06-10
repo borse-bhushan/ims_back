@@ -68,4 +68,4 @@ def get_authentication_classes(*_, **__):
     if tenant_configuration_obj.authentication_type == AuthenticationTypeEnum.JWT_TOKEN:
         return [JWTAuthentication()]
 
-    raise BadRequestError(error.AUTHENTICATIION_NOT_CONFIGURED)
+    raise BadRequestError(error.AUTHENTICATION_NOT_CONFIGURED)

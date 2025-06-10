@@ -128,7 +128,7 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
             at = tenant_config_obj.authentication_type
 
             if not at:
-                raise BadRequestError(error.AUTHENTICATIION_NOT_CONFIGURED)
+                raise BadRequestError(error.AUTHENTICATION_NOT_CONFIGURED)
 
             if at == AuthenticationTypeEnum.JWT_TOKEN:
                 return self.jwt_login(request, *args, **kwargs)

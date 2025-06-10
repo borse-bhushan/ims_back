@@ -2,13 +2,16 @@ from rest_framework import viewsets
 
 from auth_user.constants import MethodEnum
 
-from authentication.auth import get_authentication_classes
 from authentication.permission import register_permission
+from authentication.auth import get_authentication_classes
 
 from utils.response import generate_response
+from utils.exceptions import ValidationError
 
 from stock.db_access import stock_manager
 from product.db_access import product_manager
+
+from .serializers import StockSummaryFilter
 
 MODULE_NAME = "Reports"
 
@@ -30,7 +33,16 @@ class ReportViewSet(viewsets.ViewSet):
         Endpoint to get stock summary.
         """
 
-        stock_summary = stock_manager.get_stock_summary({})
+        stock_summary_filter = StockSummaryFilter(
+            data=request.query_params.dict() or {}, partial=True
+        )
+
+        if not stock_summary_filter.is_valid():
+            raise ValidationError(stock_summary_filter.errors)
+
+        stock_summary = stock_manager.get_stock_summary(
+            query=stock_summary_filter.validated_data
+        )
 
         product_id_list = []
         for obj in stock_summary:
