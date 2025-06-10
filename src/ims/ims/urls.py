@@ -29,6 +29,8 @@ urlpatterns = [
     path(BASE_PATH, include("product.urls")),
     # Stock Management API
     path(BASE_PATH, include("stock.urls")),
+    # Notification Management API
+    path(BASE_PATH, include("notification.urls")),
     # Supplier Management API
     path(BASE_PATH, include("supplier.urls")),
     # Audit Logs Management API

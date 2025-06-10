@@ -29,7 +29,7 @@ class UpdateView:
     def get_method_view_mapping(cls):
         return {PATCH: "update", PUT: "update"}
 
-    def add_common_data(self, data: dict | list, request):
+    def add_common_update_data(self, data: dict | list, request):
         """
         Adds common metadata fields to the object, such as `created_by` and `updated_by`.
 
@@ -75,7 +75,7 @@ class UpdateView:
         if not data:
             raise BadRequestError(error.DATA_NOT_PROVIDED)
 
-        data = self.add_common_data(data=data, request=request)
+        data = self.add_common_update_data(data=data, request=request)
 
         obj = self.manager.update(data, query)
 

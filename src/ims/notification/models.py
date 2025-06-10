@@ -6,8 +6,9 @@ from django.db import models
 
 from base.db_models import BaseModel
 from utils.functions import get_uuid
+from utils.constants import SeverityEnum
 
-from .constants import NotificationType
+from .constants import NotificationTypeEnum
 
 
 class Notification(BaseModel, models.Model):
@@ -22,14 +23,17 @@ class Notification(BaseModel, models.Model):
     message = models.TextField()
     title = models.CharField(max_length=255)
 
-    notification_type = models.CharField(
+    severity = models.CharField(
         max_length=32,
-        default=NotificationType.IN,
-        choices=NotificationType.choices,
+        default=SeverityEnum.INFO,
+        choices=SeverityEnum.choices,
     )
 
-    def __str__(self):
-        return f"Notification[{self.title} - {self.message[:10]}...]"
+    notification_type = models.CharField(
+        max_length=32,
+        choices=NotificationTypeEnum.choices,
+    )
+    notification_data = models.JSONField(default=dict)
 
     class Meta:
         db_table = "notifications"
@@ -41,8 +45,11 @@ class Notification(BaseModel, models.Model):
         return {
             "title": self.title,
             "message": self.message,
+            "created_by": self.created_by,
+            "created_at": self.created_at,
             "notification_id": self.notification_id,
             "notification_type": self.notification_type,
+            "notification_data": self.notification_data,
         }
 
 
@@ -56,11 +63,8 @@ class UserNotification(BaseModel, models.Model):
     )
 
     is_read = models.BooleanField(default=False)
-    user = models.ForeignKey("User", on_delete=models.CASCADE)
+    user = models.ForeignKey("auth_user.User", on_delete=models.CASCADE)
     notification = models.ForeignKey("Notification", on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"UserNotification[{self.user_id} - {self.notification.title}]"
 
     class Meta:
         db_table = "user_notifications"
@@ -73,5 +77,5 @@ class UserNotification(BaseModel, models.Model):
         return {
             "user_id": self.user_id,
             "is_read": self.is_read,
-            "notification": self.notification.to_dict(),
+            "notification_id": self.notification_id,
         }

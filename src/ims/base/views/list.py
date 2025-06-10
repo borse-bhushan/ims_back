@@ -27,6 +27,9 @@ class ListView:
     search_fields = []
     filter_fields = []
 
+    only_fields = []
+    order_by_fields = []
+
     @classmethod
     def get_method_view_mapping(cls):
         """
@@ -142,6 +145,8 @@ class ListView:
         objects, pagination = self.manager.list_with_pagination(
             query=query_objects,
             pagination=pagination,
+            only=self.only_fields,
+            order_by=self.order_by_fields,
         )
 
         if not objects:

@@ -27,7 +27,7 @@ class StockViewSet(BaseView, viewsets.ViewSet):
     serializer_class = StockSerializer
     list_serializer_class = StockQuerySerializer
 
-    search_fields = ["referance_number"]
+    search_fields = ["reference_number"]
     filter_fields = ["product_id", "supplier_id", "movement_type"]
 
     get_authenticators = get_authentication_classes
@@ -43,10 +43,6 @@ class StockViewSet(BaseView, viewsets.ViewSet):
     @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE}")
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
-
-    @register_permission(MODULE, MethodEnum.PUT, f"Update {MODULE}")
-    def update(self, request, *args, **kwargs):
-        return super().update(request, *args, **kwargs)
 
     @register_permission(MODULE, MethodEnum.DELETE, f"Delete {MODULE}")
     def destroy(self, request, *args, **kwargs):

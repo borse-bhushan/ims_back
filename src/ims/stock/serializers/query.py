@@ -17,5 +17,5 @@ class StockQuerySerializer(QuerySerializer):
     product_id = serializers.UUIDField()
     supplier_id = serializers.UUIDField()
 
-    referance_number = serializers.CharField(max_length=256)
+    reference_number = serializers.CharField(max_length=256)
     movement_type = serializers.ChoiceField(choices=StockMovementEnum.choices)

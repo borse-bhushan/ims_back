@@ -2,6 +2,8 @@
 This file contains the constants used for the utility.
 """
 
+from django.db.models import TextChoices
+
 QA = "QA"
 UAT = "UAT"
 DEV = "DEV"
@@ -19,3 +21,17 @@ CURRENT_VERSION = "CV"
 
 
 BASE_PATH = "api/"
+
+
+class SeverityEnum(TextChoices):
+    """
+    Enum for notification severity levels.
+    """
+
+    LOW = "LOW", "Low"
+    MEDIUM = "MEDIUM", "Medium"
+    HIGH = "HIGH", "High"
+    CRITICAL = "CRITICAL", "Critical"
+    INFO = "INFO", "Info"
+    WARNING = "WARNING", "Warning"
+    ERROR = "ERROR", "Error"

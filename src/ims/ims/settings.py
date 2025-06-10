@@ -74,6 +74,7 @@ MY_APPS = [
     "product",
     "supplier",
     "stock",
+    "notification",
 ]
 
 INSTALLED_APPS += MY_APPS

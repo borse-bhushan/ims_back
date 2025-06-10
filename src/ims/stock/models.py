@@ -6,7 +6,7 @@ It inherits from the BaseModel class which contains common fields for all models
 from django.db import models
 from base.db_models import BaseModel
 from stock.constants import StockMovementEnum
-from utils.functions import get_uuid, create_stock_referance
+from utils.functions import get_uuid, create_stock_reference
 
 
 class Stock(BaseModel, models.Model):
@@ -15,7 +15,7 @@ class Stock(BaseModel, models.Model):
     stock_id = models.CharField(primary_key=True, default=get_uuid, max_length=36)
 
     quantity = models.IntegerField(default=0)
-    referance_number = models.CharField(max_length=256)
+    reference_number = models.CharField(max_length=256)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     movement_type = models.CharField(max_length=20, choices=StockMovementEnum.choices)
 
@@ -41,13 +41,13 @@ class Stock(BaseModel, models.Model):
             "product_id": self.product_id,
             "supplier_id": self.supplier_id,
             "movement_type": self.movement_type,
-            "referance_number": self.referance_number,
+            "reference_number": self.reference_number,
         }
 
     def save(self, *args, **kwargs):
         """
-        If the referance_number is not set, it will create a new one.
+        If the reference_number is not set, it will create a new one.
         """
-        if not self.referance_number:
-            self.referance_number = create_stock_referance(self.movement_type)
+        if not self.reference_number:
+            self.reference_number = create_stock_reference(self.movement_type)
         super().save(*args, **kwargs)
