@@ -96,7 +96,7 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
         return super().destroy(request, *args, **kwargs)
 
 
-class TenantDetialsViewSet(RetrieveView, viewsets.ViewSet):
+class TenantDetailsViewSet(RetrieveView, viewsets.ViewSet):
     """
     ViewSet for managing tenant details.
     """
@@ -154,7 +154,7 @@ class TenantConfigurationViewSet(CreateView, RetrieveView, viewsets.ViewSet):
         return super().create(request, *args, **kwargs)
 
     def get_details_query(self, **kwargs):
-        return {}
+        return {"tenant_id": kwargs["tenant_id"]}
 
     @register_permission(
         TENANT_CONF,
@@ -170,4 +170,4 @@ class TenantConfigurationViewSet(CreateView, RetrieveView, viewsets.ViewSet):
         Save the tenant configuration data.
         """
 
-        return self.manager.upsert(data=data, query={})
+        return self.manager.upsert(data=data, query={"tenant_id": data["tenant_id"]})

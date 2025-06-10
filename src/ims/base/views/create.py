@@ -138,7 +138,7 @@ class CreateView:
         if not serializer_obj.is_valid():
             raise ValidationError(serializer_obj.errors)
 
-        return serializer_obj
+        return serializer_obj.validated_data
 
     def create(self, request, *args, **kwargs):
         """
@@ -153,9 +153,7 @@ class CreateView:
             or an error message if validation fails.
         """
 
-        serializer_obj = self.is_create_data_valid(request, *args, **kwargs)
-
-        data = serializer_obj.validated_data
+        data = self.is_create_data_valid(request, *args, **kwargs)
 
         if self.is_common_data_needed:
             data = self.add_common_data(data=data, request=request, many=self.many)
