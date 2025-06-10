@@ -52,7 +52,7 @@ class SendNotification:
             user_notification_manager.create(
                 data={
                     "is_read": False,
-                    "user": recipient.user_id,
+                    "user_id": recipient.user_id,
                     "notification": notification,
                     "created_by": self.created_by,
                     "updated_by": self.created_by,

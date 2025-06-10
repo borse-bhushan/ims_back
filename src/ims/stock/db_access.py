@@ -43,28 +43,21 @@ class StockManager(manager.Manager[Stock]):
         elif instance.movement_type == StockMovementEnum.OUT:
             notification_type = NotificationTypeEnum.STOCK_OUT
 
-        try:
-            SendNotification(
-                title="Stock Movement",
-                message=f"Stock {instance.reference_number} has been created",
-                created_by=instance.created_by,
-                notification_type=notification_type,
-                notification_data={
-                    "stock_id": instance.stock_id,
+        SendNotification(
+            title="Stock Movement",
+            message=f"Stock {instance.reference_number} has been created",
+            created_by=instance.created_by,
+            notification_type=notification_type,
+            notification_data={
+                "stock_id": instance.stock_id,
+            },
+        ).send(
+            recipient_list=user_manager.list(
+                query={
+                    "role_id": RoleEnum.COMPANY_ADMIN,
                 },
-            ).send(
-                recipient_list=user_manager.list(
-                    query={
-                        "role_id": RoleEnum.COMPANY_ADMIN,
-                    },
-                )
             )
-        except Exception as e:
-            print(f"Error sending notification: {e}")
-            # Optionally, you could log the error or handle it in a different way
-            return None
-
-        print(sender, instance, created, kwargs)
+        )
 
 
 stock_manager = StockManager()
