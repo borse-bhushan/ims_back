@@ -244,4 +244,7 @@ SPECTACULAR_SETTINGS = {
             }
         }
     },
+    "PREPROCESSING_HOOKS": [
+        "ims.swagger.domain_based_preprocessing_hook",
+    ],
 }

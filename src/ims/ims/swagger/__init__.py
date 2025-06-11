@@ -15,10 +15,16 @@ with drf-spectacular for OpenAPI schema generation.
 
 """
 
+from .view import TenantAwareSchemaView
+from .doc_filter import domain_based_preprocessing_hook
 from .spectacular_extensions import CustomTokenAuthScheme
 
 
-__all__ = ["CustomTokenAuthScheme"]
+__all__ = [
+    "CustomTokenAuthScheme",
+    "TenantAwareSchemaView",
+    "domain_based_preprocessing_hook"
+]
 
 
 def get_token_auth_schema():

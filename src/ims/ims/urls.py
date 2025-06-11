@@ -12,8 +12,9 @@ from drf_spectacular.views import (
 
 from utils.constants import BASE_PATH
 from utils.exceptions import error_404
+from utils.tenant_aware_path import add_to_tenant_aware_excluded_path_list
 
-from .swagger import get_token_auth_schema
+from .swagger import get_token_auth_schema, TenantAwareSchemaView
 
 get_token_auth_schema()
 
@@ -40,13 +41,27 @@ urlpatterns = [
     # Monitoring API
     path(BASE_PATH, include("monitor.urls")),
     # Swagger Documentation
-    path("api/schema", SpectacularAPIView.as_view(), name="schema"),
     path(
-        "api/docs",
+        add_to_tenant_aware_excluded_path_list(
+            "api/schema", method_list=["GET"], add_base_path=False
+        ),
+        TenantAwareSchemaView.as_view(),
+        name="schema",
+    ),
+    path(
+        add_to_tenant_aware_excluded_path_list(
+            "api/docs", method_list=["GET"], add_base_path=False
+        ),
         SpectacularSwaggerView.as_view(url_name="schema"),
         name="swagger-ui",
     ),
-    path("api/redoc", SpectacularRedocView.as_view(url_name="schema"), name="redoc"),
+    path(
+        add_to_tenant_aware_excluded_path_list(
+            "api/redoc", method_list=["GET"], add_base_path=False
+        ),
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
 ]
 
 handler404 = error_404

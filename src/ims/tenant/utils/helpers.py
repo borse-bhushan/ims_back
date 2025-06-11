@@ -17,13 +17,19 @@ def set_tenant_details_to_request_thread(tenant_obj):
     return True
 
 
-def get_tenant_details_from_request_thread():
+def get_tenant_details_from_request_thread(raise_err=True):
     """
     Get the tenant_id from the thread local storage.
     """
 
+    tenant_id = None
+    if raise_err:
+        tenant_id = _thread_locals.tenant_id
+    else:
+        tenant_id = getattr(_thread_locals, "tenant_id", None)
+
     return {
-        "tenant_id": _thread_locals.tenant_id,
+        "tenant_id": tenant_id,
     }
 
 

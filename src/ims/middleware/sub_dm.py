@@ -51,6 +51,10 @@ class AttachSubdomainToRequestMiddleware:
         with an error message.
         """
 
+        tenant_obj = self.get_tenant_details(request=request)
+        if tenant_obj:
+            set_tenant_details_to_request_thread(tenant_obj)
+
         try:
             resolver_match = resolve(request.path)
             request.resolver_match = resolver_match
@@ -64,8 +68,6 @@ class AttachSubdomainToRequestMiddleware:
         except Resolver404:
             pass
 
-        tenant_obj = self.get_tenant_details(request=request)
-
         if not tenant_obj:
             return generate_response(
                 create_json_response=True,
@@ -74,7 +76,6 @@ class AttachSubdomainToRequestMiddleware:
             )
 
         set_request_tenant_aware()
-        set_tenant_details_to_request_thread(tenant_obj)
 
         response = self.get_response(request)
 
