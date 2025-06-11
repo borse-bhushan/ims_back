@@ -5,6 +5,8 @@ handling HTTP requests related to notifications.
 """
 
 from rest_framework import viewsets, status
+from drf_spectacular.utils import extend_schema
+
 
 from utils.messages import success
 from utils.response import generate_response
@@ -15,6 +17,23 @@ from auth_user.db_access import user_manager
 
 from base.views.base import UpdateView, ListView
 from authentication import register_permission, get_authentication_classes
+
+from utils.swagger import (
+    responses_400,
+    responses_404,
+    responses_401,
+    responses_400_example,
+    responses_404_example,
+    responses_401_example,
+)
+
+
+from .serializers.swagger import (
+    MarkNotificationResponseSerializer,
+    NotificationListResponseSerializer,
+    notification_list_success_example,
+    mark_read_patch_success_example
+)
 
 
 from .serializers import NotificationMarkAsReadSerializer
@@ -40,7 +59,7 @@ class NotificationViewSet(UpdateView, ListView, viewsets.ViewSet):
         """
         return {
             **ListView.get_method_view_mapping(),
-            **UpdateView.get_method_view_mapping(),
+            **UpdateView.get_method_view_mapping(patch=False),
         }
 
     def get_query_obj(self, request, **_):
@@ -80,10 +99,39 @@ class NotificationViewSet(UpdateView, ListView, viewsets.ViewSet):
 
         return data_list
 
+    @extend_schema(
+        responses={
+            200: NotificationListResponseSerializer,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            notification_list_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE],
+    )
     @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE}")
     def list_all(self, request, *args, **kwargs):
         return super().list_all(request, *args, **kwargs)
 
+
+    @extend_schema(
+        responses={
+            200: MarkNotificationResponseSerializer,
+            **responses_400,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            mark_read_patch_success_example,
+            responses_404_example,
+            responses_401_example,
+            responses_400_example,
+        ],
+        tags=[MODULE],
+    )
     @register_permission(MODULE, MethodEnum.PUT, f"Make {MODULE} mark as read")
     def update(self, request, *args, **kwargs):
         """

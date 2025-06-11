@@ -26,8 +26,10 @@ class UpdateView:
     serializer_class: serializers.Serializer = None
 
     @classmethod
-    def get_method_view_mapping(cls):
-        return {PATCH: "update", PUT: "update"}
+    def get_method_view_mapping(cls, patch=True):
+        if patch:
+            return {PATCH: "update", PUT: "update"}
+        return {PUT: "update"}
 
     def add_common_update_data(self, data: dict | list, request):
         """
