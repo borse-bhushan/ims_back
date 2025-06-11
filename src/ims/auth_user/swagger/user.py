@@ -15,11 +15,12 @@ from utils.swagger.common_swagger_functions import (
 )
 
 
-class UserSerializer(serializers.Serializer):
+class UserDataSerializer(serializers.Serializer):
     """
     Serializer for both creating and updating a user.
     """
 
+    user_id = serializers.UUIDField(required=True, help_text="PK for user model")
     email = serializers.EmailField(required=True, help_text="User's email address.")
     profile_photo = serializers.CharField(
         required=False, help_text="URL or path to the user's profile photo."
@@ -40,7 +41,7 @@ class UserResponseSerializer(serializers.Serializer):
     Serializer for the response of user-related endpoints.
     """
 
-    data = UserSerializer(help_text=" User Information.")
+    data = UserDataSerializer(help_text=" User Information.")
     errors = serializers.JSONField(
         help_text="Any errors message for the response.", allow_null=True
     )
@@ -56,7 +57,7 @@ class UserListDataSerializer(serializers.Serializer):
     Serializer for the data field in user list response.
     """
 
-    list = UserSerializer(many=True, help_text="List of user records.")
+    list = UserDataSerializer(many=True, help_text="List of user records.")
     pagination = PaginationSerializer(
         help_text="Pagination information for the list of users."
     )

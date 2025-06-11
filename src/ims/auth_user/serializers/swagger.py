@@ -12,9 +12,6 @@ from utils.exceptions import codes
 class CommonFields:
     """
     Common fields used across various serializers for standardized response formatting.
-    Attributes:
-        status_code (IntegerField): HTTP status code of the response, defaults to 201
-        is_success (BooleanField): Flag indicating if the operation was successful, defaults to True
     """
 
     status_code = serializers.IntegerField(default=201)
@@ -25,9 +22,6 @@ class LoginTokenDataSerializer(serializers.Serializer):
     """
     A serializer for handling login token response data.
     Serializes an authentication token and its creation timestamp.
-    Attributes:
-        token (str): The authentication token string.
-        created_dtm (datetime): The timestamp when the token was created.
     """
 
     token = serializers.CharField(help_text="Authentication token.")
@@ -37,17 +31,6 @@ class LoginTokenDataSerializer(serializers.Serializer):
 class LoginResponseSerializer(CommonFields, serializers.Serializer):
     """
     A serializer for handling login response data.
-    This serializer represents the structure of the response returned after a login attempt.
-    Attributes:
-        data (LoginTokenDataSerializer): Contains login data including authentication token.
-        errors (JSONField): JSON field for any error messages that occurred during login.
-            Defaults to null if no errors.
-        messages (JSONField): JSON field for any informational messages.
-            Defaults to null if no messages.
-        status_code (IntegerField): HTTP status code for the response.
-            Defaults to 201.
-        is_success (BooleanField): Flag indicating if the login was successful.
-            Defaults to True.
     """
 
     data = LoginTokenDataSerializer(help_text="Login data with token.")
@@ -103,17 +86,6 @@ responses_401_example = OpenApiExample(
 class LogoutResponseSerializer(CommonFields, serializers.Serializer):
     """
     A serializer for handling logout response data.
-    This serializer represents the structure of the response returned after a logout attempt.
-    Attributes:
-        data (JSONField): Contains logout data, typically null.
-        errors (JSONField): JSON field for any error messages that occurred during logout.
-            Defaults to null if no errors.
-        messages (JSONField): JSON field for any informational messages.
-            Defaults to null if no messages.
-        status_code (IntegerField): HTTP status code for the response.
-            Defaults to 201.
-        is_success (BooleanField): Flag indicating if the logout was successful.
-            Defaults to True.
     """
 
     data = serializers.JSONField(
