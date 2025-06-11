@@ -106,5 +106,5 @@ category_update_success_example: OpenApiExample = get_update_success_example(
 )
 
 category_delete_success_example: OpenApiExample = get_delete_success_example(
-    name="Delete Category - Success", message="Deleted Successfully."
+    name="Delete Category - Success",
 )

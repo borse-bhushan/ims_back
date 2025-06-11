@@ -120,5 +120,5 @@ product_update_success_example: OpenApiExample = get_update_success_example(
 )
 
 product_delete_success_example: OpenApiExample = get_delete_success_example(
-    name="Delete Product - Success", message="Deleted Successfully."
+    name="Delete Product - Success",
 )

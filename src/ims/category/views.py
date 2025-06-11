@@ -17,6 +17,7 @@ from utils.swagger import (
     responses_400_example,
     responses_404_example,
     responses_401_example,
+    SuccessResponseSerializer,
 )
 
 
@@ -111,7 +112,7 @@ class CategoryViewSet(BaseView, viewsets.ViewSet):
         return super().update(request, *args, **kwargs)
 
     @extend_schema(
-        responses={204: CategoryResponseSerializer, **responses_404, **responses_401},
+        responses={204: SuccessResponseSerializer, **responses_404, **responses_401},
         examples=[
             category_delete_success_example,
             responses_404_example,

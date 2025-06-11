@@ -89,5 +89,5 @@ role_permission_list_example: OpenApiExample = get_list_success_example(
 )
 
 role_permission_delete_example: OpenApiExample = get_delete_success_example(
-    name="Delete RolePermission - Success", message="Deleted Successfully."
+    name="Delete RolePermission - Success",
 )

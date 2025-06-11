@@ -3,10 +3,21 @@ Tenant viewset for managing Tenants.
 """
 
 from rest_framework import viewsets
+from drf_spectacular.utils import extend_schema
+
 
 from base.views.base import BaseView, RetrieveView, CreateView
 
 from utils.constants import BASE_PATH
+from utils.swagger import (
+    responses_400,
+    responses_404,
+    responses_401,
+    responses_400_example,
+    responses_404_example,
+    responses_401_example,
+    SuccessResponseSerializer,
+)
 
 from auth_user.constants import MethodEnum
 from authentication import get_default_authentication_class, register_permission
@@ -19,10 +30,32 @@ from .serializers import (
     TenantConfigurationSerializer,
 )
 
+from .serializers.swagger.tenant import (
+    TenantResponseSerializer,
+    TenantListResponseSerializer,
+    tenant_list_success_example,
+    tenant_create_success_example,
+    tenant_update_success_example,
+    tenant_get_by_id_success_example,
+    tenant_delete_success_example,
+)
+
+
+from .serializers.swagger.tenant_conf import (
+    tenant_config_create_success_example,
+    tenant_config_get_by_id_success_example,
+    TenantConfigurationResponseSerializer,
+    TenantConfigurationDataSerializer,
+)
+
+from .serializers.swagger.tenant_details import (
+    TenantDomainConfigResponseSerializer,
+    tenant_domain_config_get_by_id_success_example,
+)
 
 MODULE = "Tenant"
 MODULE_DETAILS = "Tenant Details"
-TENANT_CONF = "Tenant Configuration"
+MODULE_CONF = "Tenant Configuration"
 
 
 class TenantViewSet(BaseView, viewsets.ViewSet):
@@ -50,6 +83,15 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
 
         return data
 
+    @extend_schema(
+        responses={201: TenantResponseSerializer, **responses_400, **responses_401},
+        examples=[
+            tenant_create_success_example,
+            responses_400_example,
+            responses_401_example,
+        ],
+        tags=[MODULE],
+    )
     @register_permission(
         MODULE,
         MethodEnum.POST,
@@ -59,6 +101,19 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
 
+    @extend_schema(
+        responses={
+            200: TenantListResponseSerializer,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            tenant_list_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE],
+    )
     @register_permission(
         MODULE,
         MethodEnum.GET,
@@ -68,6 +123,15 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
     def list_all(self, request, *args, **kwargs):
         return super().list_all(request, *args, **kwargs)
 
+    @extend_schema(
+        responses={200: TenantResponseSerializer, **responses_404, **responses_401},
+        examples=[
+            tenant_get_by_id_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE],
+    )
     @register_permission(
         MODULE,
         MethodEnum.GET,
@@ -77,6 +141,21 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
     def retrieve(self, request, *args, **kwargs):
         return super().retrieve(request, *args, **kwargs)
 
+    @extend_schema(
+        responses={
+            200: TenantResponseSerializer,
+            **responses_400,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            tenant_update_success_example,
+            responses_404_example,
+            responses_401_example,
+            responses_400_example,
+        ],
+        tags=[MODULE],
+    )
     @register_permission(
         MODULE,
         MethodEnum.PUT,
@@ -86,6 +165,15 @@ class TenantViewSet(BaseView, viewsets.ViewSet):
     def update(self, request, *args, **kwargs):
         return super().update(request, *args, **kwargs)
 
+    @extend_schema(
+        responses={204: SuccessResponseSerializer, **responses_404, **responses_401},
+        examples=[
+            tenant_delete_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE],
+    )
     @register_permission(
         MODULE,
         MethodEnum.DELETE,
@@ -103,6 +191,22 @@ class TenantDetailsViewSet(RetrieveView, viewsets.ViewSet):
 
     manager = tenant_manager
     lookup_field = "tenant_code"
+
+    @extend_schema(
+        responses={
+            200: TenantDomainConfigResponseSerializer,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            tenant_domain_config_get_by_id_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_DETAILS],
+    )
+    def retrieve(self, request, *args, **kwargs):
+        return super().retrieve(request, *args, **kwargs)
 
     def get_details(self, obj, **kwargs):
         """
@@ -144,10 +248,24 @@ class TenantConfigurationViewSet(CreateView, RetrieveView, viewsets.ViewSet):
         request.data["tenant_id"] = kwargs["tenant_id"]
         return super().is_create_data_valid(request, *args, **kwargs)
 
+    @extend_schema(
+        request=TenantConfigurationDataSerializer,
+        responses={
+            201: TenantConfigurationResponseSerializer,
+            **responses_400,
+            **responses_401,
+        },
+        examples=[
+            tenant_config_create_success_example,
+            responses_400_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_CONF],
+    )
     @register_permission(
-        TENANT_CONF,
+        MODULE_CONF,
         MethodEnum.POST,
-        f"Create {TENANT_CONF}",
+        f"Create {MODULE_CONF}",
         create_permission=False,
     )
     def create(self, request, *args, **kwargs):
@@ -156,10 +274,23 @@ class TenantConfigurationViewSet(CreateView, RetrieveView, viewsets.ViewSet):
     def get_details_query(self, **kwargs):
         return {"tenant_id": kwargs["tenant_id"]}
 
+    @extend_schema(
+        responses={
+            200: TenantConfigurationResponseSerializer,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            tenant_config_get_by_id_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_CONF],
+    )
     @register_permission(
-        TENANT_CONF,
+        MODULE_CONF,
         MethodEnum.GET,
-        f"Get {TENANT_CONF}",
+        f"Get {MODULE_CONF}",
         create_permission=False,
     )
     def retrieve(self, request, *args, **kwargs):
