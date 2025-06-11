@@ -17,8 +17,6 @@ from .permission import (
     PermissionListResponseSerializer,
     permission_create_success_example,
     permission_list_success_example,
-    permission_get_by_id_success_example,
-    permission_update_success_example,
     permission_delete_success_example
 )
 
@@ -43,8 +41,6 @@ __all__ = [
     "PermissionListResponseSerializer",
     "permission_create_success_example",
     "permission_list_success_example",
-    "permission_get_by_id_success_example",
-    "permission_update_success_example",
     "permission_delete_success_example",
 
     "RolePermissionResponseSerializer",

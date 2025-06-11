@@ -17,6 +17,8 @@ from utils.swagger import (
     responses_401,
     responses_404_example,
     responses_401_example,
+    # responses_200,
+    SuccessResponseSerializer,
 )
 
 from auth_user.constants import MethodEnum
@@ -26,6 +28,7 @@ from auth_user.serializers import PermissionListQuerySerializer
 from auth_user.swagger import (
     PermissionListResponseSerializer,
     permission_list_success_example,
+    permission_create_success_example
 )
 
 MODULE = "Permission"
@@ -63,6 +66,21 @@ class ListCreatePermissionViewSet(
         )
         return None
 
+    @extend_schema(
+        responses={
+            201: SuccessResponseSerializer,
+            **responses_404,
+            **responses_401,
+
+        },
+        examples=[
+            permission_list_success_example,
+            responses_404_example,
+            responses_401_example,
+            permission_create_success_example
+        ],
+        tags=[MODULE],
+    )
     @register_permission(
         MODULE, MethodEnum.POST, f"Create {MODULE}", create_permission=False
     )
@@ -81,6 +99,7 @@ class ListCreatePermissionViewSet(
             responses_401_example,
         ],
         tags=[MODULE],
+        parameters=[PermissionListQuerySerializer],
     )
     @register_permission(
         MODULE, MethodEnum.GET, f"Get {MODULE}", create_permission=False

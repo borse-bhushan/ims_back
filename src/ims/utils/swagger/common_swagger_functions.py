@@ -4,14 +4,16 @@ from drf_spectacular.utils import OpenApiExample
 from utils.messages import success
 
 
-def get_delete_success_example(name: str = "Delete - Success", message=None):
+def get_delete_success_example(
+    name: str = "Delete - Success", message=success.DELETED_SUCCESSFULLY
+):
     """return success message after delete data"""
     return OpenApiExample(
         name=name,
         value={
             "data": None,
             "errors": None,
-            "messages": message or success.DELETED_SUCCESSFULLY,
+            "messages": {"message": message} if message else None,
             "status_code": 204,
             "is_success": True,
         },
@@ -20,14 +22,16 @@ def get_delete_success_example(name: str = "Delete - Success", message=None):
     )
 
 
-def get_update_success_example(name: str = "Update - Success", data=None, message=None):
+def get_update_success_example(
+    name: str = "Update - Success", data=None, message=success.UPDATED_SUCCESSFULLY
+):
     """Return OpenAPI  update success response."""
     return OpenApiExample(
         name=name,
         value={
             "data": data,
             "errors": None,
-            "messages": message or success.UPDATED_SUCCESSFULLY,
+            "messages": {"message": message} if message else None,
             "status_code": 200,
             "is_success": True,
         },
@@ -36,14 +40,16 @@ def get_update_success_example(name: str = "Update - Success", data=None, messag
     )
 
 
-def get_create_success_example(name: str = "Create - Success", data=None, message=None):
+def get_create_success_example(
+    name: str = "Create - Success", data=None, message=success.CREATED_SUCCESSFULLY
+):
     """Return OpenAPI  create success response."""
     return OpenApiExample(
         name=name,
         value={
             "data": data,
             "errors": None,
-            "messages": message or success.CREATED_SUCCESSFULLY,
+            "messages": {"message": message} if message else None,
             "status_code": 201,
             "is_success": True,
         },
@@ -68,7 +74,7 @@ def get_list_success_example(
                 "pagination": pagination_data
                 or {
                     "count": 0,
-                    "page_size": 10,
+                    "page_size": 1,
                     "current_page": 1,
                     "total_pages": 1,
                 },
@@ -92,7 +98,7 @@ def get_by_id_success_example(
         value={
             "data": data,
             "errors": None,
-            "messages": message,
+            "messages": {message: message} if message else None,
             "status_code": 200,
             "is_success": True,
         },

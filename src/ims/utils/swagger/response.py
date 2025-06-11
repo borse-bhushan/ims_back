@@ -22,8 +22,9 @@ class SuccessResponseSerializer(serializers.Serializer):
     """
 
     data = serializers.JSONField(default=None)
-    messages = serializers.JSONField(
-        help_text="Any informational messages for the response.", allow_null=True
+    messages = serializers.DictField(
+        help_text="Any informational messages for the response.",
+        allow_null=True,
     )
     status_code = serializers.IntegerField(default=200)
     is_success = serializers.BooleanField(default=True)
