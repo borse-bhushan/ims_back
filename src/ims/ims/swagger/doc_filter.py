@@ -14,11 +14,9 @@ def domain_based_preprocessing_hook(endpoints, **kwargs):
     Filters API endpoints shown in the schema based on the request host.
     """
 
-    is_tenant_aware_req = get_tenant_details_from_request_thread(raise_err=False)[
-        "tenant_id"
-    ]
-
-    print(is_tenant_aware_req)
+    is_tenant_aware_req = get_tenant_details_from_request_thread(
+        raise_err=False,
+    )["tenant_id"]
 
     filtered = []
     for path, path_regex, method, callback in endpoints:
