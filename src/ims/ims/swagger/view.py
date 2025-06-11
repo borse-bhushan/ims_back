@@ -2,6 +2,7 @@
 Custom Schema View for Multi-Tenant API Documentation.
 """
 
+from drf_spectacular.utils import extend_schema
 from drf_spectacular.views import SpectacularAPIView
 
 
@@ -14,6 +15,7 @@ class TenantAwareSchemaView(SpectacularAPIView):
     Inherits From:
     """
 
+    @extend_schema(exclude=True)
     def get(self, request, *args, **kwargs):
         self.request = request
         return super().get(request, *args, **kwargs)

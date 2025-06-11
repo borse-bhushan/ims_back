@@ -1,4 +1,5 @@
 from rest_framework import viewsets
+from drf_spectacular.utils import extend_schema
 
 from auth_user.constants import MethodEnum
 
@@ -8,12 +9,24 @@ from authentication.auth import get_authentication_classes
 from utils.response import generate_response
 from utils.exceptions import ValidationError
 
+from utils.swagger import (
+    responses_404,
+    responses_401,
+    responses_404_example,
+    responses_401_example,
+)
+
+
 from stock.db_access import stock_manager
 from product.db_access import product_manager
 
 from .serializers import StockSummaryQuerySerializer
+from .serializers.stock_summery_swag import (
+    ReportListResponseSerializer,
+    report_list_success_example,
+)
 
-MODULE_NAME = "Reports"
+MODULE = "Reports"
 
 
 class ReportViewSet(viewsets.ViewSet):
@@ -23,8 +36,21 @@ class ReportViewSet(viewsets.ViewSet):
 
     get_authenticators = get_authentication_classes
 
+    @extend_schema(
+        responses={
+            200: ReportListResponseSerializer,
+            **responses_404,
+            **responses_401,
+        },
+        examples=[
+            report_list_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE],
+    )
     @register_permission(
-        f"{MODULE_NAME} Stock Summary",
+        f"{MODULE} Stock Summary",
         MethodEnum.GET,
         "Get Stock Summary",
     )
