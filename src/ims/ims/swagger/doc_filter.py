@@ -2,6 +2,8 @@
 Filters API endpoints shown in the schema based on the request host.
 """
 
+from drf_spectacular.plumbing import get_view_model
+
 from utils.tenant_aware_path import is_path_excluded_from_tenant_aware
 from tenant.utils.helpers import (
     is_request_tenant_aware,

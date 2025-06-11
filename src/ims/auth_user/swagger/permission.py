@@ -76,15 +76,15 @@ permission_create_success_example: OpenApiExample = get_create_success_example(
     data=None,
 )
 
-permission_list_example_data = [
-    {
-        **permission_data_obj,
-        "permission_id": "9d018a56-abd9-4dfd-b606-80ce3ba8f53f",
-    }
-]
 permission_list_success_example: OpenApiExample = get_list_success_example(
     name="List Permissions - Success",
-    list_data=permission_list_example_data,
+    list_data=[
+        {
+            **permission_data_obj,
+            "permission_id": "9d018a56-abd9-4dfd-b606-80ce3ba8f53f",
+        }
+    ],
+    pagination_data=False,
 )
 
 permission_delete_success_example: OpenApiExample = get_delete_success_example(

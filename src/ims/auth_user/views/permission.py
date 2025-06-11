@@ -17,7 +17,7 @@ from utils.swagger import (
     responses_401,
     responses_404_example,
     responses_401_example,
-    # responses_200,
+    responses_400,
     SuccessResponseSerializer,
 )
 
@@ -71,7 +71,7 @@ class ListCreatePermissionViewSet(
             201: SuccessResponseSerializer,
             **responses_404,
             **responses_401,
-
+            **responses_400
         },
         examples=[
             permission_list_success_example,

@@ -5,7 +5,6 @@ Serializers for the auth_user app.
 from .auth import LoginSerializer
 from .user import UserSerializer, UserCompanyAdminSerializer
 
-from .permission import PermissionSerializer
 from .role_permission import RolePermissionSerializer
 from .user_query import UserCompanyAdminListQuerySerializer
 from .permission_query import PermissionListQuerySerializer
@@ -24,7 +23,6 @@ __all__ = [
     "LogoutResponseSerializer",
     "login_success_example",
     "logout_success_example",
-    "PermissionSerializer",
     "RolePermissionSerializer",
     "UserCompanyAdminListQuerySerializer",
     "UserCompanyAdminSerializer",

@@ -1,6 +1,8 @@
 """This file is for the comman data passing"""
 
+from rest_framework import status
 from drf_spectacular.utils import OpenApiExample
+
 from utils.messages import success
 
 
@@ -14,11 +16,11 @@ def get_delete_success_example(
             "data": None,
             "errors": None,
             "messages": {"message": message} if message else None,
-            "status_code": 204,
+            "status_code": status.HTTP_204_NO_CONTENT,
             "is_success": True,
         },
         response_only=True,
-        status_codes=["204"],
+        status_codes=[str(status.HTTP_204_NO_CONTENT)],
     )
 
 
@@ -32,11 +34,11 @@ def get_update_success_example(
             "data": data,
             "errors": None,
             "messages": {"message": message} if message else None,
-            "status_code": 200,
+            "status_code": status.HTTP_200_OK,
             "is_success": True,
         },
         response_only=True,
-        status_codes=["200"],
+        status_codes=[str(status.HTTP_200_OK)],
     )
 
 
@@ -50,35 +52,46 @@ def get_create_success_example(
             "data": data,
             "errors": None,
             "messages": {"message": message} if message else None,
-            "status_code": 201,
+            "status_code": status.HTTP_201_CREATED,
             "is_success": True,
         },
         response_only=True,
-        status_codes=["201"],
+        status_codes=[str(status.HTTP_201_CREATED)],
     )
 
 
 def get_list_success_example(
     name: str = "List - Success",
     list_data=None,
-    pagination_data=None,
+    pagination_data=True,
     message=None,
-    status_code: int = 200,
+    status_code: int = status.HTTP_200_OK,
 ):
     """Return OpenAPI success response for list endpoints."""
+
+    _pagination_data = {
+        "count": 1,
+        "page_size": 1,
+        "current_page": 1,
+        "total_pages": 1,
+    }
+
+    if pagination_data:
+        if not isinstance(pagination_data, bool):
+            _pagination_data = pagination_data
+
+    data = {}
+
+    if pagination_data:
+        data["list"] = list_data
+        data["pagination"] = _pagination_data
+    else:
+        data = list_data
+
     return OpenApiExample(
         name=name,
         value={
-            "data": {
-                "list": list_data or [],
-                "pagination": pagination_data
-                or {
-                    "count": 0,
-                    "page_size": 1,
-                    "current_page": 1,
-                    "total_pages": 1,
-                },
-            },
+            "data": data,
             "errors": None,
             "messages": message,
             "status_code": status_code,
@@ -90,7 +103,10 @@ def get_list_success_example(
 
 
 def get_by_id_success_example(
-    name: str = "Get Data - Success", data=None, message=None, status_code: int = 200
+    name: str = "Get Data - Success",
+    data=None,
+    message=None,
+    status_code: int = status.HTTP_200_OK,
 ):
     """Return OpenAPI success response for data by id endpoints."""
     return OpenApiExample(
@@ -99,7 +115,7 @@ def get_by_id_success_example(
             "data": data,
             "errors": None,
             "messages": {message: message} if message else None,
-            "status_code": 200,
+            "status_code": status_code,
             "is_success": True,
         },
         response_only=True,
