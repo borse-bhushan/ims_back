@@ -17,7 +17,7 @@ from utils.swagger import (
     responses_400_example,
     responses_404_example,
     responses_401_example,
-    SuccessResponseSerializer
+    SuccessResponseSerializer,
 )
 
 from ..db_access import user_manager
