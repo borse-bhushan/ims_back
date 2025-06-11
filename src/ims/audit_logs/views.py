@@ -16,13 +16,13 @@ from utils.swagger import (
     responses_404_example,
     responses_401_example,
 )
-from ..serializers import (
+from .serializers import (
     AuditLogsListResponseSerializer,
     audit_get_by_id_success_example,
     audit_list_success_example,
     AuditLogsResponseSerializer,
 )
-from ..db_access import audit_logs_manager
+from .db_access import audit_logs_manager
 
 
 MODULE_NAME = "Audit Logs"

@@ -97,7 +97,7 @@ audit_log_ex_data = (
         "request_route": "api/audit-logs",
         "client_user_agent": "PostmanRuntime/7.44.0",
         "request_headers": {
-            "Content-Length": "",
+            "Content-Length": "10",
             "Content-Type": "text/plain",
             "User-Agent": "PostmanRuntime/7.44.0",
             "Accept": "*/*",
