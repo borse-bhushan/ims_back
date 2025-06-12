@@ -145,10 +145,37 @@ class Manager(Generic[T]):
         user_manager.delete({'id': 1}, soft_delete=True)
     """
 
+    DEFAULT_DB = "default"
     model: type[T] = None
     __tenant_aware = True
     check_is_deleted: bool = True
     query_builder = QueryBuilder()
+
+    @property
+    def using(self):
+
+        if not self.__is_tenant_aware or not self.model.migrate_to_tenant:
+            return self.DEFAULT_DB
+
+        migrate_to_tenant = getattr(self.model, "migrate_to_tenant")
+
+        if migrate_to_tenant:
+            from tenant.utils.tenant_conf import is_tenant_using_shared_db
+
+            tenant_obj = get_tenant_details_from_request_thread(
+                raise_err=False,
+                g_t_obj=True,
+            )["tenant_obj"]
+
+            if not tenant_obj:
+                return self.DEFAULT_DB
+
+            is_shared_db = is_tenant_using_shared_db(tenant_obj=tenant_obj)
+
+            if not is_shared_db:
+                return tenant_obj.tenant_code
+
+        return self.DEFAULT_DB
 
     def __init__(self, tenant_aware=True):
         if not tenant_aware:
@@ -162,7 +189,7 @@ class Manager(Generic[T]):
 
         return self.__class__(tenant_aware=False)
 
-    def _parse_query(self, query, is_deleted=False) -> QuerySet[T]:
+    def _parse_query(self, query, is_deleted=False, using=None) -> QuerySet[T]:
         """
         Parse and process query parameters for database filtering.
         This method handles query parsing and filtering for database operations.
@@ -186,7 +213,9 @@ class Manager(Generic[T]):
             tenant_info = get_tenant_details_from_request_thread()
             query["tenant_id"] = tenant_info["tenant_id"]
 
-        objects = self.model.objects.filter(self.query_builder.build_query(query))
+        objects = self.model.objects.using(using or self.using).filter(
+            self.query_builder.build_query(query)
+        )
 
         return objects
 
@@ -203,7 +232,7 @@ class Manager(Generic[T]):
             return False
         return self.__tenant_aware
 
-    def get(self, query) -> T | None:
+    def get(self, query, using=None) -> T | None:
         """
         Get the object based on the query.
         Args:
@@ -212,7 +241,7 @@ class Manager(Generic[T]):
             object: The first object that matches the query criteria. Returns None if no match is found.
 
         """
-        return self._parse_query(query=query).first()
+        return self._parse_query(query=query, using=using).first()
 
     def get_objects_mapping(
         self,
@@ -220,21 +249,19 @@ class Manager(Generic[T]):
         only: List = None,
         order_by: List = None,
         mapping_by: str = "pk",
+        using=None,
     ) -> Dict[str, T]:
         """
         Retrieves objects from the database based on the provided query and returns a
         dictionary mapping a specified attribute to each object.
         """
 
-        objects = self.list(query=query, only=only, order_by=order_by)
+        objects = self.list(query=query, only=only, order_by=order_by, using=using)
 
         return {getattr(obj, mapping_by): obj for obj in objects}
 
     def list(
-        self,
-        query,
-        only: list = None,
-        order_by: list = None,
+        self, query, only: list = None, order_by: list = None, using=None
     ) -> QuerySet[T]:
         """
         Returns a list of objects based on the provided query parameters.
@@ -248,7 +275,7 @@ class Manager(Generic[T]):
             model_mgr.list({'status': 'active'})
         """
 
-        objects = self._parse_query(query=query)
+        objects = self._parse_query(query=query, using=using)
 
         if only:
             objects = objects.only(*only)
@@ -258,7 +285,7 @@ class Manager(Generic[T]):
 
         return objects
 
-    def count(self, query: dict) -> int:
+    def count(self, query: dict, using=None) -> int:
         """
         Count the number of objects based on the provided query.
         Args:
@@ -268,9 +295,9 @@ class Manager(Generic[T]):
         Example:
             model_mgr.count({'status': 'active'})
         """
-        return self._parse_query(query=query).count()
+        return self._parse_query(query=query, using=using).count()
 
-    def exists(self, query: dict) -> bool:
+    def exists(self, query: dict, using=None) -> bool:
         """
         Check if any objects exist based on the provided query.
         Args:
@@ -280,7 +307,7 @@ class Manager(Generic[T]):
         Example:
             model_mgr.exists({'status': 'active'})
         """
-        return self._parse_query(query=query).exists()
+        return self._parse_query(query=query, using=using).exists()
 
     def list_with_pagination(
         self,
@@ -288,6 +315,7 @@ class Manager(Generic[T]):
         only: list = None,
         order_by: list = None,
         pagination: dict = None,
+        using=None,
     ) -> tuple[QuerySet[T], dict[str, int]]:
         """
         List objects with pagination based on the provided query.
@@ -298,7 +326,7 @@ class Manager(Generic[T]):
             pagination (dict, optional): Pagination parameters including 'page' and 'page_size'.
                 Defaults to None, which means no pagination is applied.
         """
-        objects = self.list(query=query, only=only, order_by=order_by)
+        objects = self.list(query=query, only=only, order_by=order_by, using=using)
 
         page_number: int = pagination["page"]
         page_size = pagination.get("page_size", None)
@@ -316,11 +344,7 @@ class Manager(Generic[T]):
         }
 
     def delete(
-        self,
-        query=None,
-        data=None,
-        soft_delete=True,
-        force_delete=False,
+        self, query=None, data=None, soft_delete=True, force_delete=False, using=None
     ):
         """
         Delete records from the database based on the provided query.
@@ -346,7 +370,7 @@ class Manager(Generic[T]):
                 status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
 
-        objects = self._parse_query(query=query)
+        objects = self._parse_query(query=query, using=using)
 
         if self.check_is_deleted:
             if soft_delete:
@@ -357,12 +381,14 @@ class Manager(Generic[T]):
         return objects.delete()
 
     @overload
-    def create(self, data: dict, many: False = False) -> T: ...
+    def create(self, data: dict, many: False = False, using=None) -> T: ...
 
     @overload
-    def create(self, data: List[dict], many: True = True) -> QuerySet[T]: ...
+    def create(
+        self, data: List[dict], many: True = True, using=None
+    ) -> QuerySet[T]: ...
 
-    def create(self, data, many=False) -> Union[T, QuerySet[T]]:
+    def create(self, data, many=False, using=None) -> Union[T, QuerySet[T]]:
         """
         Create one or multiple instances of the model.
         Args:
@@ -402,11 +428,13 @@ class Manager(Generic[T]):
             for item in data:
                 # pylint: disable=not-callable
                 data_list.append(self.model(**add_tenant_info(item)))
-            return self.model.objects.bulk_create(data_list)
+            return self.model.objects.using(using or self.using).bulk_create(data_list)
 
-        return self.model.objects.create(**add_tenant_info(data))
+        return self.model.objects.using(using or self.using).create(
+            **add_tenant_info(data)
+        )
 
-    def update(self, data, query) -> T | None:
+    def update(self, data, query, using=None) -> T | None:
         """
         Update an existing object in the database based on the provided data and query.
         Args:
@@ -419,7 +447,7 @@ class Manager(Generic[T]):
             <Updated object with id=1>
         """
 
-        obj = self.get(query)
+        obj = self.get(query, using=using)
         if not obj:
             return None
 
@@ -445,7 +473,7 @@ class Manager(Generic[T]):
         obj.save()
         return obj
 
-    def upsert(self, data, query) -> T:
+    def upsert(self, data, query, using=None) -> T:
         """
         Update an existing object or create a new one based on query conditions.
         This function attempts to find an object using the provided query parameters. If the object
@@ -461,10 +489,13 @@ class Manager(Generic[T]):
             >>> model_manager.update_or_create(data, query)
         """
 
-        obj = self.get(query=query)
+        obj = self.get(query=query, using=using)
         if not obj:
-            return self.create(data)
+            return self.create(data, using=using)
         return self.__update(obj, data)
 
-    def sum(self, query, field):
-        return self._parse_query(query=query).aggregate(sum=Sum(field))["sum"] or 0
+    def sum(self, query, field, using=None):
+        return (
+            self._parse_query(query=query, using=using).aggregate(sum=Sum(field))["sum"]
+            or 0
+        )

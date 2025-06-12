@@ -41,7 +41,7 @@ class CreateView:
         """
         return {constants.POST: "create"}
 
-    def post_save(self, obj: models.Model, **kwargs):
+    def post_save(self, obj: models.Model = None, **kwargs):
         """
         A hook executed after the object is saved in the database.
         This method allows additional modifications or operations on the saved object.
@@ -53,7 +53,7 @@ class CreateView:
         Returns:
             models.Model: The modified object after post-save operations.
         """
-        if self.many:
+        if self.many or obj is None:
             return generate_response(
                 data=None,
                 status_code=status.HTTP_201_CREATED,

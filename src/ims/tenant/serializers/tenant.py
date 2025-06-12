@@ -9,7 +9,7 @@ from utils.exceptions import codes
 from utils.validators import validate_unique
 
 from ..db_access import tenant_manager
-from ..constants import AuthenticationTypeEnum
+from ..constants import AuthenticationTypeEnum, DatabaseStrategyEnum
 
 
 class TenantSerializer(serializers.Serializer):
@@ -67,6 +67,11 @@ class TenantConfigurationSerializer(serializers.Serializer):
 
     authentication_type = serializers.ChoiceField(
         choices=AuthenticationTypeEnum.choices
+    )
+
+    database_strategy = serializers.ChoiceField(
+        default=DatabaseStrategyEnum.SHARED,
+        choices=DatabaseStrategyEnum.choices,
     )
 
     tenant_id = serializers.UUIDField()

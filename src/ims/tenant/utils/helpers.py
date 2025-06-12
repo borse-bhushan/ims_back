@@ -13,24 +13,26 @@ def set_tenant_details_to_request_thread(tenant_obj):
     """
     Set the tenant_id to the thread local storage.
     """
-    _thread_locals.tenant_id = getattr(tenant_obj, "tenant_id", None)
+    _thread_locals.tenant_obj = tenant_obj
+    _thread_locals.tenant_id = tenant_obj.tenant_id if tenant_obj else None
     return True
 
 
-def get_tenant_details_from_request_thread(raise_err=True):
+def get_tenant_details_from_request_thread(raise_err=True, g_t_obj=False):
     """
     Get the tenant_id from the thread local storage.
+    Or Get tenant obj by passing g_t_obj=True
     """
 
-    tenant_id = None
     if raise_err:
-        tenant_id = _thread_locals.tenant_id
-    else:
-        tenant_id = getattr(_thread_locals, "tenant_id", None)
+        if g_t_obj:
+            return {"tenant_obj": _thread_locals.tenant_obj}
+        return {"tenant_id": _thread_locals.tenant_id}
 
-    return {
-        "tenant_id": tenant_id,
-    }
+    if g_t_obj:
+        return {"tenant_obj": getattr(_thread_locals, "tenant_obj", None)}
+
+    return {"tenant_id": getattr(_thread_locals, "tenant_id", None)}
 
 
 def clear_tenant_details_from_request_thread():
@@ -38,6 +40,7 @@ def clear_tenant_details_from_request_thread():
     Clear the tenant_id from the thread local storage.
     """
     del _thread_locals.tenant_id
+    del _thread_locals.tenant_obj
     return True
 
 

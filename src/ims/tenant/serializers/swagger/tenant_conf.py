@@ -8,7 +8,7 @@ from utils.swagger.common_swagger_functions import (
     get_create_success_example,
     get_by_id_success_example,
 )
-from tenant.constants import AuthenticationTypeEnum  # Adjust path as needed
+from tenant.constants import AuthenticationTypeEnum, DatabaseStrategyEnum
 
 
 # ----------------------------------
@@ -24,6 +24,11 @@ class TenantConfigurationDataSerializer(serializers.Serializer):
     authentication_type = serializers.ChoiceField(
         choices=AuthenticationTypeEnum.choices,
         help_text="Authentication type (e.g., password, SAML, OIDC).",
+    )
+    database_strategy = serializers.ChoiceField(
+        choices=DatabaseStrategyEnum.choices,
+        default=DatabaseStrategyEnum.SHARED,
+        help_text="Database Strategy type (e.g., Shared DB, Separate DB).",
     )
 
 
@@ -50,6 +55,7 @@ class TenantConfigurationResponseSerializer(serializers.Serializer):
 # ----------------------------------
 
 tenant_config_sample_data = {
+    "database_strategy": DatabaseStrategyEnum.SHARED.name,
     "authentication_type": AuthenticationTypeEnum.JWT_TOKEN.name,
 }
 

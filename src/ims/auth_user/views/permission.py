@@ -21,6 +21,9 @@ from utils.swagger import (
     SuccessResponseSerializer,
 )
 
+from tenant.utils.helpers import get_tenant_details_from_request_thread
+
+
 from auth_user.constants import MethodEnum
 from auth_user.db_access import permission_manager
 from auth_user.utils.permission import load_permission
@@ -28,7 +31,7 @@ from auth_user.serializers import PermissionListQuerySerializer
 from auth_user.swagger import (
     PermissionListResponseSerializer,
     permission_list_success_example,
-    permission_create_success_example
+    permission_create_success_example,
 )
 
 MODULE = "Permission"
@@ -43,7 +46,6 @@ class ListCreatePermissionViewSet(
     Load the permission array against the tenant.
     """
 
-    many = True
     is_pagination: bool = False
     manager = permission_manager
     is_common_data_needed = False
@@ -59,25 +61,18 @@ class ListCreatePermissionViewSet(
             **CreateView.get_method_view_mapping(),
         }
 
-    def save(self, data, **kwargs):
-        load_permission.load_module_and_actions_for_tenants(
-            request=kwargs["request"],
-            tenant_id_or_list=[tenant_data["tenant_id"] for tenant_data in data],
-        )
-        return True
-
     @extend_schema(
+        request={},
         responses={
             201: SuccessResponseSerializer,
             **responses_404,
             **responses_401,
-            **responses_400
+            **responses_400,
         },
         examples=[
-            permission_list_success_example,
             responses_404_example,
             responses_401_example,
-            permission_create_success_example
+            permission_create_success_example,
         ],
         tags=[MODULE],
     )
@@ -86,6 +81,13 @@ class ListCreatePermissionViewSet(
     )
     def create(self, request, *args, **kwargs):
         return super().create(request, *args, **kwargs)
+
+    def save(self, data, **kwargs):
+        load_permission.load_permissions_for_tenant(
+            request=kwargs["request"],
+            tenant_id=data["tenant_id"],
+        )
+        return None
 
     @extend_schema(
         responses={

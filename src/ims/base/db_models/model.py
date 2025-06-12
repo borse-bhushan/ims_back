@@ -28,3 +28,5 @@ class BaseModel(models.Model):
         """
 
         abstract = True
+
+    migrate_to_tenant = True

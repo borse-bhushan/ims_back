@@ -10,3 +10,9 @@ class AuthenticationTypeEnum(TextChoices):
 
     TOKEN = "TOKEN", "Token"
     JWT_TOKEN = "JWT_TOKEN", "JWT Token"
+
+
+class DatabaseStrategyEnum(TextChoices):
+
+    SHARED = "SHARED", "Shared DB"
+    SEPARATE = "SEPARATE", "Separate DB"

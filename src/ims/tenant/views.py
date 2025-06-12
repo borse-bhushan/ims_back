@@ -30,6 +30,8 @@ from .serializers import (
     TenantConfigurationSerializer,
 )
 
+from .utils.tenant_setup import NewTenantSetup
+
 from .serializers.swagger.tenant import (
     TenantResponseSerializer,
     TenantListResponseSerializer,
@@ -243,6 +245,10 @@ class TenantConfigurationViewSet(CreateView, RetrieveView, viewsets.ViewSet):
             **CreateView.get_method_view_mapping(),
             **RetrieveView.get_method_view_mapping(),
         }
+
+    def post_save(self, obj, request, **kwargs):
+        NewTenantSetup(obj, request).setup()
+        return super().post_save(obj, **kwargs)
 
     def is_create_data_valid(self, request, *args, **kwargs):
         request.data["tenant_id"] = kwargs["tenant_id"]

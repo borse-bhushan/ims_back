@@ -7,11 +7,13 @@ from django.db import models
 from utils.functions import get_uuid
 from base.db_models import BaseModel
 
-from .constants import AuthenticationTypeEnum
+from .constants import AuthenticationTypeEnum, DatabaseStrategyEnum
 
 
 class Tenant(BaseModel, models.Model):
     """Represents a tenant organization within the system."""
+
+    migrate_to_tenant = False
 
     tenant_id = models.CharField(primary_key=True, default=get_uuid, max_length=36)
 
@@ -39,6 +41,8 @@ class Tenant(BaseModel, models.Model):
 class TenantConfiguration(BaseModel, models.Model):
     """Represents configuration settings for a tenant."""
 
+    migrate_to_tenant = False
+
     tenant_configuration_id = models.CharField(
         primary_key=True, default=get_uuid, max_length=36
     )
@@ -47,6 +51,13 @@ class TenantConfiguration(BaseModel, models.Model):
         max_length=56,
         default=AuthenticationTypeEnum.TOKEN,
         choices=AuthenticationTypeEnum.choices,
+    )
+
+    database_strategy = models.CharField(
+        max_length=16,
+        choices=DatabaseStrategyEnum.choices,
+        default=DatabaseStrategyEnum.SHARED,
+        help_text="Defines whether the tenant uses a shared or separate database.",
     )
 
     tenant = models.ForeignKey("Tenant", on_delete=models.CASCADE)
@@ -63,5 +74,6 @@ class TenantConfiguration(BaseModel, models.Model):
         Convert the model instance to a dictionary.
         """
         return {
+            "database_strategy": self.database_strategy,
             "authentication_type": self.authentication_type,
         }
