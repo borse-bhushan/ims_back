@@ -38,7 +38,7 @@ urlpatterns = [
         name="user-profile",
     ),
     path(
-        add_to_tenant_aware_excluded_path_list("user/admin/profile"),
+        add_to_tenant_aware_excluded_path_list("user/super-admin/profile"),
         UserProfileViewSet.as_view(UserProfileViewSet.get_method_view_mapping()),
         name="user-profile",
     ),

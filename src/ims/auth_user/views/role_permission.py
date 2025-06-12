@@ -12,6 +12,7 @@ from utils.swagger import (
     responses_400_example,
     responses_404_example,
     responses_401_example,
+    SuccessResponseSerializer,
 )
 from utils.messages import success
 from utils.response import generate_response
@@ -39,6 +40,7 @@ class RolePermissionViewSet(CreateView, DeleteView, ListView, viewsets.ViewSet):
     ViewSet for handling role-permission endpoints.
     """
 
+    many = True
     is_pagination: bool = False
     manager = role_permission_mapping_manager
     serializer_class = RolePermissionSerializer
@@ -57,6 +59,7 @@ class RolePermissionViewSet(CreateView, DeleteView, ListView, viewsets.ViewSet):
         }
 
     @extend_schema(
+        request=RolePermissionSerializer(many=True),
         responses={
             201: RolePermissionResponseSerializer,
             **responses_400,
@@ -91,7 +94,7 @@ class RolePermissionViewSet(CreateView, DeleteView, ListView, viewsets.ViewSet):
         return super().list_all(request, *args, **kwargs)
 
     @extend_schema(
-        responses={204: None, **responses_404, **responses_401},
+        responses={204: SuccessResponseSerializer, **responses_404, **responses_401},
         examples=[
             role_permission_delete_example,
             responses_404_example,

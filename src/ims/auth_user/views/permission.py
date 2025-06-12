@@ -64,7 +64,7 @@ class ListCreatePermissionViewSet(
             request=kwargs["request"],
             tenant_id_or_list=[tenant_data["tenant_id"] for tenant_data in data],
         )
-        return None
+        return True
 
     @extend_schema(
         responses={

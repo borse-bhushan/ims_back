@@ -168,6 +168,15 @@ class UserProfileViewSet(RetrieveView, viewsets.ViewSet):
 
     get_authenticators = get_authentication_classes
 
+    @extend_schema(
+        responses={200: UserResponseSerializer, **responses_404, **responses_401},
+        examples=[
+            user_get_by_id_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE_PROFILE],
+    )
     @register_permission(
         MODULE_PROFILE,
         MethodEnum.POST,
