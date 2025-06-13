@@ -87,15 +87,16 @@ def set_database_to_global_settings(tenant_obj):
     Configures and adds a new database configuration for a specific tenant to the global settings.
     """
 
-    DATABASES = settings.read("DATABASES")
+    db_connection_code = tenant_obj.tenant_code
 
-    if tenant_obj.tenant_code in DATABASES:
+    DATABASES = settings.read("DATABASES")
+    if db_connection_code in DATABASES:
         return True
 
     new_db = copy.deepcopy(DATABASES["default"])
 
-    new_db["NAME"] = f"{tenant_obj.tenant_code}.sqlite3"
+    new_db["NAME"] = f"{db_connection_code}.sqlite3"
 
-    DATABASES[tenant_obj.tenant_code] = new_db
+    DATABASES[db_connection_code] = new_db
 
-    return True
+    return db_connection_code

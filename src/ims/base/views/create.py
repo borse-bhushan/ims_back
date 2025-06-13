@@ -120,11 +120,11 @@ class CreateView:
 
         return add_data(data)
 
-    def save(self, data: dict | list, **kwargs):
+    def save(self, data: dict | list, using=None, **kwargs):
         """
         Saves the validated data to the database using the manager.
         """
-        return self.manager.create(data, many=self.many)
+        return self.manager.create(data, many=self.many, using=using)
 
     def is_create_data_valid(self, request, *args, **kwargs):
         """

@@ -5,8 +5,7 @@ permissions for different modules and their actions.
 
 from auth_user.db_access import permission_manager
 
-from tenant.db_access import tenant_manager
-from tenant.utils.tenant_conf import is_tenant_using_shared_db
+from tenant.utils.tenant_conf import get_tenant_db_name
 
 
 class LoadPermission:
@@ -38,19 +37,16 @@ class LoadPermission:
         Loads all registered modules and their actions into the
         permission manager for a single tenant.
         """
-        tenant_obj = tenant_manager.get({"tenant_id": tenant_id})
 
-        is_shared = is_tenant_using_shared_db(tenant_obj)
+        db_name = get_tenant_db_name(tenant_id)
 
         for module, action_and_name_list in self.__modules_and_there_actions.items():
             for action_and_name in action_and_name_list:
                 self.__upsert_permission(
-                    module, action_and_name, tenant_obj, request, is_shared
+                    module, action_and_name, db_name, request, tenant_id
                 )
 
-    def __upsert_permission(
-        self, module, action_and_name, tenant_obj, request, is_shared
-    ):
+    def __upsert_permission(self, module, action_and_name, db_name, request, tenant_id):
         """
         Upserts a single permission into the permission manager.
         """
@@ -58,15 +54,15 @@ class LoadPermission:
             data={
                 "module": module,
                 **action_and_name,
-                "tenant_id": tenant_obj.tenant_id,
+                "tenant_id": tenant_id,
                 "created_by": request.user.user_id,
             },
             query={
                 "module": module,
-                "tenant_id": tenant_obj.tenant_id,
+                "tenant_id": tenant_id,
                 "action": action_and_name["action"],
             },
-            using=tenant_obj.tenant_code if not is_shared else None,
+            using=db_name,
         )
 
 

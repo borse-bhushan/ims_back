@@ -9,6 +9,8 @@ from auth_user.constants import MethodEnum
 from base.views import BaseView, RetrieveView, CreateView, ListView
 from authentication import get_authentication_classes, register_permission
 
+from tenant.utils.tenant_conf import get_tenant_db_name
+
 from utils.response import generate_response
 from utils.swagger import (
     responses_400,
@@ -40,7 +42,16 @@ MODULE = "User"
 MODULE_PROFILE = "User Profile"
 
 
-class UserViewSetBase:
+class UserViewSet(BaseView, viewsets.ViewSet):
+    """
+    ViewSet for handling user endpoints.
+    """
+
+    manager = user_manager
+    lookup_field = "user_id"
+    serializer_class = UserSerializer
+
+    get_authenticators = get_authentication_classes
 
     def save(self, data, **kwargs):
         """
@@ -119,20 +130,7 @@ class UserViewSetBase:
         return super().destroy(request, *args, **kwargs)
 
 
-class UserViewSet(UserViewSetBase, BaseView, viewsets.ViewSet):
-    """
-    ViewSet for handling user endpoints.
-    """
-
-    manager = user_manager
-    lookup_field = "user_id"
-    serializer_class = UserSerializer
-
-    get_authenticators = get_authentication_classes
-
-
 class UserCompanyAdminsViewSet(
-    UserViewSetBase,
     ListView,
     CreateView,
     viewsets.ViewSet,
@@ -159,6 +157,53 @@ class UserCompanyAdminsViewSet(
             **CreateView.get_method_view_mapping(),
             **ListView.get_method_view_mapping(),
         }
+
+    def save(self, data, **kwargs):
+        """
+        Save password in hash
+        """
+
+        db_name = get_tenant_db_name(data["tenant_id"])
+
+        user_obj = super().save(
+            data,
+            using=db_name,
+            **kwargs,
+        )
+        user_obj.set_password(user_obj.password)
+        user_obj.save()
+
+        return user_obj
+
+    @extend_schema(
+        responses={201: UserResponseSerializer, **responses_400, **responses_401},
+        examples=[
+            user_create_success_example,
+            responses_400_example,
+            responses_401_example,
+        ],
+        tags=[MODULE],
+    )
+    @register_permission(
+        MODULE, MethodEnum.POST, f"Create {MODULE}", create_permission=False
+    )
+    def create(self, request, *args, **kwargs):
+        return super().create(request, *args, **kwargs)
+
+    @extend_schema(
+        responses={200: UserListResponseSerializer, **responses_404, **responses_401},
+        examples=[
+            user_list_success_example,
+            responses_404_example,
+            responses_401_example,
+        ],
+        tags=[MODULE],
+    )
+    @register_permission(
+        MODULE, MethodEnum.GET, f"Get {MODULE}", create_permission=False
+    )
+    def list_all(self, request, *args, **kwargs):
+        return super().list_all(request, *args, **kwargs)
 
 
 class UserProfileViewSet(RetrieveView, viewsets.ViewSet):

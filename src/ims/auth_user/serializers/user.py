@@ -9,6 +9,7 @@ from utils.messages import error
 from utils.exceptions import codes
 
 from tenant.db_access import tenant_manager
+from tenant.utils.tenant_conf import get_tenant_db_name
 
 from ..constants import RoleEnum
 from ..db_access import user_manager
@@ -29,7 +30,7 @@ class UserSerializer(serializers.Serializer):
     )
     password = serializers.CharField(required=True, max_length=16, min_length=4)
 
-    def validate_email(self, value):
+    def validate_email(self, value, **kwargs):
         """
         Validate email field.
         - For create: email must not exist.
@@ -42,7 +43,7 @@ class UserSerializer(serializers.Serializer):
         if is_update:
             query["user_id"] = {"NOT": self.instance.user_id}
 
-        if user_manager.exists(query=query):
+        if user_manager.exists(query=query, using=kwargs.get("using")):
             raise serializers.ValidationError(
                 error.ALREADY_EXIST,
                 code=codes.DUPLICATE_ENTRY,
@@ -74,3 +75,13 @@ class UserCompanyAdminSerializer(UserSerializer, serializers.Serializer):
                 code=codes.NO_DATA_FOUND,
             )
         return value
+
+    def validate_email(self, value):
+        """
+        Validate email field.
+        - For create: email must not exist.
+        - For update: email must not belong to a different user.
+        """
+
+        db_name = get_tenant_db_name(self.initial_data.get("tenant_id"))
+        return super().validate_email(value, using=db_name)

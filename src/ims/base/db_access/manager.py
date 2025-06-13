@@ -160,7 +160,7 @@ class Manager(Generic[T]):
         migrate_to_tenant = getattr(self.model, "migrate_to_tenant")
 
         if migrate_to_tenant:
-            from tenant.utils.tenant_conf import is_tenant_using_shared_db
+            from tenant.utils.tenant_conf import get_tenant_db_name
 
             tenant_obj = get_tenant_details_from_request_thread(
                 raise_err=False,
@@ -170,10 +170,7 @@ class Manager(Generic[T]):
             if not tenant_obj:
                 return self.DEFAULT_DB
 
-            is_shared_db = is_tenant_using_shared_db(tenant_obj=tenant_obj)
-
-            if not is_shared_db:
-                return tenant_obj.tenant_code
+            return get_tenant_db_name(tenant_obj)
 
         return self.DEFAULT_DB
 
@@ -380,14 +377,6 @@ class Manager(Generic[T]):
 
         return objects.delete()
 
-    @overload
-    def create(self, data: dict, many: False = False, using=None) -> T: ...
-
-    @overload
-    def create(
-        self, data: List[dict], many: True = True, using=None
-    ) -> QuerySet[T]: ...
-
     def create(self, data, many=False, using=None) -> Union[T, QuerySet[T]]:
         """
         Create one or multiple instances of the model.
@@ -488,7 +477,6 @@ class Manager(Generic[T]):
             >>> query = {'id': 1}
             >>> model_manager.update_or_create(data, query)
         """
-
         obj = self.get(query=query, using=using)
         if not obj:
             return self.create(data, using=using)
