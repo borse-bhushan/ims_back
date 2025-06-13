@@ -21,41 +21,41 @@ class CacheInterface:
     def clear(self):
         self.cache.clear()
 
-    def _build_key(self, key):
-        """
-        Internal method to build tenant-aware cache keys
-        """
+    # def _build_key(self, key):
+    #     """
+    #     Internal method to build tenant-aware cache keys
+    #     """
 
-        tenant_id = get_tenant_details_from_request_thread(raise_err=False)["tenant_id"]
-        if not tenant_id:
-            return key
+    #     tenant_id = get_tenant_details_from_request_thread(raise_err=False)["tenant_id"]
+    #     if not tenant_id:
+    #         return key
 
-        return f"{tenant_id}:{key}"
+    #     return f"{tenant_id}:{key}"
 
     def get(self, key, default=None):
         """
         Retrieve a value from cache by key
         """
-        value = self.cache.get(self._build_key(key), default)
+        value = self.cache.get(key, default)
         return value
 
     def set(self, key, value, timeout=DEFAULT_TIMEOUT):
         """
         Store a value in cache with optional timeout
         """
-        return self.cache.set(self._build_key(key), value, timeout)
+        return self.cache.set(key, value, timeout)
 
     def delete(self, key):
         """
         Remove a value from cache by key
         """
-        return self.cache.delete(self._build_key(key))
+        return self.cache.delete(key)
 
     def has_key(self, key):
         """
         Check if a key exists in cache
         """
-        return self.cache.has_key(self._build_key(key))
+        return self.cache.has_key(key)
 
     def clear(self):
         """
