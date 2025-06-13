@@ -124,8 +124,6 @@ WSGI_APPLICATION = f"{PROJECT_NAME.lower()}.wsgi.application"
 
 DATABASES = config["DATABASES"]
 
-DATABASE_ROUTERS = ["ims.db_router.router.TenantDBRouter"]
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

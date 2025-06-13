@@ -153,6 +153,21 @@ class Manager(Generic[T]):
 
     @property
     def using(self):
+        """
+        Returns the database connection name for tenant-aware models.
+        This method determines which database connection to use based on tenant awareness
+        and migration settings. For tenant-aware models that are configured to migrate,
+        it returns the tenant-specific database name. Otherwise, it returns the default
+        database connection.
+        Returns:
+            str: The database connection name to use. Either the tenant-specific database
+            name or the default database name (self.DEFAULT_DB).
+        Notes:
+            - Checks if model is tenant aware and configured for tenant migration
+            - Gets tenant details from request context if needed
+            - Falls back to default DB if tenant info not available
+            - Requires tenant_obj to have valid database configuration
+        """
 
         if not self.__is_tenant_aware or not self.model.migrate_to_tenant:
             return self.DEFAULT_DB

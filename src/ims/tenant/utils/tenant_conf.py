@@ -14,10 +14,24 @@ DEFAULT = "default"
 
 def get_tenant_db_name(tenant):
     """
-    Check if a tenant is using a shared database configuration.
-    This function determines whether a given tenant uses a shared database strategy by:
-    1. Checking if tenant has a dedicated database configuration
-    2. If not, retrieving tenant configuration to check database strategy
+    Retrieve the database name for a given tenant.
+    This function determines the appropriate database name for a tenant based on their
+    configuration and database strategy. It handles both direct tenant objects and
+    tenant IDs as input.
+    Args:
+        tenant: Either a tenant object or a tenant ID string. If a tenant ID is provided,
+               the function will attempt to retrieve the corresponding tenant object.
+    Returns:
+        str: The database name to use for the tenant. This will be either:
+             - The tenant's code if it exists in DATABASES
+             - A new database name if the tenant uses a dedicated database
+             - The default database name if the tenant uses a shared database
+    Raises:
+        None explicitly, but may raise exceptions from underlying functions
+    Notes:
+        - If tenant is not found in the request thread, it will attempt to fetch from database
+        - The function checks the tenant's database strategy (shared vs dedicated)
+        - For dedicated databases, it sets up the database configuration in global settings
     """
 
     _tenant = tenant
