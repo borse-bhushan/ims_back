@@ -8,10 +8,11 @@ A class to handle the setup of a new tenant in the system.
 from django.core.management import call_command
 
 from utils import settings
+from auth_user.constants import RoleEnum
+from auth_user.db_access import user_manager
 
 from ..db_access import tenant_manager
 from ..constants import DatabaseStrategyEnum
-from auth_user.db_access import user_manager
 
 
 class NewTenantSetup:
@@ -68,11 +69,12 @@ class NewTenantSetup:
             data={
                 "email": user.email,
                 "user_id": user.user_id,
-                "role_id": user.role_id,
                 "password": user.password,
                 "last_name": user.last_name,
                 "first_name": user.first_name,
                 "date_joined": user.date_joined,
+                "role_id": RoleEnum.COMPANY_ADMIN,
+                "tenant_id": tenant_obj.tenant_id,
                 "phone_number": user.phone_number,
                 "profile_photo": user.profile_photo,
             },
