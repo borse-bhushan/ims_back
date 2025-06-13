@@ -59,7 +59,7 @@ class NewTenantSetup:
 
         call_command("migrate", database=tenant_obj.tenant_code)
 
-        self.create_super_admin_in_new_tenant(tenant_obj)
+        # self.create_super_admin_in_new_tenant(tenant_obj)
 
         return True
 
