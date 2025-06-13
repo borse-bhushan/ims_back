@@ -3,15 +3,14 @@
 		"_postman_id": "173a12c4-71a9-4bad-9607-851f06278153",
 		"name": "IMS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "42734015",
-		"_collection_link": ""
+		"_exporter_id": "42734015"
 	},
 	"item": [
 		{
 			"name": "Auth",
 			"item": [
 				{
-					"name": "Login",
+					"name": "Login Into Tenant",
 					"event": [
 						{
 							"listen": "test",
@@ -34,7 +33,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"helloborse@gmail.com\",\n    // \"username\": \"11@gmail.com\",\n    \"password\": \"1234\"\n}",
+							"raw": "{\n    \"username\": \"helloborse@gmail.com\",\n    // \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -78,7 +77,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -154,7 +153,7 @@
 									"variable": [
 										{
 											"key": "tenant_id",
-											"value": "2ded15fb-7a92-401f-b3dc-ee0467689bb8"
+											"value": "{{tenant_id}}"
 										}
 									]
 								}
@@ -168,7 +167,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"authentication_type\": \"JWT_TOKEN\"\n}",
+									"raw": "{\n    \"authentication_type\": \"JWT_TOKEN\",\n    \"database_strategy\": \"SEPARATE\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -188,7 +187,7 @@
 									"variable": [
 										{
 											"key": "tenant_id",
-											"value": "2ded15fb-7a92-401f-b3dc-ee0467689bb8"
+											"value": "{{tenant_id}}"
 										}
 									]
 								}
@@ -207,7 +206,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n    {\n        \"tenant_id\": \"2ded15fb-7a92-401f-b3dc-ee0467689bb8\"\n    }\n]",
+									"raw": "{\n    \"tenant_id\": \"{{tenant_id}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -240,7 +239,7 @@
 									"raw": ""
 								},
 								"url": {
-									"raw": "{{host}}/admin/permission?tenant_id=2ded15fb-7a92-401f-b3dc-ee0467689bb8",
+									"raw": "{{host}}/admin/permission?tenant_id={{tenant_id}}",
 									"host": [
 										"{{host}}"
 									],
@@ -251,7 +250,7 @@
 									"query": [
 										{
 											"key": "tenant_id",
-											"value": "2ded15fb-7a92-401f-b3dc-ee0467689bb8"
+											"value": "{{tenant_id}}"
 										}
 									]
 								}
@@ -295,7 +294,7 @@
 							"variable": [
 								{
 									"key": "tenant_code",
-									"value": "ami"
+									"value": "tst"
 								}
 							]
 						}
@@ -359,6 +358,23 @@
 				},
 				{
 					"name": "Tenant",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"",
+									"if (response.is_success){",
+									"    pm.environment.set(\"tenant_id\", response.data.tenant_id);",
+									"}",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -493,7 +509,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"email\": \"helloborse@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"COMPANY_ADMIN\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\",\n    \"tenant_id\": \"2ded15fb-7a92-401f-b3dc-ee0467689bb8\"\n}",
+									"raw": "{\n    \"email\": \"helloborse@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"COMPANY_ADMIN\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\",\n    \"tenant_id\": \"{{tenant_id}}\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -721,6 +737,50 @@
 									"key": "user_id",
 									"value": ""
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Profile",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n    {\n        \"role_id\": \"OPERATOR\",\n        \"permission_id\": \"cb9b9123-ce6c-4c1d-be6a-c52fe555eed5\"\n    }\n]"
+						},
+						"url": {
+							"raw": "{{api_host}}/user/profile",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Super Admin User Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{api_host}}/user/super-admin/profile",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"user",
+								"super-admin",
+								"profile"
 							]
 						}
 					},
@@ -974,7 +1034,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_code\": \"asd\",\n    \"product_name\": \"asdsad\",\n    \"category_id\": \"7c582bf5-4dca-4593-8495-acd36757f464\",\n    \"product_desc\": \"asd\",\n    \"sell_price\": 2.99,\n    \"purchase_price\": 1.23\n}",
+							"raw": "{\n    \"product_code\": \"DE\",\n    \"product_name\": \"sad\",\n    \"category_id\": \"b4f792e2-d1be-4398-9fdf-5265539e1f71\",\n    \"sell_price\": 2.99,\n    \"purchase_price\": 1.23\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1335,7 +1395,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_id\": \"5f930404-ed43-4d3e-bb89-6f9665804e41\",\n    \"supplier_id\": \"72ca4731-3384-4c7a-8a3c-d06718407bcf\",\n    \"price\": 32,\n    \"quantity\": 1,\n    \"movement_type\": \"OUT\"\n}",
+							"raw": "{\n    \"product_id\": \"a4d4cd4f-6580-4a88-a157-b0eba816df60\",\n    \"supplier_id\": \"00f03c9a-af97-4f78-bc06-af2c0b93d9d2\",\n    \"price\": 32,\n    \"quantity\": 20,\n    \"movement_type\": \"OUT\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1477,7 +1537,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"role_id\": \"OPERATOR\",\n    \"permission_id\": \"44d288bd-e6d1-4ff7-a22f-b292a9949955\"\n}",
+							"raw": "[\n    {\n        \"role_id\": \"OPERATOR\",\n        \"permission_id\": \"cb9b9123-ce6c-4c1d-be6a-c52fe555eed5\"\n    }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1566,7 +1626,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"list_notification_id\": [],\n    \"mark_all_as_read\": false\n}",
+							"raw": "{\n    \"list_notification_id\": [\"1160442a-d08b-4ce7-9ab8-ec7a495e0a5e\"],\n    \"mark_all_as_read\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1580,6 +1640,42 @@
 							],
 							"path": [
 								"notification"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "Stock Summary",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"helloborse@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"COMPANY_ADMIN\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\",\n    \"tenant_id\": \"2ded15fb-7a92-401f-b3dc-ee0467689bb8\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/report/stock-summary?product_id=a4d4cd4f-6580-4a88-a157-b0eba816df60",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"report",
+								"stock-summary"
+							],
+							"query": [
+								{
+									"key": "product_id",
+									"value": "a4d4cd4f-6580-4a88-a157-b0eba816df60"
+								}
 							]
 						}
 					},
