@@ -4,7 +4,6 @@ Interface for caching operations with tenant awareness support.
 
 from django.core.cache import cache as d_cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
-from tenant.utils.helpers import get_tenant_details_from_request_thread
 
 
 class CacheInterface:
@@ -19,18 +18,10 @@ class CacheInterface:
         self.clear()
 
     def clear(self):
+        """
+        Clear the whole cache
+        """
         self.cache.clear()
-
-    # def _build_key(self, key):
-    #     """
-    #     Internal method to build tenant-aware cache keys
-    #     """
-
-    #     tenant_id = get_tenant_details_from_request_thread(raise_err=False)["tenant_id"]
-    #     if not tenant_id:
-    #         return key
-
-    #     return f"{tenant_id}:{key}"
 
     def get(self, key, default=None):
         """
