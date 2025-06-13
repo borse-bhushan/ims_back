@@ -5,7 +5,6 @@ Login and Logout ViewSets for handling user authentication.
 import jwt
 import secrets
 
-
 from rest_framework import status, viewsets
 from drf_spectacular.utils import extend_schema
 
@@ -104,6 +103,9 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
         Handle post-save actions after user login.
         """
 
+        if is_request_tenant_aware():
+            user_manager.cache.set(obj.user_id, obj.user)
+
         return generate_response(
             data=obj.to_dict(),
             status_code=status.HTTP_201_CREATED,
@@ -157,6 +159,10 @@ class LoginViewSet(CreateView, viewsets.ViewSet):
             key=settings.read("SECRET_KEY"),
             payload={"user_id": user_obj.user_id},
         )
+
+        if is_request_tenant_aware():
+            user_manager.cache.set(user_obj.user_id, user_obj)
+
         return generate_response(
             data={"token": access_token, "created_dtm": user_obj.last_login},
             status_code=status.HTTP_201_CREATED,

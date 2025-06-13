@@ -1,14 +1,12 @@
 import jwt
 
-from django.contrib.auth import get_user_model
-from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.authentication import BaseAuthentication
 
 from utils import settings
-from .exception import UnauthorizedException
-
-
 from auth_user.db_access import user_manager
+from tenant.utils.helpers import is_request_tenant_aware
+
+from .exception import UnauthorizedException
 
 
 class JWTAuthentication(BaseAuthentication):
@@ -21,6 +19,7 @@ class JWTAuthentication(BaseAuthentication):
             raise UnauthorizedException()
 
         token = auth_header.split(" ")[1]
+
         try:
 
             payload = jwt.decode(
@@ -51,9 +50,16 @@ class JWTAuthentication(BaseAuthentication):
 
             raise UnauthorizedException()
 
+        if is_request_tenant_aware():
+            user = user_manager.cache.get(payload["user_id"])
+            if user:
+                return (user, None)
+
         user = user_manager.get({"user_id": payload["user_id"]})
         if not user:
             raise UnauthorizedException()
+
+        user_manager.cache.set(payload["user_id"], user)
 
         return (user, None)
 

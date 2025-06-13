@@ -17,3 +17,7 @@ drf-spectacular-sidecar==2025.3.1
 
 # for encoding and decoding the JWT Access Token
 PyJWT==2.10.1
+
+
+# for the Memcached
+pylibmc==1.6.3

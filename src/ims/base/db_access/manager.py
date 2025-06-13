@@ -2,12 +2,13 @@
 This is the model BaseManager class which is used to perform CRUD operations on the models.
 """
 
-from typing import Union, TypeVar, Generic, overload, List, Dict
+from typing import Union, TypeVar, Generic, List, Dict
 
 from rest_framework import status
 from django.db.models.query import QuerySet
 from django.db.models import Q, F, Model, Sum
 
+from utils.cache import cache
 from utils.messages import error
 from utils.pagination import Pagination
 from utils.exceptions import CommonError
@@ -150,6 +151,8 @@ class Manager(Generic[T]):
     __tenant_aware = True
     check_is_deleted: bool = True
     query_builder = QueryBuilder()
+
+    cache = cache
 
     @property
     def using(self):
