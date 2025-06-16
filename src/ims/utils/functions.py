@@ -31,27 +31,6 @@ def is_local():
     return is_env(constants.LOCAL)
 
 
-def is_dev():
-    """
-    return true of the current env is DEV.
-    """
-    return is_env(constants.DEV)
-
-
-def is_qa():
-    """
-    return true of the current env is QA.
-    """
-    return is_env(constants.QA)
-
-
-def is_uat():
-    """
-    return true of the current env is UAT.
-    """
-    return is_env(constants.UAT)
-
-
 def is_prod():
     """
     return true of the current env is PROD.

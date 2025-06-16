@@ -1,5 +1,5 @@
 {
-    "ENV": "DOCKER",
+    "ENV": "PROD",
     "PROJECT_NAME": "IMS",
     "DEBUG": false,
     "DISABLE_PRINT": true,

@@ -22,4 +22,5 @@ class Command(BaseCommand):
         log_msg(logging.INFO, "Loading data from files...")
         load_data()
         log_msg(logging.INFO, "Data loaded successfully.")
+
         return ""

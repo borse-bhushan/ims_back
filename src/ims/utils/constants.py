@@ -4,9 +4,6 @@ This file contains the constants used for the utility.
 
 from django.db.models import TextChoices
 
-QA = "QA"
-UAT = "UAT"
-DEV = "DEV"
 PROD = "PROD"
 LOCAL = "LOCAL"
 
