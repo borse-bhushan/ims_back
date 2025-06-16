@@ -100,7 +100,7 @@ class MonitorView(APIView):
         responses={"200": swagger.SysInfoResponseSerializer()},
         tags=[MODULE],
     )
-    @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE} information")
+    @register_permission(MODULE, MethodEnum.GET, f"Get {MODULE} information", create_permission=False)
     def get(self, *_):
         """
         This API will return the system health details.

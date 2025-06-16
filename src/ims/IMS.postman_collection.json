@@ -3,7 +3,8 @@
 		"_postman_id": "173a12c4-71a9-4bad-9607-851f06278153",
 		"name": "IMS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "42734015"
+		"_exporter_id": "42734015",
+		"_collection_link": "https://sagacity-pctms.postman.co/workspace/My-Workspace~3ea0d6e9-bed4-4100-8efc-641209af93c5/collection/42734015-173a12c4-71a9-4bad-9607-851f06278153?action=share&source=collection_link&creator=42734015"
 	},
 	"item": [
 		{
@@ -51,7 +52,89 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Login Into Tenant",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"helloborse@gmail.com\",\n    // \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/auth/login",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:31:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "312"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.494298[HH:MM:SS:MS] | 494.298[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYzU3ODFjYjAtMDVhZi00NDhhLTllYjctMDAwYzU3MThjN2MyIn0.e4U-ueo5nTBmXI2wEobT6rDxBIPeQK3DOjfjz4KdRA0\",\n        \"created_dtm\": \"2025-06-16T07:31:21.549967Z\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Logged in successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Login Super Admin",
@@ -96,7 +179,90 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Login Super Admin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/auth/admin/login",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"auth",
+										"admin",
+										"login"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:04:05 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "POST, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "196"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.535602[HH:MM:SS:MS] | 535.602[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"token\": \"166EFA212724204427975A6AD8F84952\",\n        \"created_dtm\": \"2025-06-16T07:04:05.752618Z\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Logged in successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Logout",
@@ -118,7 +284,185 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/auth/logout",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:05:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "DELETE, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "113"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.016019[HH:MM:SS:MS] | 16.019[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Logged out successfully.\"\n    },\n    \"status_code\": 204,\n    \"is_success\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "Super Admin Logout",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+						},
+						"url": {
+							"raw": "{{api_host}}/auth/admin/logout",
+							"host": [
+								"{{api_host}}"
+							],
+							"path": [
+								"auth",
+								"admin",
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/auth/admin/logout",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"auth",
+										"admin",
+										"logout"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:06:11 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "DELETE, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "113"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.018070[HH:MM:SS:MS] | 18.07[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Logged out successfully.\"\n    },\n    \"status_code\": 204,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			]
 		},
@@ -158,7 +502,91 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Configuration",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/tenant/:tenant_id/configuration",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"tenant",
+												":tenant_id",
+												"configuration"
+											],
+											"variable": [
+												{
+													"key": "tenant_id",
+													"value": "{{tenant_id}}"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 16 Jun 2025 07:21:01 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.12.3"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, POST, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "141"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Version",
+											"value": "V0.0.0"
+										},
+										{
+											"key": "Req-Performance-Time",
+											"value": "0:00:00.013261[HH:MM:SS:MS] | 13.261000000000001[MS]"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"database_strategy\": \"SEPARATE\",\n        \"authentication_type\": \"JWT_TOKEN\"\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+								}
+							]
 						},
 						{
 							"name": "Create",
@@ -192,7 +620,96 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Create",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"authentication_type\": \"JWT_TOKEN\",\n    \"database_strategy\": \"SEPARATE\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/tenant/:tenant_id/configuration",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"tenant",
+												":tenant_id",
+												"configuration"
+											],
+											"variable": [
+												{
+													"key": "tenant_id",
+													"value": "{{tenant_id}}"
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 16 Jun 2025 07:20:50 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.12.3"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, POST, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "172"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Version",
+											"value": "V0.0.0"
+										},
+										{
+											"key": "Req-Performance-Time",
+											"value": "0:00:00.088651[HH:MM:SS:MS] | 88.651[MS]"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"database_strategy\": \"SEPARATE\",\n        \"authentication_type\": \"JWT_TOKEN\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+								}
+							]
 						}
 					]
 				},
@@ -224,7 +741,89 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Permission",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"tenant_id\": \"{{tenant_id}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/admin/permission",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"admin",
+												"permission"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 16 Jun 2025 07:19:52 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.12.3"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, POST, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "110"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Version",
+											"value": "V0.0.0"
+										},
+										{
+											"key": "Req-Performance-Time",
+											"value": "0:00:00.102125[HH:MM:SS:MS] | 102.125[MS]"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+								}
+							]
 						},
 						{
 							"name": "Permission List",
@@ -255,7 +854,90 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Permission List",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": ""
+										},
+										"url": {
+											"raw": "{{host}}/admin/permission?tenant_id={{tenant_id}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"admin",
+												"permission"
+											],
+											"query": [
+												{
+													"key": "tenant_id",
+													"value": "{{tenant_id}}"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 16 Jun 2025 07:27:54 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.12.3"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, POST, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "3256"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Version",
+											"value": "V0.0.0"
+										},
+										{
+											"key": "Req-Performance-Time",
+											"value": "0:00:00.019075[HH:MM:SS:MS] | 19.075000000000003[MS]"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": [\n        {\n            \"name\": \"Create Role Permission\",\n            \"module\": \"Role Permission\",\n            \"action\": \"POST\",\n            \"permission_id\": \"efdbc2f9-8ee3-4f6d-ac7f-a5e55a366742\"\n        },\n        {\n            \"name\": \"Get Role Permission\",\n            \"module\": \"Role Permission\",\n            \"action\": \"GET\",\n            \"permission_id\": \"1aa461d4-786f-47f4-95c9-bbf1e58eafba\"\n        },\n        {\n            \"name\": \"Create User\",\n            \"module\": \"User\",\n            \"action\": \"POST\",\n            \"permission_id\": \"03ac4213-136f-4177-924f-cde1f90bbec7\"\n        },\n        {\n            \"name\": \"Get User\",\n            \"module\": \"User\",\n            \"action\": \"GET\",\n            \"permission_id\": \"d0de635b-bd79-46f6-8285-b3196e6fd5bc\"\n        },\n        {\n            \"name\": \"Update User\",\n            \"module\": \"User\",\n            \"action\": \"PUT\",\n            \"permission_id\": \"343f9262-5acd-4e41-a7ce-b1323b600c29\"\n        },\n        {\n            \"name\": \"Delete User\",\n            \"module\": \"User\",\n            \"action\": \"DELETE\",\n            \"permission_id\": \"104b6aba-2fde-4e50-8ffd-26d6f8d2af97\"\n        },\n        {\n            \"name\": \"Get Permission\",\n            \"module\": \"Permission\",\n            \"action\": \"GET\",\n            \"permission_id\": \"491e6d46-5673-4adf-80c7-ae2cf01dbf54\"\n        },\n        {\n            \"name\": \"Create Category\",\n            \"module\": \"Category\",\n            \"action\": \"POST\",\n            \"permission_id\": \"3753fe59-4f66-42b5-a78f-2a2a5003a9ca\"\n        },\n        {\n            \"name\": \"Get Category\",\n            \"module\": \"Category\",\n            \"action\": \"GET\",\n            \"permission_id\": \"bf4ec5a0-d0fd-4d41-93fa-316c28bdca46\"\n        },\n        {\n            \"name\": \"Update Category\",\n            \"module\": \"Category\",\n            \"action\": \"PUT\",\n            \"permission_id\": \"946d8b33-6f66-49e5-8d96-b881e9efeb01\"\n        },\n        {\n            \"name\": \"Delete Category\",\n            \"module\": \"Category\",\n            \"action\": \"DELETE\",\n            \"permission_id\": \"86f329fd-e9b1-4452-b4df-e837aeb633de\"\n        },\n        {\n            \"name\": \"Create Product\",\n            \"module\": \"Product\",\n            \"action\": \"POST\",\n            \"permission_id\": \"2019c553-12ce-4085-823c-9b773d384f77\"\n        },\n        {\n            \"name\": \"Get Product\",\n            \"module\": \"Product\",\n            \"action\": \"GET\",\n            \"permission_id\": \"0b824a5c-09f7-48aa-8978-844be4ccab0e\"\n        },\n        {\n            \"name\": \"Update Product\",\n            \"module\": \"Product\",\n            \"action\": \"PUT\",\n            \"permission_id\": \"b6245e24-4383-41e6-a483-607e5ae46727\"\n        },\n        {\n            \"name\": \"Delete Product\",\n            \"module\": \"Product\",\n            \"action\": \"DELETE\",\n            \"permission_id\": \"63c77df5-1870-48dd-ab9a-0a8a4a1d48a6\"\n        },\n        {\n            \"name\": \"Create Stock\",\n            \"module\": \"Stock\",\n            \"action\": \"POST\",\n            \"permission_id\": \"2bb066eb-86e1-4e60-b49e-a440b77307ee\"\n        },\n        {\n            \"name\": \"Get Stock\",\n            \"module\": \"Stock\",\n            \"action\": \"GET\",\n            \"permission_id\": \"960d570e-0a52-4704-90d5-a119f8fa680d\"\n        },\n        {\n            \"name\": \"Delete Stock\",\n            \"module\": \"Stock\",\n            \"action\": \"DELETE\",\n            \"permission_id\": \"ac72d76e-c517-42b0-a2eb-533b7f0ed5b6\"\n        },\n        {\n            \"name\": \"Get Notification\",\n            \"module\": \"Notification\",\n            \"action\": \"GET\",\n            \"permission_id\": \"093317dd-1fbb-4fa4-b448-1ad9ac69ed64\"\n        },\n        {\n            \"name\": \"Make Notification mark as read\",\n            \"module\": \"Notification\",\n            \"action\": \"PUT\",\n            \"permission_id\": \"7d2a0abf-bcbd-4238-bba5-3d5f923d921d\"\n        },\n        {\n            \"name\": \"Create Supplier\",\n            \"module\": \"Supplier\",\n            \"action\": \"POST\",\n            \"permission_id\": \"1a251208-2d47-409a-9200-b3bd16246d6b\"\n        },\n        {\n            \"name\": \"Get Supplier\",\n            \"module\": \"Supplier\",\n            \"action\": \"GET\",\n            \"permission_id\": \"ac4f380f-0e30-47c1-b95e-427e22f2db99\"\n        },\n        {\n            \"name\": \"Update Supplier\",\n            \"module\": \"Supplier\",\n            \"action\": \"PUT\",\n            \"permission_id\": \"863d8df6-e1c7-40b5-a045-97d314fb0bc3\"\n        },\n        {\n            \"name\": \"Delete Supplier\",\n            \"module\": \"Supplier\",\n            \"action\": \"DELETE\",\n            \"permission_id\": \"df37ad46-a423-47e1-aca0-63a04df347a0\"\n        },\n        {\n            \"name\": \"Get Stock Summary\",\n            \"module\": \"Reports Stock Summary\",\n            \"action\": \"GET\",\n            \"permission_id\": \"aa4fc0c7-edf6-4562-86cd-15cd20b75f8f\"\n        },\n        {\n            \"name\": \"Get Audit Logs\",\n            \"module\": \"Audit Logs\",\n            \"action\": \"GET\",\n            \"permission_id\": \"bb0a6abc-77dd-4cb4-9053-11b41b27993e\"\n        },\n        {\n            \"name\": \"Get Monitor information\",\n            \"module\": \"Monitor\",\n            \"action\": \"GET\",\n            \"permission_id\": \"d46effef-513a-49cd-9a18-efd1eb39a662\"\n        }\n    ],\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+								}
+							]
 						}
 					]
 				},
@@ -294,12 +976,92 @@
 							"variable": [
 								{
 									"key": "tenant_code",
-									"value": "tst"
+									"value": "ami"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Tenant Domain Details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/tenant/:tenant_code/details",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"tenant",
+										":tenant_code",
+										"details"
+									],
+									"variable": [
+										{
+											"key": "tenant_code",
+											"value": "ami"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:06:46 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "176"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.001526[HH:MM:SS:MS] | 1.526[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"host\": \"localhost:8000\",\n        \"base_path\": \"api\",\n        \"sub_domain\": \"ami\",\n        \"api_host\": \"http://ami.localhost:8000\"\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Tenant List",
@@ -323,7 +1085,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Tenant List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/tenant",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"tenant"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:08:27 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "260"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.012813[HH:MM:SS:MS] | 12.813[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"list\": [\n            {\n                \"tenant_id\": \"1df73f95-bd7e-4ede-b6e1-3b81ea48cc8e\",\n                \"tenant_code\": \"ami\",\n                \"tenant_name\": \"Amazon-India\"\n            }\n        ],\n        \"pagination\": {\n            \"count\": 1,\n            \"page_size\": 10,\n            \"current_page\": 1,\n            \"total_pages\": 1\n        }\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Tenant",
@@ -349,12 +1187,95 @@
 							"variable": [
 								{
 									"key": "tenant_id",
-									"value": "ff380c78-bac8-4adc-9fad-a94c445bbcd5"
+									"value": "1df73f95-bd7e-4ede-b6e1-3b81ea48cc8e"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Tenant",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/tenant/:tenant_id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"tenant",
+										":tenant_id"
+									],
+									"variable": [
+										{
+											"key": "tenant_id",
+											"value": "3ee37046-1bbe-4cb9-9e1b-ba4c629e293d"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:07:23 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "176"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.013308[HH:MM:SS:MS] | 13.308[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"tenant_id\": \"3ee37046-1bbe-4cb9-9e1b-ba4c629e293d\",\n        \"tenant_code\": \"ami\",\n        \"tenant_name\": \"Amazon-India\"\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Tenant",
@@ -397,7 +1318,88 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Tenant",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tenant_code\": \"ami\",\n    \"tenant_name\": \"Amazon-India\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/tenant",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"tenant"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:07:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "207"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.016380[HH:MM:SS:MS] | 16.38[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"tenant_id\": \"1df73f95-bd7e-4ede-b6e1-3b81ea48cc8e\",\n        \"tenant_code\": \"ami\",\n        \"tenant_name\": \"Amazon-India\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Tenant",
@@ -406,7 +1408,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"tenant_code\": \"ami\",\n    \"tenant_name\": \"Amazon - India\",\n    \"tenant_desc\": null\n}",
+							"raw": "{\n    \"tenant_code\": \"ami\",\n    \"tenant_name\": \"Amazon - India\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -425,12 +1427,100 @@
 							"variable": [
 								{
 									"key": "tenant_id",
-									"value": "bb6fd9d3-f2ca-42de-a6e8-b6c471a901b9"
+									"value": "1df73f95-bd7e-4ede-b6e1-3b81ea48cc8e"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Tenant",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tenant_code\": \"ami\",\n    \"tenant_name\": \"Amazon - India\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/tenant/:tenant_id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"tenant",
+										":tenant_id"
+									],
+									"variable": [
+										{
+											"key": "tenant_id",
+											"value": "1df73f95-bd7e-4ede-b6e1-3b81ea48cc8e"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:08:49 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "209"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.010678[HH:MM:SS:MS] | 10.678[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"tenant_id\": \"1df73f95-bd7e-4ede-b6e1-3b81ea48cc8e\",\n        \"tenant_code\": \"ami\",\n        \"tenant_name\": \"Amazon - India\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Updated Successfully.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Tenant",
@@ -439,7 +1529,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"tenant_desc\": \"hello\"\n}",
+							"raw": "{\n    \"tenant_name\": \"Amazon-India\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -458,12 +1548,100 @@
 							"variable": [
 								{
 									"key": "tenant_id",
-									"value": "bb6fd9d3-f2ca-42de-a6e8-b6c471a901b9"
+									"value": "1df73f95-bd7e-4ede-b6e1-3b81ea48cc8e"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Tenant",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tenant_name\": \"Amazon-India\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/tenant/:tenant_id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"tenant",
+										":tenant_id"
+									],
+									"variable": [
+										{
+											"key": "tenant_id",
+											"value": "1df73f95-bd7e-4ede-b6e1-3b81ea48cc8e"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:09:31 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "207"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.016740[HH:MM:SS:MS] | 16.740000000000002[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"tenant_id\": \"1df73f95-bd7e-4ede-b6e1-3b81ea48cc8e\",\n        \"tenant_code\": \"ami\",\n        \"tenant_name\": \"Amazon-India\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Updated Successfully.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Tenant",
@@ -486,12 +1664,95 @@
 							"variable": [
 								{
 									"key": "tenant_id",
-									"value": "35f420fa-73d2-4068-8e9f-cb6356c0b6b9"
+									"value": "3ee37046-1bbe-4cb9-9e1b-ba4c629e293d"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Tenant",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{host}}/tenant/:tenant_id",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"tenant",
+										":tenant_id"
+									],
+									"variable": [
+										{
+											"key": "tenant_id",
+											"value": "3ee37046-1bbe-4cb9-9e1b-ba4c629e293d"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:07:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.015738[HH:MM:SS:MS] | 15.737999999999998[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Deleted Successfully.\"\n    },\n    \"status_code\": 204,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			],
 			"description": "This is the tenant module.\n\nThe CRUD operation for the tenant module is only applicable for the SUPER_ADMIN role"
@@ -527,7 +1788,89 @@
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Create Company Admins",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\": \"helloborse@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"COMPANY_ADMIN\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\",\n    \"tenant_id\": \"{{tenant_id}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/user/company-admin",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"company-admin"
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 16 Jun 2025 07:30:21 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.12.3"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, POST, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "327"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Version",
+											"value": "V0.0.0"
+										},
+										{
+											"key": "Req-Performance-Time",
+											"value": "0:00:00.497909[HH:MM:SS:MS] | 497.909[MS]"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"email\": \"helloborse@gmail.com\",\n        \"user_id\": \"c5781cb0-05af-448a-9eb7-000c5718c7c2\",\n        \"role_id\": \"COMPANY_ADMIN\",\n        \"phone_number\": 234234,\n        \"profile_photo\": null,\n        \"last_name\": \"Bhushan\",\n        \"first_name\": \"Borse\",\n        \"full_name\": \"Borse Bhushan\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+								}
+							]
 						},
 						{
 							"name": "Company Admins List",
@@ -547,7 +1890,7 @@
 									}
 								},
 								"url": {
-									"raw": "{{host}}/user/company-admin?tenant_id=2ded15fb-7a92-401f-b3dc-ee0467689bb8",
+									"raw": "{{host}}/user/company-admin?tenant_id={{tenant_id}}",
 									"host": [
 										"{{host}}"
 									],
@@ -558,12 +1901,100 @@
 									"query": [
 										{
 											"key": "tenant_id",
-											"value": "2ded15fb-7a92-401f-b3dc-ee0467689bb8"
+											"value": "{{tenant_id}}"
 										}
 									]
 								}
 							},
-							"response": []
+							"response": [
+								{
+									"name": "Company Admins List",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{host}}/user/company-admin?tenant_id={{tenant_id}}",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"user",
+												"company-admin"
+											],
+											"query": [
+												{
+													"key": "tenant_id",
+													"value": "{{tenant_id}}"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Date",
+											"value": "Mon, 16 Jun 2025 07:31:03 GMT"
+										},
+										{
+											"key": "Server",
+											"value": "WSGIServer/0.2 CPython/3.12.3"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Vary",
+											"value": "Accept"
+										},
+										{
+											"key": "Allow",
+											"value": "GET, POST, HEAD, OPTIONS"
+										},
+										{
+											"key": "X-Frame-Options",
+											"value": "DENY"
+										},
+										{
+											"key": "Content-Length",
+											"value": "382"
+										},
+										{
+											"key": "X-Content-Type-Options",
+											"value": "nosniff"
+										},
+										{
+											"key": "Referrer-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Cross-Origin-Opener-Policy",
+											"value": "same-origin"
+										},
+										{
+											"key": "Version",
+											"value": "V0.0.0"
+										},
+										{
+											"key": "Req-Performance-Time",
+											"value": "0:00:00.019873[HH:MM:SS:MS] | 19.872999999999998[MS]"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"data\": {\n        \"list\": [\n            {\n                \"email\": \"helloborse@gmail.com\",\n                \"user_id\": \"c5781cb0-05af-448a-9eb7-000c5718c7c2\",\n                \"role_id\": \"COMPANY_ADMIN\",\n                \"phone_number\": \"234234\",\n                \"profile_photo\": null,\n                \"last_name\": \"Bhushan\",\n                \"first_name\": \"Borse\",\n                \"full_name\": \"Borse Bhushan\"\n            }\n        ],\n        \"pagination\": {\n            \"count\": 1,\n            \"page_size\": 10,\n            \"current_page\": 1,\n            \"total_pages\": 1\n        }\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+								}
+							]
 						}
 					]
 				},
@@ -589,7 +2020,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "User List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/user",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:31:47 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "382"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.013953[HH:MM:SS:MS] | 13.953[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"list\": [\n            {\n                \"email\": \"helloborse@gmail.com\",\n                \"user_id\": \"c5781cb0-05af-448a-9eb7-000c5718c7c2\",\n                \"role_id\": \"COMPANY_ADMIN\",\n                \"phone_number\": \"234234\",\n                \"profile_photo\": null,\n                \"last_name\": \"Bhushan\",\n                \"first_name\": \"Borse\",\n                \"full_name\": \"Borse Bhushan\"\n            }\n        ],\n        \"pagination\": {\n            \"count\": 1,\n            \"page_size\": 10,\n            \"current_page\": 1,\n            \"total_pages\": 1\n        }\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "User",
@@ -615,12 +2122,95 @@
 							"variable": [
 								{
 									"key": "user_id",
-									"value": ""
+									"value": "c5781cb0-05af-448a-9eb7-000c5718c7c2"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "User",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/user/:user_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user",
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "c5781cb0-05af-448a-9eb7-000c5718c7c2"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:32:07 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "298"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.012181[HH:MM:SS:MS] | 12.181000000000001[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"helloborse@gmail.com\",\n        \"user_id\": \"c5781cb0-05af-448a-9eb7-000c5718c7c2\",\n        \"role_id\": \"COMPANY_ADMIN\",\n        \"phone_number\": \"234234\",\n        \"profile_photo\": null,\n        \"last_name\": \"Bhushan\",\n        \"first_name\": \"Borse\",\n        \"full_name\": \"Borse Bhushan\"\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "User",
@@ -629,7 +2219,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"11@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"OPERATOR\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\"\n}",
+							"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"OPERATOR\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -646,7 +2236,88 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"OPERATOR\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/user",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:32:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "316"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.516200[HH:MM:SS:MS] | 516.2[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"test@gmail.com\",\n        \"user_id\": \"7a0ed893-52ab-419c-aa2d-db775cf25eb4\",\n        \"role_id\": \"OPERATOR\",\n        \"phone_number\": 234234,\n        \"profile_photo\": null,\n        \"last_name\": \"Bhushan\",\n        \"first_name\": \"Borse\",\n        \"full_name\": \"Borse Bhushan\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "User",
@@ -655,7 +2326,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"supplier_code\": \"ami\",\n    \"supplier_name\": \"Amazon - India\"\n}",
+							"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"OPERATOR\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -674,12 +2345,100 @@
 							"variable": [
 								{
 									"key": "user_id",
-									"value": ""
+									"value": "7a0ed893-52ab-419c-aa2d-db775cf25eb4"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "User",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"OPERATOR\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/user/:user_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user",
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "7a0ed893-52ab-419c-aa2d-db775cf25eb4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:33:16 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "316"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.015644[HH:MM:SS:MS] | 15.644000000000002[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"test@gmail.com\",\n        \"user_id\": \"7a0ed893-52ab-419c-aa2d-db775cf25eb4\",\n        \"role_id\": \"OPERATOR\",\n        \"phone_number\": 234234,\n        \"profile_photo\": null,\n        \"last_name\": \"Bhushan\",\n        \"first_name\": \"Borse\",\n        \"full_name\": \"Borse Bhushan\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Updated Successfully.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "User",
@@ -688,7 +2447,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"supplier_name\": \"hello\"\n}",
+							"raw": "{\n    \"profile_photo\": null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -707,12 +2466,100 @@
 							"variable": [
 								{
 									"key": "user_id",
-									"value": ""
+									"value": "7a0ed893-52ab-419c-aa2d-db775cf25eb4"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "User",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"profile_photo\": null\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/user/:user_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user",
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "7a0ed893-52ab-419c-aa2d-db775cf25eb4"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:33:57 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "318"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.015033[HH:MM:SS:MS] | 15.033[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"test@gmail.com\",\n        \"user_id\": \"7a0ed893-52ab-419c-aa2d-db775cf25eb4\",\n        \"role_id\": \"OPERATOR\",\n        \"phone_number\": \"234234\",\n        \"profile_photo\": null,\n        \"last_name\": \"Bhushan\",\n        \"first_name\": \"Borse\",\n        \"full_name\": \"Borse Bhushan\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Updated Successfully.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "User",
@@ -735,12 +2582,95 @@
 							"variable": [
 								{
 									"key": "user_id",
-									"value": ""
+									"value": "7a0ed893-52ab-419c-aa2d-db775cf25eb4"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "User",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api_host}}/user/:user_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user",
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "7a0ed893-52ab-419c-aa2d-db775cf25eb4"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:34:12 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.013636[HH:MM:SS:MS] | 13.636000000000001[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Deleted Successfully.\"\n    },\n    \"status_code\": 204,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "User Profile",
@@ -765,7 +2695,84 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "User Profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"role_id\": \"OPERATOR\",\n        \"permission_id\": \"cb9b9123-ce6c-4c1d-be6a-c52fe555eed5\"\n    }\n]"
+								},
+								"url": {
+									"raw": "{{api_host}}/user/profile",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:34:32 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "298"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.010101[HH:MM:SS:MS] | 10.101[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"helloborse@gmail.com\",\n        \"user_id\": \"c5781cb0-05af-448a-9eb7-000c5718c7c2\",\n        \"role_id\": \"COMPANY_ADMIN\",\n        \"phone_number\": \"234234\",\n        \"profile_photo\": null,\n        \"last_name\": \"Bhushan\",\n        \"first_name\": \"Borse\",\n        \"full_name\": \"Borse Bhushan\"\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Super Admin User Profile",
@@ -784,7 +2791,81 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Super Admin User Profile",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{api_host}}/user/super-admin/profile",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"user",
+										"super-admin",
+										"profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:34:51 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "305"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.012286[HH:MM:SS:MS] | 12.286[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"email\": \"borsebhushan216@gmail.com\",\n        \"user_id\": \"45a06230-0ab0-437c-a1a0-1c57e9eca506\",\n        \"role_id\": \"SUPER_ADMIN\",\n        \"phone_number\": \"9878786565\",\n        \"profile_photo\": null,\n        \"last_name\": \"Borse\",\n        \"first_name\": \"Bhushan\",\n        \"full_name\": \"Bhushan Borse\"\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			],
 			"description": "This is the tenant module.\n\nThe CRUD operation for the tenant module is only applicable for the SUPER_ADMIN role"
@@ -814,7 +2895,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Category List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/category",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:36:00 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "263"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.005548[HH:MM:SS:MS] | 5.548[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"list\": [\n            {\n                \"category_id\": \"09298e46-5a09-45b8-b55e-341594c1c2dc\",\n                \"category_code\": \"Laptop\",\n                \"category_name\": \"LAPTOP\"\n            }\n        ],\n        \"pagination\": {\n            \"count\": 1,\n            \"page_size\": 10,\n            \"current_page\": 1,\n            \"total_pages\": 1\n        }\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Category",
@@ -840,12 +2997,95 @@
 							"variable": [
 								{
 									"key": "category_id",
-									"value": ""
+									"value": "09298e46-5a09-45b8-b55e-341594c1c2dc"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Category",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/category/:category_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"category",
+										":category_id"
+									],
+									"variable": [
+										{
+											"key": "category_id",
+											"value": "09298e46-5a09-45b8-b55e-341594c1c2dc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:35:55 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "179"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.012114[HH:MM:SS:MS] | 12.113999999999999[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"category_id\": \"09298e46-5a09-45b8-b55e-341594c1c2dc\",\n        \"category_code\": \"Laptop\",\n        \"category_name\": \"LAPTOP\"\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Category",
@@ -854,7 +3094,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"category_code\": \"asdsad\",\n    \"category_name\": \"asd\"\n}",
+							"raw": "{\n    \"category_code\": \"Laptop\",\n    \"category_name\": \"LAPTOP\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -871,7 +3111,88 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Category",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category_code\": \"Laptop\",\n    \"category_name\": \"LAPTOP\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/category",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"category"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:35:33 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "210"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.014679[HH:MM:SS:MS] | 14.678999999999998[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"category_id\": \"09298e46-5a09-45b8-b55e-341594c1c2dc\",\n        \"category_code\": \"Laptop\",\n        \"category_name\": \"LAPTOP\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Category",
@@ -880,7 +3201,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"category_code\": \"asds\",\n    \"category_name\": \"addsc\",\n    \"category_desc\": \"Hello\"\n}",
+							"raw": "{\n    \"category_code\": \"LAPTOP\",\n    \"category_name\": \"Laptop\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -899,12 +3220,100 @@
 							"variable": [
 								{
 									"key": "category_id",
-									"value": "079525a1-d7a2-423b-ba5d-fac5f044fcc7"
+									"value": "09298e46-5a09-45b8-b55e-341594c1c2dc"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Category",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category_code\": \"LAPTOP\",\n    \"category_name\": \"Laptop\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/category/:category_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"category",
+										":category_id"
+									],
+									"variable": [
+										{
+											"key": "category_id",
+											"value": "09298e46-5a09-45b8-b55e-341594c1c2dc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:36:46 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "210"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.016044[HH:MM:SS:MS] | 16.044[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"category_id\": \"09298e46-5a09-45b8-b55e-341594c1c2dc\",\n        \"category_code\": \"LAPTOP\",\n        \"category_name\": \"Laptop\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Updated Successfully.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Category",
@@ -913,7 +3322,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"category_desc\": \"hu\"\n}",
+							"raw": "{\n    \"category_name\": \"Laptop\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -932,12 +3341,100 @@
 							"variable": [
 								{
 									"key": "category_id",
-									"value": "079525a1-d7a2-423b-ba5d-fac5f044fcc7"
+									"value": "09298e46-5a09-45b8-b55e-341594c1c2dc"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Category",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category_name\": \"Laptop\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/category/:category_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"category",
+										":category_id"
+									],
+									"variable": [
+										{
+											"key": "category_id",
+											"value": "09298e46-5a09-45b8-b55e-341594c1c2dc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:37:14 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "210"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.009819[HH:MM:SS:MS] | 9.818999999999999[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"category_id\": \"09298e46-5a09-45b8-b55e-341594c1c2dc\",\n        \"category_code\": \"LAPTOP\",\n        \"category_name\": \"Laptop\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Updated Successfully.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Category",
@@ -960,12 +3457,95 @@
 							"variable": [
 								{
 									"key": "category_id",
-									"value": "079525a1-d7a2-423b-ba5d-fac5f044fcc7"
+									"value": "09298e46-5a09-45b8-b55e-341594c1c2dc"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Category",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api_host}}/category/:category_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"category",
+										":category_id"
+									],
+									"variable": [
+										{
+											"key": "category_id",
+											"value": "09298e46-5a09-45b8-b55e-341594c1c2dc"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:37:26 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.013907[HH:MM:SS:MS] | 13.907[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Deleted Successfully.\"\n    },\n    \"status_code\": 204,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			]
 		},
@@ -994,7 +3574,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Product List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/product",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"product"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:48:05 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "378"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.012761[HH:MM:SS:MS] | 12.761[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"list\": [\n            {\n                \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n                \"sell_price\": 30000,\n                \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n                \"product_code\": \"INSPIRON:3924\",\n                \"product_name\": \"DELL Inspiron:3924\",\n                \"purchase_price\": 25000\n            }\n        ],\n        \"pagination\": {\n            \"count\": 1,\n            \"page_size\": 10,\n            \"current_page\": 1,\n            \"total_pages\": 1\n        }\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Product",
@@ -1020,12 +3676,95 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": "fda4a666-b2e1-4b86-8eb2-f9bfe53fc018"
+									"value": "c227c8d1-088a-4d0d-9051-343c79b15340"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Product",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/product/:product_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"product",
+										":product_id"
+									],
+									"variable": [
+										{
+											"key": "product_id",
+											"value": "c227c8d1-088a-4d0d-9051-343c79b15340"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:46:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "294"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.013485[HH:MM:SS:MS] | 13.485000000000001[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"product_id\": \"c227c8d1-088a-4d0d-9051-343c79b15340\",\n        \"sell_price\": 30000,\n        \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n        \"product_code\": \"INSPIRON:3922\",\n        \"product_name\": \"DELL Inspiron:3922\",\n        \"purchase_price\": 25000\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Product",
@@ -1034,7 +3773,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_code\": \"DE\",\n    \"product_name\": \"sad\",\n    \"category_id\": \"b4f792e2-d1be-4398-9fdf-5265539e1f71\",\n    \"sell_price\": 2.99,\n    \"purchase_price\": 1.23\n}",
+							"raw": "{\n    \"product_code\": \"INSPIRON:3922\",\n    \"product_name\": \"DELL Inspiron:3922\",\n    \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n    \"sell_price\": 30000,\n    \"purchase_price\": 25000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1051,7 +3790,88 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Product",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product_code\": \"INSPIRON:3922\",\n    \"product_name\": \"DELL Inspiron:3922\",\n    \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n    \"sell_price\": 30000,\n    \"purchase_price\": 25000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/product",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"product"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:38:48 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "325"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.015110[HH:MM:SS:MS] | 15.11[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"product_id\": \"ce8b15fa-07d6-492d-84e5-3d453fcdb503\",\n        \"sell_price\": 30000,\n        \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n        \"product_code\": \"INSPIRON:3922\",\n        \"product_name\": \"DELL Inspiron:3922\",\n        \"purchase_price\": 25000\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Product",
@@ -1060,7 +3880,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_code\": \"asdsadasd\",\n    \"product_name\": \"asdsadsad\",\n    \"category_id\": \"6c995345-15a2-4d65-a2f3-e5c6e5b15c47\",\n    \"product_desc\": \"asd\",\n    \"sell_price\": 55,\n    \"purchase_price\": 20\n}",
+							"raw": "{\n    \"product_code\": \"INSPIRON:3922\",\n    \"product_name\": \"DELL Inspiron:3922\",\n    \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n    \"sell_price\": 30000,\n    \"purchase_price\": 24000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1079,12 +3899,100 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": "fda4a666-b2e1-4b86-8eb2-f9bfe53fc018"
+									"value": "c227c8d1-088a-4d0d-9051-343c79b15340"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Product",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product_code\": \"INSPIRON:3922\",\n    \"product_name\": \"DELL Inspiron:3922\",\n    \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n    \"sell_price\": 30000,\n    \"purchase_price\": 24000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/product/:product_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"product",
+										":product_id"
+									],
+									"variable": [
+										{
+											"key": "product_id",
+											"value": "c227c8d1-088a-4d0d-9051-343c79b15340"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:46:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "325"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.017991[HH:MM:SS:MS] | 17.991[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"product_id\": \"c227c8d1-088a-4d0d-9051-343c79b15340\",\n        \"sell_price\": 30000,\n        \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n        \"product_code\": \"INSPIRON:3922\",\n        \"product_name\": \"DELL Inspiron:3922\",\n        \"purchase_price\": 24000\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Updated Successfully.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Product",
@@ -1093,7 +4001,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_desc\": \"Hello\",\n    \"sell_price\": 55,\n    \"purchase_price\": 20\n}",
+							"raw": "{\n    \"purchase_price\": 25000\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1112,12 +4020,100 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": "fda4a666-b2e1-4b86-8eb2-f9bfe53fc018"
+									"value": "c227c8d1-088a-4d0d-9051-343c79b15340"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Product",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"purchase_price\": 25000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/product/:product_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"product",
+										":product_id"
+									],
+									"variable": [
+										{
+											"key": "product_id",
+											"value": "c227c8d1-088a-4d0d-9051-343c79b15340"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:47:41 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "325"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.014561[HH:MM:SS:MS] | 14.561[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"product_id\": \"c227c8d1-088a-4d0d-9051-343c79b15340\",\n        \"sell_price\": 30000,\n        \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n        \"product_code\": \"INSPIRON:3922\",\n        \"product_name\": \"DELL Inspiron:3922\",\n        \"purchase_price\": 25000\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Updated Successfully.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Product",
@@ -1140,12 +4136,95 @@
 							"variable": [
 								{
 									"key": "product_id",
-									"value": "1ae0bce9-fa90-40aa-b6b2-dc85e055ff47"
+									"value": "c227c8d1-088a-4d0d-9051-343c79b15340"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Product",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api_host}}/product/:product_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"product",
+										":product_id"
+									],
+									"variable": [
+										{
+											"key": "product_id",
+											"value": "c227c8d1-088a-4d0d-9051-343c79b15340"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:47:53 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.014686[HH:MM:SS:MS] | 14.686[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Deleted Successfully.\"\n    },\n    \"status_code\": 204,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1174,7 +4253,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Supplier List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/supplier",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"supplier"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:38:50 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "259"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.012130[HH:MM:SS:MS] | 12.13[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"list\": [\n            {\n                \"supplier_id\": \"7f93881c-b60d-4070-bc05-b07e9f103e27\",\n                \"supplier_code\": \"DELL\",\n                \"supplier_name\": \"Dell\"\n            }\n        ],\n        \"pagination\": {\n            \"count\": 1,\n            \"page_size\": 10,\n            \"current_page\": 1,\n            \"total_pages\": 1\n        }\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Supplier",
@@ -1200,12 +4355,95 @@
 							"variable": [
 								{
 									"key": "supplier_id",
-									"value": "ebdc1f8c-08ed-49e3-b536-8aedfd0960ca"
+									"value": "7f93881c-b60d-4070-bc05-b07e9f103e27"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Supplier",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/supplier/:supplier_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"supplier",
+										":supplier_id"
+									],
+									"variable": [
+										{
+											"key": "supplier_id",
+											"value": "7f93881c-b60d-4070-bc05-b07e9f103e27"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:38:44 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "175"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.012612[HH:MM:SS:MS] | 12.612[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"supplier_id\": \"7f93881c-b60d-4070-bc05-b07e9f103e27\",\n        \"supplier_code\": \"DELL\",\n        \"supplier_name\": \"Dell\"\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Supplier",
@@ -1214,7 +4452,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"supplier_code\": \"asds\",\n    \"supplier_name\": \"addsc\"\n}",
+							"raw": "{\n    \"supplier_code\": \"DELL\",\n    \"supplier_name\": \"Dell\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1231,7 +4469,88 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Supplier",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"supplier_code\": \"DELL\",\n    \"supplier_name\": \"Dell\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/supplier",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"supplier"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:38:28 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "206"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.009875[HH:MM:SS:MS] | 9.875[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"supplier_id\": \"7f93881c-b60d-4070-bc05-b07e9f103e27\",\n        \"supplier_code\": \"DELL\",\n        \"supplier_name\": \"Dell\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Supplier",
@@ -1240,7 +4559,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"supplier_code\": \"ami\",\n    \"supplier_name\": \"Amazon - India\"\n}",
+							"raw": "{\n    \"supplier_code\": \"DELL\",\n    \"supplier_name\": \"Dell\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1259,12 +4578,100 @@
 							"variable": [
 								{
 									"key": "supplier_id",
-									"value": "ebdc1f8c-08ed-49e3-b536-8aedfd0960ca"
+									"value": "7f93881c-b60d-4070-bc05-b07e9f103e27"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Supplier",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"supplier_code\": \"DELL\",\n    \"supplier_name\": \"Dell\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/supplier/:supplier_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"supplier",
+										":supplier_id"
+									],
+									"variable": [
+										{
+											"key": "supplier_id",
+											"value": "7f93881c-b60d-4070-bc05-b07e9f103e27"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:39:27 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "206"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.015491[HH:MM:SS:MS] | 15.491[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"supplier_id\": \"7f93881c-b60d-4070-bc05-b07e9f103e27\",\n        \"supplier_code\": \"DELL\",\n        \"supplier_name\": \"Dell\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Updated Successfully.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Supplier",
@@ -1273,7 +4680,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"supplier_name\": \"hello\"\n}",
+							"raw": "{\n    \"supplier_name\": \"Dell\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1292,12 +4699,100 @@
 							"variable": [
 								{
 									"key": "supplier_id",
-									"value": ""
+									"value": "7f93881c-b60d-4070-bc05-b07e9f103e27"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Supplier",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"supplier_name\": \"Dell\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/supplier/:supplier_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"supplier",
+										":supplier_id"
+									],
+									"variable": [
+										{
+											"key": "supplier_id",
+											"value": "7f93881c-b60d-4070-bc05-b07e9f103e27"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:39:46 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "206"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.008228[HH:MM:SS:MS] | 8.228[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"supplier_id\": \"7f93881c-b60d-4070-bc05-b07e9f103e27\",\n        \"supplier_code\": \"DELL\",\n        \"supplier_name\": \"Dell\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Updated Successfully.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Supplier",
@@ -1320,12 +4815,95 @@
 							"variable": [
 								{
 									"key": "supplier_id",
-									"value": "ebdc1f8c-08ed-49e3-b536-8aedfd0960ca"
+									"value": "7f93881c-b60d-4070-bc05-b07e9f103e27"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Supplier",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api_host}}/supplier/:supplier_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"supplier",
+										":supplier_id"
+									],
+									"variable": [
+										{
+											"key": "supplier_id",
+											"value": "7f93881c-b60d-4070-bc05-b07e9f103e27"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 07:40:01 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, PATCH, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.014480[HH:MM:SS:MS] | 14.48[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Deleted Successfully.\"\n    },\n    \"status_code\": 204,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			],
 			"description": "This is the tenant module.\n\nThe CRUD operation for the tenant module is only applicable for the SUPER_ADMIN role"
@@ -1355,7 +4933,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Stock List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/stock",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"stock"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:44:46 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "636"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.013581[HH:MM:SS:MS] | 13.581[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"list\": [\n            {\n                \"price\": 32,\n                \"stock_id\": \"efbff8c4-21bf-44ba-b20b-22f0b83bdef6\",\n                \"quantity\": 20,\n                \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n                \"supplier_id\": \"5918042f-3590-4eae-b9d0-4be857adea39\",\n                \"movement_type\": \"IN\",\n                \"reference_number\": \"IN:2F54D807\"\n            },\n            {\n                \"price\": 32,\n                \"stock_id\": \"1d94fdc5-5095-4b7b-b2d0-1a6bbaed95c4\",\n                \"quantity\": 10,\n                \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n                \"supplier_id\": \"5918042f-3590-4eae-b9d0-4be857adea39\",\n                \"movement_type\": \"OUT\",\n                \"reference_number\": \"OUT:8E056B11\"\n            }\n        ],\n        \"pagination\": {\n            \"count\": 2,\n            \"page_size\": 10,\n            \"current_page\": 1,\n            \"total_pages\": 1\n        }\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Stock",
@@ -1381,12 +5035,95 @@
 							"variable": [
 								{
 									"key": "stock_id",
-									"value": "7dd302bc-ea0a-4891-ba1f-63976df36e89"
+									"value": "efbff8c4-21bf-44ba-b20b-22f0b83bdef6"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Stock",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/stock/:stock_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"stock",
+										":stock_id"
+									],
+									"variable": [
+										{
+											"key": "stock_id",
+											"value": "efbff8c4-21bf-44ba-b20b-22f0b83bdef6"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:44:59 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "312"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.017827[HH:MM:SS:MS] | 17.826999999999998[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"price\": 32,\n        \"stock_id\": \"efbff8c4-21bf-44ba-b20b-22f0b83bdef6\",\n        \"quantity\": 20,\n        \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n        \"supplier_id\": \"5918042f-3590-4eae-b9d0-4be857adea39\",\n        \"movement_type\": \"IN\",\n        \"reference_number\": \"IN:2F54D807\"\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Stock",
@@ -1395,7 +5132,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"product_id\": \"a4d4cd4f-6580-4a88-a157-b0eba816df60\",\n    \"supplier_id\": \"00f03c9a-af97-4f78-bc06-af2c0b93d9d2\",\n    \"price\": 32,\n    \"quantity\": 20,\n    \"movement_type\": \"OUT\"\n}",
+							"raw": "{\n    \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n    \"supplier_id\": \"5918042f-3590-4eae-b9d0-4be857adea39\",\n    \"price\": 32,\n    \"quantity\": 20,\n    \"movement_type\": \"IN\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1412,7 +5149,168 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Stock IN",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n    \"supplier_id\": \"5918042f-3590-4eae-b9d0-4be857adea39\",\n    \"price\": 32,\n    \"quantity\": 20,\n    \"movement_type\": \"IN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/stock",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"stock"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:43:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "343"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.020149[HH:MM:SS:MS] | 20.149[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"price\": 32,\n        \"stock_id\": \"efbff8c4-21bf-44ba-b20b-22f0b83bdef6\",\n        \"quantity\": 20,\n        \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n        \"supplier_id\": \"5918042f-3590-4eae-b9d0-4be857adea39\",\n        \"movement_type\": \"IN\",\n        \"reference_number\": \"IN:2F54D807\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+						},
+						{
+							"name": "Stock OUT",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n    \"supplier_id\": \"5918042f-3590-4eae-b9d0-4be857adea39\",\n    \"price\": 32,\n    \"quantity\": 10,\n    \"movement_type\": \"OUT\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/stock",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"stock"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:44:25 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "345"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.020573[HH:MM:SS:MS] | 20.573[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"price\": 32,\n        \"stock_id\": \"1d94fdc5-5095-4b7b-b2d0-1a6bbaed95c4\",\n        \"quantity\": 10,\n        \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n        \"supplier_id\": \"5918042f-3590-4eae-b9d0-4be857adea39\",\n        \"movement_type\": \"OUT\",\n        \"reference_number\": \"OUT:8E056B11\"\n    },\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Stock",
@@ -1435,12 +5333,95 @@
 							"variable": [
 								{
 									"key": "stock_id",
-									"value": "75a007f7-be21-40a2-b10c-bcc3a8b7c8b3"
+									"value": "efbff8c4-21bf-44ba-b20b-22f0b83bdef6"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Stock",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api_host}}/stock/:stock_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"stock",
+										":stock_id"
+									],
+									"variable": [
+										{
+											"key": "stock_id",
+											"value": "efbff8c4-21bf-44ba-b20b-22f0b83bdef6"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:45:07 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, DELETE, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.014255[HH:MM:SS:MS] | 14.255[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Deleted Successfully.\"\n    },\n    \"status_code\": 204,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			],
 			"description": "This is the tenant module.\n\nThe CRUD operation for the tenant module is only applicable for the SUPER_ADMIN role"
@@ -1470,7 +5451,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Health Metrix",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{host}}/health",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"health"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:40:09 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "764"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:02.013395[HH:MM:SS:MS] | 2013.395[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"cpu\": {\n            \"percent_per_core\": \"Core1 5.0%, Core2 4.1%, Core3 9.8%, Core4 7.1%, Core5 10.0%, Core6 15.2%, Core7 8.9%, Core8 5.1%\",\n            \"percent_total\": \"6.0%\",\n            \"count_logical\": 8,\n            \"count_physical\": 4,\n            \"frequency_current\": \"2223.389125 MHz\",\n            \"frequency_min\": \"400.0 MHz\",\n            \"frequency_max\": \"4900.0 MHz\",\n            \"times_user\": \"3776.58 seconds\",\n            \"times_system\": \"886.38 seconds\",\n            \"times_idle\": \"86321.95 seconds\"\n        },\n        \"disk\": {\n            \"total\": \"228.12 GB\",\n            \"used\": \"70.57 GB\",\n            \"free\": \"145.89 GB\",\n            \"percent\": \"32.6%\",\n            \"read_count\": 178331,\n            \"write_count\": 141765\n        },\n        \"memory\": {\n            \"percent\": \"51.5%\",\n            \"total\": \"[15.29 GB] [15660.30859375 MB]\",\n            \"used\": \"[6.87 GB] [7035.51171875 MB]\",\n            \"free\": \"[1.04 GB] [1061.9609375 MB]\",\n            \"available\": \"[7.41 GB] [7590.1953125 MB]\"\n        }\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1499,7 +5556,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Permission List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api_host}}/permission",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"permission"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:41:22 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "3256"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.012780[HH:MM:SS:MS] | 12.78[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"name\": \"Create Role Permission\",\n            \"module\": \"Role Permission\",\n            \"action\": \"POST\",\n            \"permission_id\": \"efdbc2f9-8ee3-4f6d-ac7f-a5e55a366742\"\n        },\n        {\n            \"name\": \"Get Role Permission\",\n            \"module\": \"Role Permission\",\n            \"action\": \"GET\",\n            \"permission_id\": \"1aa461d4-786f-47f4-95c9-bbf1e58eafba\"\n        },\n        {\n            \"name\": \"Create User\",\n            \"module\": \"User\",\n            \"action\": \"POST\",\n            \"permission_id\": \"03ac4213-136f-4177-924f-cde1f90bbec7\"\n        },\n        {\n            \"name\": \"Get User\",\n            \"module\": \"User\",\n            \"action\": \"GET\",\n            \"permission_id\": \"d0de635b-bd79-46f6-8285-b3196e6fd5bc\"\n        },\n        {\n            \"name\": \"Update User\",\n            \"module\": \"User\",\n            \"action\": \"PUT\",\n            \"permission_id\": \"343f9262-5acd-4e41-a7ce-b1323b600c29\"\n        },\n        {\n            \"name\": \"Delete User\",\n            \"module\": \"User\",\n            \"action\": \"DELETE\",\n            \"permission_id\": \"104b6aba-2fde-4e50-8ffd-26d6f8d2af97\"\n        },\n        {\n            \"name\": \"Get Permission\",\n            \"module\": \"Permission\",\n            \"action\": \"GET\",\n            \"permission_id\": \"491e6d46-5673-4adf-80c7-ae2cf01dbf54\"\n        },\n        {\n            \"name\": \"Create Category\",\n            \"module\": \"Category\",\n            \"action\": \"POST\",\n            \"permission_id\": \"3753fe59-4f66-42b5-a78f-2a2a5003a9ca\"\n        },\n        {\n            \"name\": \"Get Category\",\n            \"module\": \"Category\",\n            \"action\": \"GET\",\n            \"permission_id\": \"bf4ec5a0-d0fd-4d41-93fa-316c28bdca46\"\n        },\n        {\n            \"name\": \"Update Category\",\n            \"module\": \"Category\",\n            \"action\": \"PUT\",\n            \"permission_id\": \"946d8b33-6f66-49e5-8d96-b881e9efeb01\"\n        },\n        {\n            \"name\": \"Delete Category\",\n            \"module\": \"Category\",\n            \"action\": \"DELETE\",\n            \"permission_id\": \"86f329fd-e9b1-4452-b4df-e837aeb633de\"\n        },\n        {\n            \"name\": \"Create Product\",\n            \"module\": \"Product\",\n            \"action\": \"POST\",\n            \"permission_id\": \"2019c553-12ce-4085-823c-9b773d384f77\"\n        },\n        {\n            \"name\": \"Get Product\",\n            \"module\": \"Product\",\n            \"action\": \"GET\",\n            \"permission_id\": \"0b824a5c-09f7-48aa-8978-844be4ccab0e\"\n        },\n        {\n            \"name\": \"Update Product\",\n            \"module\": \"Product\",\n            \"action\": \"PUT\",\n            \"permission_id\": \"b6245e24-4383-41e6-a483-607e5ae46727\"\n        },\n        {\n            \"name\": \"Delete Product\",\n            \"module\": \"Product\",\n            \"action\": \"DELETE\",\n            \"permission_id\": \"63c77df5-1870-48dd-ab9a-0a8a4a1d48a6\"\n        },\n        {\n            \"name\": \"Create Stock\",\n            \"module\": \"Stock\",\n            \"action\": \"POST\",\n            \"permission_id\": \"2bb066eb-86e1-4e60-b49e-a440b77307ee\"\n        },\n        {\n            \"name\": \"Get Stock\",\n            \"module\": \"Stock\",\n            \"action\": \"GET\",\n            \"permission_id\": \"960d570e-0a52-4704-90d5-a119f8fa680d\"\n        },\n        {\n            \"name\": \"Delete Stock\",\n            \"module\": \"Stock\",\n            \"action\": \"DELETE\",\n            \"permission_id\": \"ac72d76e-c517-42b0-a2eb-533b7f0ed5b6\"\n        },\n        {\n            \"name\": \"Get Notification\",\n            \"module\": \"Notification\",\n            \"action\": \"GET\",\n            \"permission_id\": \"093317dd-1fbb-4fa4-b448-1ad9ac69ed64\"\n        },\n        {\n            \"name\": \"Make Notification mark as read\",\n            \"module\": \"Notification\",\n            \"action\": \"PUT\",\n            \"permission_id\": \"7d2a0abf-bcbd-4238-bba5-3d5f923d921d\"\n        },\n        {\n            \"name\": \"Create Supplier\",\n            \"module\": \"Supplier\",\n            \"action\": \"POST\",\n            \"permission_id\": \"1a251208-2d47-409a-9200-b3bd16246d6b\"\n        },\n        {\n            \"name\": \"Get Supplier\",\n            \"module\": \"Supplier\",\n            \"action\": \"GET\",\n            \"permission_id\": \"ac4f380f-0e30-47c1-b95e-427e22f2db99\"\n        },\n        {\n            \"name\": \"Update Supplier\",\n            \"module\": \"Supplier\",\n            \"action\": \"PUT\",\n            \"permission_id\": \"863d8df6-e1c7-40b5-a045-97d314fb0bc3\"\n        },\n        {\n            \"name\": \"Delete Supplier\",\n            \"module\": \"Supplier\",\n            \"action\": \"DELETE\",\n            \"permission_id\": \"df37ad46-a423-47e1-aca0-63a04df347a0\"\n        },\n        {\n            \"name\": \"Get Stock Summary\",\n            \"module\": \"Reports Stock Summary\",\n            \"action\": \"GET\",\n            \"permission_id\": \"aa4fc0c7-edf6-4562-86cd-15cd20b75f8f\"\n        },\n        {\n            \"name\": \"Get Audit Logs\",\n            \"module\": \"Audit Logs\",\n            \"action\": \"GET\",\n            \"permission_id\": \"bb0a6abc-77dd-4cb4-9053-11b41b27993e\"\n        },\n        {\n            \"name\": \"Get Monitor information\",\n            \"module\": \"Monitor\",\n            \"action\": \"GET\",\n            \"permission_id\": \"d46effef-513a-49cd-9a18-efd1eb39a662\"\n        }\n    ],\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1528,7 +5661,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Role Permission",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/role-permission",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"role-permission"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:42:07 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "154"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.011672[HH:MM:SS:MS] | 11.672[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"role_id\": \"OPERATOR\",\n            \"permission_id\": \"efdbc2f9-8ee3-4f6d-ac7f-a5e55a366742\"\n        }\n    ],\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Role Permission",
@@ -1537,7 +5746,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n    {\n        \"role_id\": \"OPERATOR\",\n        \"permission_id\": \"cb9b9123-ce6c-4c1d-be6a-c52fe555eed5\"\n    }\n]",
+							"raw": "[\n    {\n        \"role_id\": \"OPERATOR\",\n        \"permission_id\": \"efdbc2f9-8ee3-4f6d-ac7f-a5e55a366742\"\n    }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1554,7 +5763,88 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Role Permission",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"role_id\": \"OPERATOR\",\n        \"permission_id\": \"efdbc2f9-8ee3-4f6d-ac7f-a5e55a366742\"\n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/role-permission",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"role-permission"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:42:01 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, POST, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.015472[HH:MM:SS:MS] | 15.472[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Created Successfully.\"\n    },\n    \"status_code\": 201,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Role Permission",
@@ -1582,12 +5872,100 @@
 								},
 								{
 									"key": "permission_id",
-									"value": "44d288bd-e6d1-4ff7-a22f-b292a9949955"
+									"value": "efdbc2f9-8ee3-4f6d-ac7f-a5e55a366742"
 								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Role Permission",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "{{api_host}}/role-permission/:role_id/:permission_id",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"role-permission",
+										":role_id",
+										":permission_id"
+									],
+									"variable": [
+										{
+											"key": "role_id",
+											"value": "OPERATOR"
+										},
+										{
+											"key": "permission_id",
+											"value": "efdbc2f9-8ee3-4f6d-ac7f-a5e55a366742"
+										}
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:42:36 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "DELETE, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.014528[HH:MM:SS:MS] | 14.527999999999999[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"Deleted Successfully.\"\n    },\n    \"status_code\": 204,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			],
 			"description": "This is the tenant module.\n\nThe CRUD operation for the tenant module is only applicable for the SUPER_ADMIN role"
@@ -1617,7 +5995,83 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Notification List",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"borsebhushan216@gmail.com\",\n    \"password\": \"Bhushan@123\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/notification",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"notification"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:45:21 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1357"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.013463[HH:MM:SS:MS] | 13.463[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"list\": [\n            {\n                \"created_dtm\": \"2025-06-16T09:43:54.691998Z\",\n                \"sent_by\": {\n                    \"email\": \"helloborse@gmail.com\",\n                    \"user_id\": \"c5781cb0-05af-448a-9eb7-000c5718c7c2\",\n                    \"role_id\": \"COMPANY_ADMIN\",\n                    \"phone_number\": \"234234\",\n                    \"profile_photo\": null,\n                    \"last_name\": \"Bhushan\",\n                    \"first_name\": \"Borse\",\n                    \"full_name\": \"Borse Bhushan\"\n                },\n                \"notification\": {\n                    \"title\": \"Stock Movement\",\n                    \"message\": \"Stock(IN:2F54D807) has been In. The quantity is 20.\",\n                    \"created_by\": \"c5781cb0-05af-448a-9eb7-000c5718c7c2\",\n                    \"notification_id\": \"36e50232-9f67-400e-af92-9ded08b3c636\",\n                    \"notification_type\": \"STOCK_IN\",\n                    \"notification_data\": {\n                        \"stock_id\": \"efbff8c4-21bf-44ba-b20b-22f0b83bdef6\"\n                    }\n                }\n            },\n            {\n                \"created_dtm\": \"2025-06-16T09:44:25.868415Z\",\n                \"sent_by\": {\n                    \"email\": \"helloborse@gmail.com\",\n                    \"user_id\": \"c5781cb0-05af-448a-9eb7-000c5718c7c2\",\n                    \"role_id\": \"COMPANY_ADMIN\",\n                    \"phone_number\": \"234234\",\n                    \"profile_photo\": null,\n                    \"last_name\": \"Bhushan\",\n                    \"first_name\": \"Borse\",\n                    \"full_name\": \"Borse Bhushan\"\n                },\n                \"notification\": {\n                    \"title\": \"Stock Movement\",\n                    \"message\": \"Stock(OUT:8E056B11) has been Out. The quantity is 10.\",\n                    \"created_by\": \"c5781cb0-05af-448a-9eb7-000c5718c7c2\",\n                    \"notification_id\": \"71769fc4-b3c1-47e8-88cc-4f9955e77153\",\n                    \"notification_type\": \"STOCK_OUT\",\n                    \"notification_data\": {\n                        \"stock_id\": \"1d94fdc5-5095-4b7b-b2d0-1a6bbaed95c4\"\n                    }\n                }\n            }\n        ],\n        \"pagination\": {\n            \"count\": 2,\n            \"page_size\": 10,\n            \"current_page\": 1,\n            \"total_pages\": 1\n        }\n    },\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				},
 				{
 					"name": "Mark As Read",
@@ -1626,7 +6080,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"list_notification_id\": [\"1160442a-d08b-4ce7-9ab8-ec7a495e0a5e\"],\n    \"mark_all_as_read\": false\n}",
+							"raw": "{\n    \"list_notification_id\": [\"71769fc4-b3c1-47e8-88cc-4f9955e77153\"],\n    \"mark_all_as_read\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1643,7 +6097,88 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Mark As Read",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"list_notification_id\": [\"71769fc4-b3c1-47e8-88cc-4f9955e77153\"],\n    \"mark_all_as_read\": false\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{api_host}}/notification",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"notification"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:46:54 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, PUT, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "122"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.015992[HH:MM:SS:MS] | 15.991999999999999[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": null,\n    \"errors\": null,\n    \"messages\": {\n        \"message\": \"1 Notifications are mark as read.\"\n    },\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1663,23 +6198,94 @@
 							"raw": "{\n    \"email\": \"helloborse@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"COMPANY_ADMIN\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\",\n    \"tenant_id\": \"2ded15fb-7a92-401f-b3dc-ee0467689bb8\"\n}"
 						},
 						"url": {
-							"raw": "{{api_host}}/report/stock-summary?product_id=a4d4cd4f-6580-4a88-a157-b0eba816df60",
+							"raw": "{{api_host}}/report/stock-summary",
 							"host": [
 								"{{api_host}}"
 							],
 							"path": [
 								"report",
 								"stock-summary"
-							],
-							"query": [
-								{
-									"key": "product_id",
-									"value": "a4d4cd4f-6580-4a88-a157-b0eba816df60"
-								}
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Stock Summary",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"helloborse@gmail.com\",\n    \"profile_photo\": null,\n    \"phone_number\": \"234234\",\n    \"role_id\": \"COMPANY_ADMIN\",\n    \"last_name\": \"bhushan\",\n    \"first_name\": \"borse\",\n    \"password\": \"1234\",\n    \"tenant_id\": \"2ded15fb-7a92-401f-b3dc-ee0467689bb8\"\n}"
+								},
+								"url": {
+									"raw": "{{api_host}}/report/stock-summary",
+									"host": [
+										"{{api_host}}"
+									],
+									"path": [
+										"report",
+										"stock-summary"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Mon, 16 Jun 2025 09:47:55 GMT"
+								},
+								{
+									"key": "Server",
+									"value": "WSGIServer/0.2 CPython/3.12.3"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Accept"
+								},
+								{
+									"key": "Allow",
+									"value": "GET, HEAD, OPTIONS"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Length",
+									"value": "623"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "Referrer-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Cross-Origin-Opener-Policy",
+									"value": "same-origin"
+								},
+								{
+									"key": "Version",
+									"value": "V0.0.0"
+								},
+								{
+									"key": "Req-Performance-Time",
+									"value": "0:00:00.012093[HH:MM:SS:MS] | 12.093[MS]"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": [\n        {\n            \"movement_type\": \"IN\",\n            \"total_quantity\": 20,\n            \"product\": {\n                \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n                \"sell_price\": 30000,\n                \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n                \"product_code\": \"INSPIRON:3924\",\n                \"product_name\": \"DELL Inspiron:3924\",\n                \"purchase_price\": 25000\n            }\n        },\n        {\n            \"movement_type\": \"OUT\",\n            \"total_quantity\": 10,\n            \"product\": {\n                \"product_id\": \"ce26cdc9-47e4-4753-96ce-fc3fbf3475c5\",\n                \"sell_price\": 30000,\n                \"category_id\": \"76428852-b7be-4ea4-b0a7-3f647ceafe3c\",\n                \"product_code\": \"INSPIRON:3924\",\n                \"product_name\": \"DELL Inspiron:3924\",\n                \"purchase_price\": 25000\n            }\n        }\n    ],\n    \"errors\": null,\n    \"messages\": null,\n    \"status_code\": 200,\n    \"is_success\": true\n}"
+						}
+					]
 				}
 			]
 		}
