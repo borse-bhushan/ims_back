@@ -21,3 +21,6 @@ PyJWT==2.10.1
 
 # for the Memcached
 pylibmc==1.6.3
+
+# To run the app using gunicorn + NgNix
+gunicorn==23.0.0

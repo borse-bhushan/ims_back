@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  web:
+    build: .
+    container_name: ims_web
+    restart: always
+    volumes:
+      - sqlite_data:/app/sqlite_dbs/
+    expose:
+      - 8000
+    depends_on:
+      - memcached
+    networks:
+      - ims_net
+
+  nginx:
+    image: nginx:alpine
+    container_name: ims_nginx
+    restart: always
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+    networks:
+      - ims_net
+
+  memcached:
+    image: memcached:alpine
+    container_name: ims_memcached
+    restart: always
+    ports:
+      - "11211:11211"
+    networks:
+      - ims_net
+
+volumes:
+  sqlite_data:
+
+networks:
+  ims_net:
+    driver: bridge

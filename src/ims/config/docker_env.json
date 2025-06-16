@@ -1,21 +1,21 @@
 {
-    "ENV": "LOCAL",
-    "DEBUG": false,
+    "ENV": "DOCKER",
     "PROJECT_NAME": "IMS",
-    "DISABLE_PRINT": false,
+    "DEBUG": false,
+    "DISABLE_PRINT": true,
     "ALLOWED_HOSTS": [
-        "*.localhost"
+        "*"
     ],
     "DATABASES": {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": "db.sqlite3"
+            "NAME": "/app/sqlite_dbs/default.sqlite3"
         }
     },
     "CACHES": {
         "default": {
             "BACKEND": "django.core.cache.backends.memcached.PyLibMCCache",
-            "LOCATION": "localhost:11211",
+            "LOCATION": "memcached:11211",
             "TIMEOUT": 300
         }
     }

@@ -124,13 +124,7 @@ WSGI_APPLICATION = f"{PROJECT_NAME.lower()}.wsgi.application"
 
 DATABASES = config["DATABASES"]
 
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.memcached.PyLibMCCache",  # or MemcachedCache
-        "LOCATION": "127.0.0.1:11211",
-        "TIMEOUT": 300,
-    }
-}
+CACHES = config["CACHES"]
 
 
 # Password validation
@@ -174,7 +168,8 @@ if DISABLE_PRINT:
 # Static files (CSS, JavaScript,> Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
+STATIC_ROOT = os.getenv("STATIC_ROOT", os.path.join(BASE_DIR, "static"))
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
