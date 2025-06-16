@@ -5,12 +5,14 @@ Permission ViewSet for handling permission endpoints.
 from rest_framework import viewsets
 from drf_spectacular.utils import extend_schema
 
+
 from base.views import CreateView, ListView
 from authentication import (
     get_authentication_classes,
     register_permission,
     get_default_authentication_class,
 )
+
 
 from utils.swagger import (
     responses_404,
@@ -21,7 +23,7 @@ from utils.swagger import (
     SuccessResponseSerializer,
 )
 
-from tenant.utils.helpers import get_tenant_details_from_request_thread
+from tenant.utils.tenant_conf import get_tenant_db_name
 
 
 from auth_user.constants import MethodEnum
@@ -60,6 +62,10 @@ class ListCreatePermissionViewSet(
             **ListView.get_method_view_mapping(),
             **CreateView.get_method_view_mapping(),
         }
+
+    def using(self, request, **kwargs):
+        qp = request.query_params.dict()
+        return get_tenant_db_name(qp["tenant_id"])
 
     @extend_schema(
         request={},

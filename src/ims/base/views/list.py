@@ -112,7 +112,9 @@ class ListView:
             query_objects=query_objects,
         )
 
-        objects = self.manager.list(query=query_objects)
+        objects = self.manager.list(
+            query=query_objects, using=self.using(request=request)
+        )
         if not objects:
             raise NoDataFoundError()
 
@@ -120,6 +122,9 @@ class ListView:
 
     def get_query_obj(self, request, **_):
         return {}
+
+    def using(self, **kwargs):
+        return None
 
     def get_with_pagination(self, request, query):
         """
@@ -150,6 +155,7 @@ class ListView:
             pagination=pagination,
             only=self.only_fields,
             order_by=self.order_by_fields,
+            using=self.using(request=request),
         )
 
         if not objects:

@@ -24,9 +24,7 @@ urlpatterns = [
         name="login",
     ),
     path(
-        add_to_tenant_aware_excluded_path_list(
-            "admin/login", other_base_path="auth/"
-        ),
+        add_to_tenant_aware_excluded_path_list("admin/login", other_base_path="auth/"),
         LoginViewSet.as_view(LoginViewSet.get_method_view_mapping()),
         name="login",
     ),
@@ -36,9 +34,12 @@ urlpatterns = [
         name="login",
     ),
     path(
-        add_to_tenant_aware_excluded_path_list(
-            "admin/logout", other_base_path="auth/"
-        ),
+        "logout",
+        LogoutViewSet.as_view(LogoutViewSet.get_method_view_mapping()),
+        name="logout",
+    ),
+    path(
+        add_to_tenant_aware_excluded_path_list("admin/logout", other_base_path="auth/"),
         LogoutViewSet.as_view(LogoutViewSet.get_method_view_mapping()),
         name="logout",
     ),
