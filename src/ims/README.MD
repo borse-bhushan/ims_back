@@ -175,8 +175,8 @@ python manage.py ver CV
 - 🏢 **Tenant-wise Database Configuration**
   Tenants can operate on:
   - A **shared RDBMS database**, or
-  - **Isolated databases** (per-tenant DB) using a pluggable DB router
-  - 🔌 **Database Backend is Pluggable**: Easily extend support for **NoSQL databases** (e.g. MongoDB) or other RDBMS by abstracting DB access logic behind an interface layer
+  - **Isolated databases** per-tenant DB using a db-access layer
+  - 🔌 **Database Backend is Pluggable**: Easily extend support for **NoSQL databases** (e.g. MongoDB) or other RDBMS by abstracting DB access layer logic behind an interface layer
 
 - ⚡ **Pluggable Caching Layer**
   A unified caching interface abstracts the underlying cache system, with current support for:
